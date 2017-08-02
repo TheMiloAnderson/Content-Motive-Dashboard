@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $id
  * @property string $name
- *
+ * @property string $code
  * @property DealerAccess[] $dealerAccesses
  */
 class Dealers extends \yii\db\ActiveRecord {
@@ -28,6 +28,7 @@ class Dealers extends \yii\db\ActiveRecord {
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 45],
+            [['code'], 'safe'],
         ];
     }
 
@@ -38,6 +39,7 @@ class Dealers extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'name' => 'Dealer Name',
+            'code' => 'Code',
         ];
     }
 
@@ -50,6 +52,12 @@ class Dealers extends \yii\db\ActiveRecord {
     
     public function getGaProperties() {
         return $this->hasMany(GaProperties::className(), ['dealer_id' => 'id']);
+    }
+    
+    public function getContentProperties() {
+        $links = ['dealer_id' => 'id'];
+        return $this->hasMany(GaProperties::className(), $links)
+            ->onCondition(['type' => 'Content']);
     }
 
     /**

@@ -63,6 +63,7 @@ function mainChart(csv) {
         .attr("transform", "translate(0," + height + ")")
         .call(bottomAxis())
     ;
+    
     // Y Axis
     function leftAxis() {
         return d3.axisLeft(yScale)
@@ -127,6 +128,7 @@ function mainChart(csv) {
         .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].total_unique_pageviews)+")")
         .attr('fill', prms.dataLines.uniqueVisitorColor)
     ;
+    
     // Entrances path
     var entLineD = d3.line()
         .x(function(d) { return xScale(d.date_recorded); })
@@ -157,7 +159,8 @@ function mainChart(csv) {
             .tween('text', function() {
                 var element = d3.select(this);
                 var f = d3.format(',.0f');
-                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), d[d.length - 1].total_pageviews);
+                var newValue = d[d.length - 1].total_pageviews - d[0].total_pageviews;
+                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), newValue);
                 return function(t) {
                     element.text(f(i(t)));
                 };
@@ -169,7 +172,8 @@ function mainChart(csv) {
             .tween('text', function() {
                 var element = d3.select(this);
                 var f = d3.format(',.0f');
-                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), d[d.length - 1].total_unique_pageviews);
+                var newValue = d[d.length - 1].total_unique_pageviews - d[0].total_unique_pageviews;
+                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), newValue);
                 return function(t) {
                     element.text(f(i(t)));
                 };
@@ -181,7 +185,8 @@ function mainChart(csv) {
             .tween('text', function() {
                 var element = d3.select(this);
                 var f = d3.format(',.0f');
-                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), d[d.length - 1].total_entrances);
+                var newValue = d[d.length - 1].total_entrances - d[0].total_entrances;
+                var i = d3.interpolateNumber(element.text().replace(/,/g, ''), newValue);
                 return function(t) {
                     element.text(f(i(t)));
                 };
@@ -233,8 +238,58 @@ function mainChart(csv) {
     }
     metricReadouts(dataset);
     
-    // Click element to update chart data
-    $('.dealerSelect').click(function(e) {
+    // Dates slider initialization
+    var startDateGuide = g.append('rect')
+        .attr('id', 'startDateGuide')
+        .attr('height', height)
+        .attr('width', 0)
+        .attr('fill', 'black')
+        .attr('opacity', .04)
+    ;
+    var endDateGuide = g.append('rect')
+        .attr('id', 'endDateGuide')
+        .attr('height', height)
+        .attr('width', 0)
+        .attr('x', width)
+        .attr('fill', 'black')
+        .attr('opacity', .04)
+    ;
+    var dateSlider = jQuery( "#slider-range" ).slider({
+        range: true,
+        min: new Date(dataset[0].date_recorded).getTime() / 1000,
+        max: new Date(dataset[dataset.length - 1].date_recorded).getTime() / 1000,
+        step: 86400,
+        get values () {
+            return [this.min, this.max];
+        },
+        slide: function(event, ui) {
+            var startDate = new Date(ui.values[0] * 1000);
+            var endDate = new Date(ui.values[1] * 1000);
+            var max = $(this).slider('option', 'max');
+            var min = $(this).slider('option', 'min');
+            var range = max - min;
+            var dateRangeBtn = jQuery('#dateRangeBtn');
+            jQuery('#startDate').val(('0' + (startDate.getMonth() + 1)).slice(-2) + '/' + ('0' + startDate.getDate()).slice(-2) + '/' + startDate.getFullYear());
+            jQuery('#endDate').val(('0' + (endDate.getMonth() + 1)).slice(-2) + '/' + ('0' + endDate.getDate()).slice(-2) + '/' + endDate.getFullYear());
+            dateRangeBtn.data('startdate', startDate);
+            dateRangeBtn.data('enddate', endDate);
+            startDateGuide.attr('width', xScale(startDate));
+            endDateGuide.attr('width', width - xScale(endDate)).attr('x', xScale(endDate));
+        }
+    });
+    
+    // Filter dataset by date, update the chart
+    jQuery('#dateRangeBtn').click(function() {
+        var startDate = $(this).data('startdate');
+        var endDate = $(this).data('enddate');
+        revisedDataset = dataset.filter(function(d) {
+            return d.date_recorded >= startDate && d.date_recorded <= endDate;
+        });
+        updateData(revisedDataset);
+    });
+    
+    // Click dealer names, get new dataset
+    jQuery('.dealerSelect').click(function(e) {
         e.preventDefault();
         updateChart(this);
     });
@@ -245,31 +300,44 @@ function mainChart(csv) {
             dataType: 'text',
             success: function(csv) {
                 updateData(csv);
+            },
+            error:  function(xhr) {
+                console.log(xhr);
             }
         });
     };
 
     function updateData(csv) {
-        // Receive revised data & clean it up
-        // Fix the line breaks so D3 parses it right
-        csv = csv.replace (/\\n/g, "\n");
-        var parseTime = d3.timeParse("%Y-%m-%d");
-        var dataset = d3.csvParse(csv, function(data) {
-            data.pv = +data.pv;
-            data.upv = +data.upv;
-            data.total_pageviews = +data.total_pageviews;
-            data.total_unique_pageviews = +data.total_unique_pageviews;
-            data.total_entrances = +data.total_entrances;
-            data.date_recorded = parseTime(data.date_recorded);
-            return data;
-        });
-        // Redefine the scales
-        xScale.domain(d3.extent(dataset.map(function(d) { return d.date_recorded; })))
-        ;
-        var yDomain = d3.extent(dataset.map(function(d) { return d.total_pageviews; }))
-        ;
-        yScale.domain([yDomain[0], yDomain[1] * 1.1])
-        ;      
+        if (Array.isArray(csv)) {
+            // If array, we assume dataset was already parsed by D3
+            var dataset = csv;
+        } else {
+            // Receive revised data & clean it up
+            // Fix the line breaks so D3 parses it right
+            csv = csv.replace (/\\n/g, "\n");
+            var parseTime = d3.timeParse("%Y-%m-%d");
+            var dataset = d3.csvParse(csv, function(data) {
+                data.property_id = +data.property_id;
+                data.date_recorded = parseTime(data.date_recorded);
+                data.pageviews = +data.pageviews;
+                data.visitors = +data.visitors;
+                data.entrances = +data.entrances;
+                data.avg_time = +data.avg_time;
+                data.bounce_rate = +data.bounce_rate;
+                return data;
+            });
+            
+            // Re-set the date slider range
+            dateSlider.slider('option', 'min', new Date(dataset[0].date_recorded).getTime() / 1000);
+            dateSlider.slider('option', 'max', new Date(dataset[dataset.length - 1].date_recorded).getTime() / 1000);
+        }
+        console.log(dataset);
+        // Redefine the D3 scales
+        xScale.domain(d3.extent(dataset.map(function(d) { return d.date_recorded; })));
+        var yDomainMin = d3.min(dataset.map(function(d) { return d.entrances; }));
+        var yDomainMax = d3.max(dataset.map(function(d) { return d.pageviews; }));
+        yScale.domain([yDomainMin, yDomainMax * 1.1]);
+        
         // Do the transitions
         var svg = d3.select('.mainChart').transition();
         svg.select('.pageviews')
@@ -303,15 +371,24 @@ function mainChart(csv) {
         ;
         svg.select('#visitorsText')
             .duration(prms.duration)
-            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].total_unique_pageviews)+")")
+            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].visitors)+")")
         ;
         svg.select('#pageviewsText')
             .duration(prms.duration)
-            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].total_pageviews)+")")
+            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].pageviews)+")")
         ;
         svg.select('#entrancesText')
             .duration(prms.duration)
-            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].total_entrances)+")")
+            .attr("transform", "translate("+(width+3)+","+yScale(dataset[dataset.length - 1].entrances)+")")
+        ;
+        svg.select('#startDateGuide')
+            .duration(prms.duration)
+            .attr('width', xScale(dataset[0].date_recorded))
+        ;
+        svg.select('#endDateGuide')
+            .duration(prms.duration)
+            .attr('width', width - xScale(dataset[dataset.length - 1].date_recorded))
+            .attr('x', xScale(dataset[dataset.length - 1].date_recorded))
         ;
         // Re-fix the ticks
         formatTicks();

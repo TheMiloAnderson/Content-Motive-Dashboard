@@ -28,7 +28,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => Html::img('@web/images/contentmotive-80x53.png', ['alt'=>Yii::$app->name])
+            . '<div id="logoTxt"><span class="con">content</span><br /><span class="MOT">MOTIVE</span></div>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -37,9 +38,14 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Dashboard', 'url' => ['/dashboard']],
-            ['label' => 'Users', 'url' => ['/users/index']],
-			['label' => 'Dealers', 'url' => ['/dealers/index']],
+            ['label' => 'Content', 'url' => ['/dashboard/content']],
+            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']],
+            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']],
+            ['label' => 'Admin', 'items' => [
+                    ['label' => 'Users', 'url' => ['/users/index']],
+                    ['label' => 'Dealers', 'url' => ['/dealers/index']],
+                ],
+            ],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -56,7 +62,7 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
+    
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

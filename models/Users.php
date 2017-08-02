@@ -64,7 +64,8 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     
     public function getDealers() {
         return $this->hasMany(Dealers::className(), ['id' => 'dealer_id'])
-            ->via('dealerAccesses');
+            ->via('dealerAccesses')
+            ->orderBy('name');
     }
 
     /**

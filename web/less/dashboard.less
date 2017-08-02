@@ -1,0 +1,201 @@
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.col-xs-5ths {
+    width: 100%;
+    //float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 100%;
+        //float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+.readout {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.ui-state-active {
+	border: 1px solid dimgray;
+	background: dimgray;
+}
+
+.ui-accordion-header {
+	font-weight: bold;
+}
+
+#accordion .date {
+	width: 46%;
+	padding: 0px 6px;
+	height: 30px;
+	display: inline;
+}
+#dash-right-col {
+	padding-top: 5px;
+}
+#accordion .btn-primary {
+	margin:auto;
+	margin-top:25px;
+}
+
+#dash-right-col h3, #dash-right-col h4 {
+    text-align: center;
+}
+#dash-right-col h4 {
+    margin-bottom: 20px;
+}
+
+/*** Global CSS here, might need to get moved later ***/
+@gNavHeight: 74px;
+nav#w0 {
+    height: @gNavHeight;
+}
+nav #w1 .active {
+    border-bottom: solid 1px #cd2128;
+}
+
+body > .wrap > .container {
+    padding-top: 90px;
+}
+.navbar-header .navbar-brand {
+    padding-top: 10px;
+}
+.navbar-brand > img {
+    float: left;
+}
+#logoTxt {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 7px;
+    font-family: 'Bree Serif', serif;
+    line-height: 20px;
+    font-size: 26px;
+}
+#logoTxt .con {
+    color: #CF2129;
+}
+#logoTxt .MOT {
+    color: #3AC0BE;
+}
+
+.tertiary-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #222;
+    border-right: 1px solid #000;
+    padding-top: @gNavHeight;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    color: #e1ffff;
+}
+.tertiary-nav ul, 
+.tertiary-nav li {
+    list-style: none;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+    line-height: 28px;
+    font-weight: bold;
+}
+.tertiary-nav .active,
+.tertiary-nav li .active {
+  background-color: #4f5b69;
+}
+.tertiary-nav ul .sub-menu li.active,
+.tertiary-nav li .sub-menu li.active {
+  color: #d19b3d;
+}
+.tertiary-nav ul .sub-menu li.active a,
+.tertiary-nav li .sub-menu li.active a {
+  color: #d19b3d;
+}
+.tertiary-nav ul .sub-menu li,
+.tertiary-nav li .sub-menu li {
+  background-color: #181c20;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid #23282e;
+  margin-left: 0px;
+  padding-left: 20px;
+  font-weight: lighter;
+}
+.tertiary-nav ul .sub-menu li:hover,
+.tertiary-nav li .sub-menu li:hover {
+  background-color: #020203;
+}
+.tertiary-nav li {
+  padding-left: 0px;
+  border-bottom: 1px solid #23282e;
+  background-color: #4f5b69 - #222;
+  padding-left: 10px;
+}
+.tertiary-nav li a {
+    display: block;
+    width: 100%;
+  text-decoration: none;
+  color: #e1ffff;
+}
+.tertiary-nav li:hover {
+  background-color: #4f5b69;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.navbar-header {
+    position: fixed;
+    left: 20px;
+}
+.control-panel {
+    margin: 10px;
+    padding: 5px;
+    background-color: #000;
+}
+.control-panel p {
+    color: #fff;
+    line-height: 14px;
+}
+
+.tertiary-nav .control-panel input {
+    display: inline-block;
+    width: 40%;
+}
+.container {
+    margin: 0 auto;
+    position: relative;
+    left: 150px;
+}
+div.panel {
+    margin-bottom: 10px;
+}
+div.panel-body {
+    padding: 7px;
+}

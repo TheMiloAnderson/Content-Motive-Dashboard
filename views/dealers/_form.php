@@ -12,7 +12,16 @@ use wbraganca\dynamicform\DynamicFormWidget;
 <div class="dealers-form">
     <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><?= $form->field($dealer, 'name')->textInput(['maxlength' => true]) ?></h4></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4><?= $form->field($dealer, 'name')->textInput(['maxlength' => true]) ?></h4>
+                </div>
+                <div class="col-sm-4">
+                    <h4><?= $form->field($dealer, 'code')->textInput(['maxlength' => true]) ?></h4>
+                </div>
+            </div>
+        </div>
         <div class="panel-body">
             <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]

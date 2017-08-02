@@ -5,39 +5,38 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "ga_analytics".
+ * This is the model class for table "ga_analytics_aggregates".
  *
- * @property integer $id
  * @property integer $property_id
  * @property string $date_recorded
- * @property string $page
  * @property integer $pageviews
- * @property integer $unique_pageviews
- * @property integer $avg_time
+ * @property integer $visitors
  * @property integer $entrances
+ * @property string $avg_time
  * @property string $bounce_rate
  *
  * @property GaProperties $property
  */
-class GoogleAnalyticsData extends \yii\db\ActiveRecord {
-
+class GoogleAnalyticsAggregates extends \yii\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
-        return 'ga_analytics';
+    public static function tableName()
+    {
+        return 'ga_analytics_aggregates';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['property_id'], 'required'],
-            [['property_id', 'pageviews', 'unique_pageviews', 'entrances'], 'integer'],
+            [['property_id', 'date_recorded'], 'required'],
+            [['property_id', 'pageviews', 'visitors', 'entrances'], 'integer'],
             [['date_recorded'], 'safe'],
-            [['bounce_rate', 'avg_time'], 'number'],
-            [['page'], 'string', 'max' => 120],
+            [['avg_time', 'bounce_rate'], 'number'],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => GaProperties::className(), 'targetAttribute' => ['property_id' => 'id']],
         ];
     }
@@ -45,16 +44,15 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'id' => 'ID',
             'property_id' => 'Property ID',
             'date_recorded' => 'Date Recorded',
-            'page' => 'Page',
             'pageviews' => 'Pageviews',
-            'unique_pageviews' => 'Unique Pageviews',
-            'avg_time' => 'Avg Time',
+            'visitors' => 'Visitors',
             'entrances' => 'Entrances',
+            'avg_time' => 'Avg Time',
             'bounce_rate' => 'Bounce Rate',
         ];
     }
@@ -62,16 +60,17 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProperty() {
+    public function getProperty()
+    {
         return $this->hasOne(GaProperties::className(), ['id' => 'property_id']);
     }
 
     /**
      * @inheritdoc
-     * @return GaAnalyticsDataQuery the active query used by this AR class.
+     * @return GaAnalyticsAggregatesQuery the active query used by this AR class.
      */
-    public static function find() {
-        return new GaAnalyticsDataQuery(get_called_class());
+    public static function find()
+    {
+        return new GaAnalyticsAggregatesQuery(get_called_class());
     }
-
 }
