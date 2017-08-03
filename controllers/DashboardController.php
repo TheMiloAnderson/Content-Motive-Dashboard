@@ -10,18 +10,54 @@ use yii\grid\GridView;
 
 class DashboardController extends Controller {
     
-    public function actionContent() {
+    private function getCurrentUser() {
         $currentUserId = Yii::$app->user->id;
-        $currentUser = Users::find()->where(['id' => $currentUserId])->one();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->all();
+        return Users::find()->where(['id' => $currentUserId])->one();
+    }
+    
+    private function simplifyArray(&$array, $key) {
+        foreach ($array as &$item) {
+            $item['properties'] = $item[$key];
+            unset($item[$key]);
+        }
+        $count = count($array) - 1;
+        for ($i=$count; $i>=0; $i--) {
+            if (empty($array[$i]['properties'])) {
+                unset($array[$i]);
+            }
+        }
+        $array = array_values($array);
+    }
+    
+    public function actionContent() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'contentProperties');
         return $this->render('index', [
             'dealers' => $dealers,
         ]);
     }
     
+    public function actionBlogs() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('blogProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'blogProperties');
+        return $this->render('index', [
+            'dealers' => $dealers,
+        ]);
+    }   
+    
+    public function actionMicrosites() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('microProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'microProperties');
+        return $this->render('index', [
+            'dealers' => $dealers,
+        ]);
+    }  
+    
     public function actionIndex() {
-        $currentUserId = Yii::$app->user->id;
-        $currentUser = Users::find()->where(['id' => $currentUserId])->one();
+        $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('gaProperties')->all();
         return $this->render('index', [
             'dealers' => $dealers,

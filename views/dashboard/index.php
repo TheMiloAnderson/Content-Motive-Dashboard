@@ -23,15 +23,18 @@ $this->title = 'Dashboard';
     </div>
     <div class="control-panel">
         <ul id="menu-content" class="menu-content out">
-        <?php if (count($dealers) > 1) { ?>
+        <?php
+        if (count($dealers) > 1) { ?>
             <li data-toggle="collapse" data-target="#dealers" class="collapsed">
                 <a href="#">Dealers<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse in" id="dealers">
                 <?php foreach ($dealers as $dealer) {
-                    $pids = ArrayHelper::getColumn($dealer->contentProperties, 'id');
-                    echo '<li><a class="dealerSelect" href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
-                    echo $dealer->name . '&nbsp;(' . count($pids) . ')' . '</a></li>';
+                    $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
+                    if ($pids) {
+                        echo '<li><a class="dealerSelect" href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
+                        echo $dealer['name'] . '&nbsp;(' . count($pids) . ')' . '</a></li>';
+                    }
                 } ?>
             </ul>
         <?php } ?>
@@ -41,7 +44,7 @@ $this->title = 'Dashboard';
             <ul class="sub-menu collapse in" id="websites">
                 <li class="single-prop all-websites"><a class="prop-click" href="">All Websites</a></li>
                 <?php foreach ($dealers as $dealer) {
-                    foreach ($dealer->contentProperties as $property) {
+                    foreach ($dealer['properties'] as $property) {
                         echo '<li class="single-prop" id="' . $property['id'] . '">';
                         echo '<a class="prop-click" href="' . $property['id'] . '">';
                         echo $property['url'] . '</a></li>';
@@ -54,9 +57,9 @@ $this->title = 'Dashboard';
 <div class="dealers-index">
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            dashboard.init("<?= Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]->contentProperties, 'id')]); ?>", [
+            dashboard.init("<?php echo Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]); ?>", [
                 <?php foreach ($dealers as $dealer) {
-                    echo '{named: "' . $dealer->name . '", id: ' . $dealer->id . '},';
+                    echo '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
                 } ?>
             ]);
         });

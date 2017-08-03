@@ -37,10 +37,6 @@ class DashboardData {
                 ],
             ],
         ]);
-//        foreach ($data as &$datum) {
-//            $datum['url'] = $datum['property']['url'];
-//            unset($datum['property']);
-//        }
         return $provider;        
     }
 }

@@ -3,7 +3,8 @@
 namespace app\models;
 
 use yii\helpers\ArrayHelper;
-
+use app\models\GaProperties;
+use app\models\DealerAccess;
 /**
  * This is the model class for table "dealers".
  *
@@ -58,6 +59,18 @@ class Dealers extends \yii\db\ActiveRecord {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GaProperties::className(), $links)
             ->onCondition(['type' => 'Content']);
+    }
+    
+    public function getBlogProperties() {
+        $links = ['dealer_id' => 'id'];
+        return $this->hasMany(GaProperties::className(), $links)
+            ->onCondition(['type' => 'Blogs']);
+    }
+    
+    public function getMicroProperties() {
+        $links = ['dealer_id' => 'id'];
+        return $this->hasMany(GaProperties::className(), $links)
+            ->onCondition(['type' => 'Microsites']);
     }
 
     /**
