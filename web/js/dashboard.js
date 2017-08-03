@@ -7,7 +7,7 @@ var dashboard = (function() {
         y: 50,
         duration: 1000,
         dataLines: {
-            lineWidth: 3,
+            lineWidth: 4,
             uniqueVisitorColor: 'firebrick',
             pageViewColor: 'steelblue',
             entrancesColor: 'darkgreen',

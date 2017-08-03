@@ -1,5 +1,4 @@
 <?php
-
 namespace app\commands\models;
 
 use Yii;
