@@ -54,7 +54,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             $start = microtime(true);
         }
         echo "Done with " . $this->property->url . "; added $count records between $startUpdateDate and $endUpdateDate\n";
-        echo $this->updateAggregates($startUpdateDate, $endUpdateDate) . "\n\n";
+        echo $this->updateAggregates($startUpdateDate, $endUpdateDate) . "\n";
+        echo $this->updateDetails($startUpdateDate, $endUpdateDate) . "\n\n";
     }
     
     private function formatAnalyticsData() {
@@ -134,6 +135,24 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
     }
     
     public function updateDetails($start, $end) {
-        
+        $result = Yii::$app->db->createCommand("
+            INSERT INTO ga_analytics_details
+            SELECT 
+                property_id,
+                page,
+                SUM(pageviews) as pageviews,
+                SUM(unique_pageviews) as visitors,
+                SUM(entrances) as entrances,
+                AVG(avg_time) as avg_time,
+                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
+            FROM ga_analytics 
+            WHERE property_id = :pid
+                AND date_recorded BETWEEN ':start' AND ':end'
+            GROUP BY page, property_id;")
+            ->bindValue(':pid', $this->property->id)
+            ->bindValue(':start', $start)
+            ->bindValue(':end', $end)
+            ->queryOne();
+        return $result;
     }
 }
