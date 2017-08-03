@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
-use app\assets\AnalyticsChartAssets;
+use app\assets\DashboardAssets;
 use yii\widgets\Pjax;
 
-AnalyticsChartAssets::register($this);
+DashboardAssets::register($this);
 
 $this->title = 'Dashboard';
 //$this->params['breadcrumbs'][] = $this->title;

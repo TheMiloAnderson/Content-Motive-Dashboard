@@ -4,7 +4,7 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class AnalyticsChartAssets extends AssetBundle {
+class DashboardAssets extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $js = [

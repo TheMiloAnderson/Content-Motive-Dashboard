@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         '//fonts.googleapis.com/css?family=Bree+Serif',
+        'css/global.css',
     ];
     public $js = [
     ];
