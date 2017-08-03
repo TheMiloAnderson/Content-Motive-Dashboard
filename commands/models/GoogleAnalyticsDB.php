@@ -25,7 +25,6 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         $getUpdateDate = $startDate->modify('+1 day');
         $startUpdateDate = $startDate->format('Y-m-d');
         $endUpdateDate = new \DateTime(date('Y-m-d', strtotime('yesterday')));
-        $endUpdateDate = $endUpdateDate->format('Y-m-d');
         // loop through the missing dates, query API, save records
         $count = 0;
         $start = microtime(true);
@@ -52,9 +51,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             }
             $start = microtime(true);
         }
-        echo "Done with " . $this->property->url . "; added $count records between $startUpdateDate and $endUpdateDate\n";
-        echo $this->updateAggregates($startUpdateDate, $endUpdateDate) . "\n";
-        echo $this->updateDetails($startUpdateDate, $endUpdateDate) . "\n\n";
+        echo "Done with " . $this->property->url . "; added $count records between $startUpdateDate and " . $endUpdateDate->format('Y-m-d') ."\n";
+        echo 'Added ga_analytics_aggregates: ' . $this->updateAggregates($startUpdateDate, $endUpdateDate->format('Y-m-d')) ."\n\n";
     }
     
     private function formatAnalyticsData() {
@@ -112,7 +110,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
     }
     
     public function updateAggregates($start, $end) {
-        $result = Yii::$app->db->createCommand("
+        $result = Yii::$app->db->createCommand('
             INSERT INTO ga_analytics_aggregates
             SELECT 
                 property_id,
@@ -124,17 +122,18 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
             FROM ga_analytics 
             WHERE property_id = :pid
-                AND date_recorded BETWEEN ':start' AND ':end'
-            GROUP BY property_id, date_recorded;")
+                AND date_recorded BETWEEN :start AND :end
+            GROUP BY property_id, date_recorded;')
             ->bindValue(':pid', $this->property->id)
             ->bindValue(':start', $start)
             ->bindValue(':end', $end)
-            ->queryOne();
+            ->execute();
         return $result;
     }
     
-    public function updateDetails($start, $end) {
-        $result = Yii::$app->db->createCommand("
+    public function updateDetails() {
+        Yii::$app->db->createCommand('DELETE FROM ga_analytics_details;')->execute();
+        $result = Yii::$app->db->createCommand('
             INSERT INTO ga_analytics_details
             SELECT 
                 property_id,
@@ -145,13 +144,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 AVG(avg_time) as avg_time,
                 IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
             FROM ga_analytics 
-            WHERE property_id = :pid
-                AND date_recorded BETWEEN ':start' AND ':end'
-            GROUP BY page, property_id;")
-            ->bindValue(':pid', $this->property->id)
-            ->bindValue(':start', $start)
-            ->bindValue(':end', $end)
-            ->queryOne();
+            GROUP BY page, property_id;')
+            ->execute();
         return $result;
     }
 }

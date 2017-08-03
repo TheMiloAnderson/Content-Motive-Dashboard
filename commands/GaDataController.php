@@ -17,5 +17,7 @@ class GaDataController extends Controller {
             $analytics->property = $property;
             $analytics->updateDB();
         }
+        $result = $analytics->updateDetails();
+        echo 'Updated ga_analytics_details; ' . $result . ' records\n\n';
     }
 }
