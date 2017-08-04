@@ -7,12 +7,13 @@ var dashboard = (function() {
         y: 50,
         duration: 1000,
         dataLines: {
-            lineWidth: 4,
-            uniqueVisitorColor: 'firebrick',
+            lineWidth: 1,
             pageViewColor: 'steelblue',
-            entrancesColor: 'darkgreen',
+            uniqueVisitorColor: 'midnightblue',
+            entrancesColor: 'darkred',
             textDx: 5,
-            textDy: '.3em'
+            textDy: '.3em',
+            opacity: 0.7
         },
         margin: {
             top: 20,
@@ -324,11 +325,13 @@ var dashboard = (function() {
             .attr("transform", "translate(0," + height + ")");
         g.append("g")
             .attr('class', 'yAxis');
+        var g2 = g.append('g')
+            .attr('opacity', prms.dataLines.opacity);
         function addPath(lineClass, txt, txtId, color) {
-            g.append("path")
+            g2.append("path")
                 .attr('class', lineClass)
-                .attr("fill", "none")
-                .attr("stroke", color)
+                .attr("fill", color)
+                .attr("stroke", 'black')
                 .attr("stroke-width", prms.dataLines.lineWidth)
             ;
             g.append('text')
@@ -402,15 +405,19 @@ var dashboard = (function() {
         detailTables(d);
     }
     function lineTransitions(d, dataCol, lineClass, txtId) {
-        var lineD = d3.line()
+        var lineD = d3.area()
             .x(function(d) { return xScale(d.date_recorded); })
-            .y(function(d) { return yScale(d[dataCol]); });
+            .y1(function(d) { return yScale(d[dataCol]); });
+        lineD.y0(yScale(0));
         mainChart.transition().select(lineClass)
             .duration(prms.duration)
             .attrTween('d', function() {
-                var previous = d3.select(this).attr('d');
+                var previous = d3.select(this).attr('d') || lineD(d);
                 var current = lineD(d);
-                return d3.interpolatePath(previous, current);
+                function exclude(a, b) {
+                    return a.x === b.x;
+                }
+                return d3.interpolatePath(previous, current, exclude);
             });
         mainChart.transition().select(txtId)
             .duration(prms.duration)
