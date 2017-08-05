@@ -5,7 +5,7 @@ var dashboard = (function() {
         height: 400,
         x: 50,
         y: 50,
-        duration: 1000,
+        duration: 1500,
         dataLines: {
             lineWidth: 1,
             pageViewColor: 'steelblue',
@@ -13,6 +13,7 @@ var dashboard = (function() {
             entrancesColor: 'darkred',
             textDx: 5,
             textDy: '.3em',
+            fontSize: '1.2em',
             opacity: 0.7
         },
         margin: {
@@ -337,6 +338,7 @@ var dashboard = (function() {
             g.append('text')
                 .text(txt)
                 .attr('id', txtId)
+                .attr('font-size', prms.dataLines.fontSize)
                 .attr('dx', prms.dataLines.textDx)
                 .attr('dy', prms.dataLines.textDy)
                 .attr('fill', color)
