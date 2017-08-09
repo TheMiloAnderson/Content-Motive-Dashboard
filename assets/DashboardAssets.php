@@ -12,6 +12,7 @@ class DashboardAssets extends AssetBundle {
         'js/d3-interpolate-path.js',
         'js/jquery-ui.min.js',
         'js/dashboard.js',
+        'js/vue.js',
     ];
     public $css = [
         'css/jquery-ui.min.css',
