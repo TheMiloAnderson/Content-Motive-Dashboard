@@ -1,14 +1,19 @@
-/*** Global CSS here, might need to get moved later ***/
+@import 'zIndexes'; 
+@import 'colors';
+
 @gNavHeight: 74px;
+
 body > div.wrap > nav.navbar {
     height: @gNavHeight;
+    z-index: @zindexGlobalNav;
+    margin-bottom: 0px;
 }
 nav #w1 .active {
     border-bottom: solid 1px #cd2128;
 }
 
 body > .wrap > .container {
-    padding-top: 90px;
+    padding-top: @gNavHeight;
 }
 .navbar-header .navbar-brand {
     padding-top: 10px;
@@ -25,12 +30,8 @@ body > .wrap > .container {
     font-size: 26px;
 }
 #logoTxt .con {
-    color: #CF2129;
+    color: @colorLogoRed;
 }
 #logoTxt .MOT {
-    color: #3AC0BE;
-}
-
-.tertiary-nav {
-    padding-top: @gNavHeight;
+    color: @colorLogoTeal;
 }

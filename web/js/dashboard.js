@@ -2,7 +2,7 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
-        height: 400,
+        height: d3.select('#dash-panel-secondary').node().getBoundingClientRect().height - d3.select('#dash-right-col h3').node().getBoundingClientRect().height,
         x: 50,
         y: 50,
         duration: 1500,
@@ -19,12 +19,11 @@ var dashboard = (function() {
         margin: {
             top: 20,
             right: 120,
-            bottom: 30,
-            left: 50
+            bottom: 25,
+            left: 60
         },
         tableColumns: ['', 'Pageviews', 'Visitors', 'Entrances', 'Avg. Visit Duration']
     };
-    
     var ajaxUrl,
         data = [], // all data for a user -- not set up yet, may be unnecessary
         dataset = [], // all data for a dealer
@@ -229,7 +228,7 @@ var dashboard = (function() {
     function metricReadouts(d) {
         // Pageviews
         d3.select('#pageviews-readout')
-            .attr('style', 'color:'+prms.dataLines.pageViewColor)
+            //.attr('style', 'color:'+prms.dataLines.pageViewColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -242,7 +241,7 @@ var dashboard = (function() {
             });
         // Visitors
         d3.select('#visitors-readout')
-            .attr('style', 'color:'+prms.dataLines.uniqueVisitorColor)
+            //.attr('style', 'color:'+prms.dataLines.uniqueVisitorColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -255,7 +254,7 @@ var dashboard = (function() {
             });
         // Entrances
         d3.select('#entrances-readout')
-            .attr('style', 'color:'+prms.dataLines.entrancesColor)
+            //.attr('style', 'color:'+prms.dataLines.entrancesColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -366,10 +365,24 @@ var dashboard = (function() {
             .range([height, 0])
             .domain([yDomainMin, yDomainMax * 1.1])
         ;
+        var formatDay = d3.timeFormat("%a %d"),
+            formatWeek = d3.timeFormat("%b %d"),
+            formatMonth = d3.timeFormat("%b"),
+            formatYear = d3.timeFormat("%Y");
+
+        function multiFormat(date) {
+          return (d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
+              : d3.timeYear(date) < date ? formatMonth
+              : formatYear)(date);
+        }
         // Axes
         bottomAxis = function() {
             return d3.axisBottom(xScale)
-                .tickSizeInner(-1 * height)
+                .ticks(8)
+                .tickFormat(multiFormat)
+                .tickPadding(10)
+                .tickSizeInner((-1 * height))
+                .tickSizeOuter(0)
             ;
         };
         svg.select('.xAxis')
@@ -379,7 +392,9 @@ var dashboard = (function() {
         leftAxis = function() {
             return d3.axisLeft(yScale)
                 .ticks(8)
+                .tickPadding(10)
                 .tickSizeInner(-1 * width)
+                .tickSizeOuter(0)
             ;
         };
         svg.select('.yAxis')
@@ -400,11 +415,11 @@ var dashboard = (function() {
             .attr('width', width - xScale(d[d.length - 1].date_recorded))
             .attr('x', xScale(d[d.length - 1].date_recorded))
         ;
-        formatTicks();
         metricReadouts(d);
         updateSiteSelect(dataset);
         updateSubheads(d);
         detailTables(d);
+        formatTicks();
     }
     function lineTransitions(d, dataCol, lineClass, txtId) {
         var lineD = d3.area()
@@ -434,6 +449,17 @@ var dashboard = (function() {
         d3.selectAll('.xAxis .tick line')
             .attr('stroke', 'lightgray')
         ;
+        d3.selectAll('.yAxis .tick text')
+            .style('font-size', '14px');
+        d3.selectAll('.xAxis .tick text')
+            .style('font-size', '14px');
+        setTimeout(function() {
+            d3.selectAll('.xAxis .tick > text')
+            .style('font-weight', function() {
+                var el = d3.select(this);
+                if (!isNaN(el.text())) { return 'bold'; } else { return ''; }
+            })
+        }, 100);
     };
 
     return {

@@ -54,85 +54,61 @@ $this->title = 'Dashboard';
         </ul>
     </div>
 </div>
-<div class="dealers-index">
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            dashboard.init("<?php echo Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]); ?>", [
-                <?php foreach ($dealers as $dealer) {
-                    echo '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
-                } ?>
-            ]);
-        });
-    </script>
-    <!--<h1><?= Html::encode($this->title) ?></h1>-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        dashboard.init("<?php echo Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]); ?>", [
+            <?php foreach ($dealers as $dealer) {
+                echo '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
+            } ?>
+        ]);
+    });
+
+</script>
+<!--<h1><?= Html::encode($this->title) ?></h1>-->
+<div class="dash-panel" id="dash-panel-main">
     <h1 id="subhead">Content: 
         <span id="dealerSubhead"></span>
     </h1>
-    <div class="col-md-2">
-<div class="row">
-            <div class="col-md-5ths">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Pageviews</h3>
-                    </div>
-                    <div id="pageviews-readout" class="panel-body readout">
-                        0
-                    </div>
-                </div>
+    <div class="dash-panel" id="dash-panel-secondary">
+        <div class="metric-panel">
+            <h4 class="metric-title">Pageviews</h3>
+            <div id="pageviews-readout" class="readout pageviews">
+                0
             </div>
-            <div class="col-md-5ths">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Visitors</h3>
-                    </div>
-                    <div id="visitors-readout" class="panel-body readout">
-                        0
-                    </div>
-                </div>
+        </div>
+        <div class="metric-panel">
+            <h4 class="metric-title">Visitors</h3>
+            <div id="visitors-readout" class="readout visitors">
+                0
             </div>
-            <div class="col-md-5ths">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Entrances</h3>
-                    </div>
-                    <div id="entrances-readout" class="panel-body readout">
-                        0
-                    </div>
-                </div>
+        </div>
+        <div class="metric-panel">
+            <h4 class="metric-title">Entrances</h3>
+            <div id="entrances-readout" class="readout entrances">
+                0
             </div>
-            <div class="col-md-5ths">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Avg. Duration</h3>
-                    </div>
-                    <div id="duration-readout" class="panel-body readout">
-                        0:00
-                    </div>
-                </div>
+        </div>
+        <div class="metric-panel">
+            <h4 class="metric-title">Avg Time</h3>
+            <div id="duration-readout" class="readout duration">
+                0:00
             </div>
-            <div class="col-md-5ths">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Bounce Rate</h3>
-                    </div>
-                    <div id="bounce-readout" class="panel-body readout">
-                        0%
-                    </div>
-                </div>
+        </div>
+        <div class="metric-panel">
+            <h4 class="metric-title">Bounce Rate</h3>
+            <div id="bounce-readout" class="readout bounce">
+                0%
             </div>
         </div>
     </div>
-    <div id="dash-right-col" class="col-md-10 panel panel-default">
-        <div class="row">
-            <div class="col-md-12">
-                <h3><span id="websiteSubhead"></span></h3>
-            </div>
+</div>
+<div id="dash-right-col">
+    <h3><span id="websiteSubhead"></span></h3>
+    <svg class="mainChart" x="0" y="0"></svg>
+</div>
+<div id="dash-bottom-row">
+    <?php Pjax::begin(); ?>
+        <div id="p0">
         </div>
-        
-        <svg class="mainChart" x="0" y="0"></svg>
-        <?php Pjax::begin(); ?>
-            <div id="p0">
-            </div>
-        <?php Pjax::end(); ?>
-    </div>
+    <?php Pjax::end(); ?>
 </div>
