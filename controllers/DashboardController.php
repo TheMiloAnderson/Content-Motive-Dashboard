@@ -10,26 +10,6 @@ use yii\grid\GridView;
 
 class DashboardController extends Controller {
     
-    private function getCurrentUser() {
-        $currentUserId = Yii::$app->user->id;
-        return Users::find()->where(['id' => $currentUserId])->one();
-    }
-    
-    private function simplifyArray(&$array, $key) {
-        // this makes it easier to handle Content, Blogs, Micro in the same view template
-        foreach ($array as &$item) {
-            $item['properties'] = $item[$key];
-            unset($item[$key]);
-        }
-        $count = count($array) - 1;
-        for ($i=$count; $i>=0; $i--) {
-            if (empty($array[$i]['properties'])) {
-                unset($array[$i]);
-            }
-        }
-        $array = array_values($array);
-    }
-    
     public function actionContent() {
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
@@ -72,9 +52,9 @@ class DashboardController extends Controller {
         return json_encode($data);
     }
     
-    public function actionDetails($pid) {
+    public function actionDetails(array $pids) {
         $model = new DashboardData();
-        $dataProvider = $model->details($pid);
+        $dataProvider = $model->details($pids);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
@@ -103,5 +83,25 @@ class DashboardController extends Controller {
         }
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return json_encode($dealers);
+    }
+    
+    private function getCurrentUser() {
+        $currentUserId = Yii::$app->user->id;
+        return Users::find()->where(['id' => $currentUserId])->one();
+    }
+    
+    private function simplifyArray(&$array, $key) {
+        // this makes it easier to handle Content, Blogs, Micro in the same view template
+        foreach ($array as &$item) {
+            $item['properties'] = $item[$key];
+            unset($item[$key]);
+        }
+        $count = count($array) - 1;
+        for ($i=$count; $i>=0; $i--) {
+            if (empty($array[$i]['properties'])) {
+                unset($array[$i]);
+            }
+        }
+        $array = array_values($array);
     }
 }

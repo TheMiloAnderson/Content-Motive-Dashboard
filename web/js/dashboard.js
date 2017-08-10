@@ -1,6 +1,6 @@
 var dashboard = (function() {
     'use strict';
-    var t0, t1;
+    //var t0, t1;
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
@@ -107,17 +107,29 @@ var dashboard = (function() {
             all.select('.prop-click').attr('href', pids.join());
         }
     }
+    //  ?r=dashboard%2Faggregate&pids%5B0%5D=58&pids%5B1%5D=59
     function detailTables(d) {
         var sites = getCurrentSites(d);
-        if (sites.length === 1) {
-            jQuery.get('?r=/dashboard/details&pid=' + sites[0][1], function(data) {
-                data = '<div id="p0">' + data + '</div>';
-                detailsTable.show();
-                detailsTable.html(data);
-            });
-        } else {
-            detailsTable.html('<div id="p0">Select a website to view details</div>');
+        var url = '?r=/dashboard/details&';
+        for (var i=0; i < sites.length; i++) {
+            url += 'pids[' + i +  ']=' + sites[i][1] + '&';
         }
+        jQuery.get(url, function(data) {
+            console.log(data);
+            data = '<div id="p0">' + data + '</div>';
+            detailsTable.show();
+            detailsTable.html(data);
+        });
+        console.log(url);
+//        if (sites.length === 1) {
+//            jQuery.get(url, function(data) {
+//                data = '<div id="p0">' + data + '</div>';
+//                detailsTable.show();
+//                detailsTable.html(data);
+//            });
+//        } else {
+//            detailsTable.html('<div id="p0">Select a website to view details</div>');
+//        }
     }
     function updateSubheads(d) {
         var id = d[0].dealer_id;
@@ -185,9 +197,6 @@ var dashboard = (function() {
     }
     
     //***** Data processing & display *****//
-//    function changeDataset(pids, callback) {
-//        jQuery.get();
-//    }
     function changeData(callback, id) {
         if (dataCache[id]) {
             dataset = dataCache[id];
@@ -209,20 +218,6 @@ var dashboard = (function() {
                 }
             });
         }
-//        callback();
-//        $.ajax({
-//            url: ajaxUrl,
-//            dataType: 'text',
-//            method: 'GET',
-//            success: function(data) {
-//                data = JSON.parse(data);
-//                dataset = dataSubset = prepData(data);
-//                callback();
-//            },
-//            error:  function(xhr) {
-//                console.log(xhr);
-//            }
-//        });
     };
     function prepData(data) {
         var parseTime = d3.timeParse("%Y-%m-%d");
@@ -476,8 +471,6 @@ var dashboard = (function() {
                 if (!isNaN(el.text())) { return 'bold'; } else { return ''; }
             })
         }, 100);
-        t1 = performance.now();
-        console.log("Call took " + (t1 - t0) + " milliseconds.");
     };
 
     return {
