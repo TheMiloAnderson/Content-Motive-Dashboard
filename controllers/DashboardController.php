@@ -16,6 +16,7 @@ class DashboardController extends Controller {
     }
     
     private function simplifyArray(&$array, $key) {
+        // this makes it easier to handle Content, Blogs, Micro in the same view template
         foreach ($array as &$item) {
             $item['properties'] = $item[$key];
             unset($item[$key]);
@@ -86,6 +87,21 @@ class DashboardController extends Controller {
             ]
         ]);
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        return $html;        
+        return $html;
+    }
+    
+    public function actionContentAll() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'contentProperties');
+        foreach($dealers as &$dealer) {
+            foreach($dealer['properties'] as &$property) {
+                $model = new DashboardData();
+                $data = $model->aggregates($property['id']);
+                $property['aggregates'] = $data;
+            }
+        }
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        return json_encode($dealers);
     }
 }

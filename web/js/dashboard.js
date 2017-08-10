@@ -1,11 +1,13 @@
 var dashboard = (function() {
+    'use strict';
+    var t0, t1;
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
         height: d3.select('#dash-panel-secondary').node().getBoundingClientRect().height - d3.select('#dash-right-col h3').node().getBoundingClientRect().height,
         x: 50,
         y: 50,
-        duration: 1500,
+        duration: 2000,
         dataLines: {
             lineWidth: 1,
             pageViewColor: 'steelblue',
@@ -25,7 +27,7 @@ var dashboard = (function() {
         tableColumns: ['', 'Pageviews', 'Visitors', 'Entrances', 'Avg. Visit Duration']
     };
     var ajaxUrl,
-        data = [], // all data for a user -- not set up yet, may be unnecessary
+        dataCache = [], // all data for a user
         dataset = [], // all data for a dealer
         dataSubset = [], // dealer data filtered by date or website
         dealersList = [],
@@ -42,6 +44,7 @@ var dashboard = (function() {
     var websiteSubhead = jQuery('#websiteSubhead');
     var dateRangeSubhead = jQuery('#dateRangeSubhead');
     
+    var dealerSelect = jQuery('.dealerSelect');
     var dateRangeBtn = jQuery('#dateRangeBtn');
     var dateSlider = jQuery('#slider-range');
     
@@ -63,30 +66,25 @@ var dashboard = (function() {
             resetDateSlider(dataSubset);
         });
         // Click dealer/host names, get new dataset
-        jQuery('.dealerSelect').click(function(e) {
+        dealerSelect.click(function(e) {
             e.preventDefault();
+            var dealerId = this.dataset.id;
+            jQuery('#dealers').collapse('toggle');
             ajaxUrl = jQuery(this).attr('href');
             changeData(function() {
                 updateChart(dataset);
                 resetDateSlider(dataset);
-            });
+            }, dealerId);
         });
         // Filter dataset by date, update the chart
         dateRangeBtn.click(function() {
             var startDate = $(this).data('startdate');
             var endDate = $(this).data('enddate');
-            revisedDataset = dataSubset.filter(function(d) {
+            var revisedDataset = dataSubset.filter(function(d) {
                 return d.date_recorded >= startDate && d.date_recorded <= endDate;
             });
             updateChart(prepData(revisedDataset));
         });
-        jQuery( function() {
-            $( "#accordion" ).accordion({
-              collapsible: true,
-              heightStyle: "content"
-            });
-            $( "#selectmenu" ).selectmenu();
-        } );
     }
     function updateSiteSelect(d) {
         var siteSelect = d3.select('#websites');
@@ -109,7 +107,6 @@ var dashboard = (function() {
             all.select('.prop-click').attr('href', pids.join());
         }
     }
-    
     function detailTables(d) {
         var sites = getCurrentSites(d);
         if (sites.length === 1) {
@@ -122,14 +119,13 @@ var dashboard = (function() {
             detailsTable.html('<div id="p0">Select a website to view details</div>');
         }
     }
-    
     function updateSubheads(d) {
         var id = d[0].dealer_id;
         var dealer = jQuery.grep(dealersList, function(obj) { return obj.id === id; });
         dealerSubhead.text(dealer[0].named);
         
         var sites = getCurrentSites(d);
-        sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';
+        var sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';
         websiteSubhead.animate({opacity: 0}, 200, function() { 
             websiteSubhead.text(sitesText);
             websiteSubhead.animate({opacity: 1}, 300);
@@ -137,7 +133,7 @@ var dashboard = (function() {
     }
     function getCurrentSites(d) {
         var sites = d.map(function(d) { return d.url + '__' + d.property_id; });
-        uniqueSites = Array.from(new Set(sites));
+        var uniqueSites = Array.from(new Set(sites));
         return uniqueSites.map(function(s) { return [s.split('__')[0], s.split('__')[1]];});
     }
     function initializeDateSlider() {
@@ -189,20 +185,44 @@ var dashboard = (function() {
     }
     
     //***** Data processing & display *****//
-    function changeData(action) {
-        $.ajax({
-            url: ajaxUrl,
-            dataType: 'text',
-            method: 'GET',
-            success: function(data) {
-                data = JSON.parse(data);
-                dataset = dataSubset = prepData(data);
-                action();
-            },
-            error:  function(xhr) {
-                console.log(xhr);
-            }
-        });
+//    function changeDataset(pids, callback) {
+//        jQuery.get();
+//    }
+    function changeData(callback, id) {
+        if (dataCache[id]) {
+            dataset = dataCache[id];
+            callback();
+            dataSubset = dataset;
+        } else {
+            $.ajax({
+                url: ajaxUrl,
+                dataType: 'text',
+                method: 'GET',
+                success: function(data) {
+                    data = JSON.parse(data);
+                    dataset = prepData(data);
+                    callback();
+                    dataCache[id] = dataSubset = dataset;
+                },
+                error:  function(xhr) {
+                    console.log(xhr);
+                }
+            });
+        }
+//        callback();
+//        $.ajax({
+//            url: ajaxUrl,
+//            dataType: 'text',
+//            method: 'GET',
+//            success: function(data) {
+//                data = JSON.parse(data);
+//                dataset = dataSubset = prepData(data);
+//                callback();
+//            },
+//            error:  function(xhr) {
+//                console.log(xhr);
+//            }
+//        });
     };
     function prepData(data) {
         var parseTime = d3.timeParse("%Y-%m-%d");
@@ -228,7 +248,6 @@ var dashboard = (function() {
     function metricReadouts(d) {
         // Pageviews
         d3.select('#pageviews-readout')
-            //.attr('style', 'color:'+prms.dataLines.pageViewColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -241,7 +260,6 @@ var dashboard = (function() {
             });
         // Visitors
         d3.select('#visitors-readout')
-            //.attr('style', 'color:'+prms.dataLines.uniqueVisitorColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -254,7 +272,6 @@ var dashboard = (function() {
             });
         // Entrances
         d3.select('#entrances-readout')
-            //.attr('style', 'color:'+prms.dataLines.entrancesColor)
             .transition().duration(prms.duration)
             .tween('text', function() {
                 var element = d3.select(this);
@@ -365,17 +382,16 @@ var dashboard = (function() {
             .range([height, 0])
             .domain([yDomainMin, yDomainMax * 1.1])
         ;
+        // Axes
         var formatDay = d3.timeFormat("%a %d"),
             formatWeek = d3.timeFormat("%b %d"),
             formatMonth = d3.timeFormat("%b"),
             formatYear = d3.timeFormat("%Y");
-
         function multiFormat(date) {
           return (d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
               : d3.timeYear(date) < date ? formatMonth
               : formatYear)(date);
         }
-        // Axes
         bottomAxis = function() {
             return d3.axisBottom(xScale)
                 .ticks(8)
@@ -439,7 +455,7 @@ var dashboard = (function() {
         mainChart.transition().select(txtId)
             .duration(prms.duration)
             .attr("transform", "translate("+(width+3)+","+yScale(d[d.length - 1][dataCol])+")")
-        ;
+        ;   
     }  
     function formatTicks() {
         d3.selectAll('.yAxis .tick line')
@@ -453,13 +469,15 @@ var dashboard = (function() {
             .style('font-size', '14px');
         d3.selectAll('.xAxis .tick text')
             .style('font-size', '14px');
-        setTimeout(function() {
+        d3.timer(function() {
             d3.selectAll('.xAxis .tick > text')
             .style('font-weight', function() {
                 var el = d3.select(this);
                 if (!isNaN(el.text())) { return 'bold'; } else { return ''; }
             })
         }, 100);
+        t1 = performance.now();
+        console.log("Call took " + (t1 - t0) + " milliseconds.");
     };
 
     return {

@@ -32,7 +32,8 @@ $this->title = 'Dashboard';
                 <?php foreach ($dealers as $dealer) {
                     $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
                     if ($pids) {
-                        echo '<li><a class="dealerSelect" href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
+                        echo '<li><a class="dealerSelect" data-id="' . $dealer['id'] . '" ';
+                        echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
                         echo $dealer['name'] . '&nbsp;(' . count($pids) . ')' . '</a></li>';
                     }
                 } ?>
