@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Users;
 use app\models\DashboardData;
+use app\commands\models\GoogleAnalytics;
 use yii\grid\GridView;
 
 class DashboardController extends Controller {
@@ -70,6 +71,14 @@ class DashboardController extends Controller {
         return $html;
     }
     
+    public function actionKeywords($start, $end, $view) {
+//        $model = new GoogleAnalytics();
+//        $data = $model->fetchKeywords($start, $end, $view);
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+//        ini_set('xdebug.var_display_max_depth', '100');  
+//        return var_dump($data);
+    }
+    
     public function actionContentAll() {
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
@@ -85,11 +94,11 @@ class DashboardController extends Controller {
         return json_encode($dealers);
     }
     
+    //*** utility functions ***//
     private function getCurrentUser() {
         $currentUserId = Yii::$app->user->id;
         return Users::find()->where(['id' => $currentUserId])->one();
     }
-    
     private function simplifyArray(&$array, $key) {
         // this makes it easier to handle Content, Blogs, Micro in the same view template
         foreach ($array as &$item) {

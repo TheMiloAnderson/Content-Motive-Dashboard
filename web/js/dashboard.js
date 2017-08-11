@@ -29,6 +29,7 @@ var dashboard = (function() {
         dataCache = [], // all data for a user (eventually)
         dataset = [], // all data for a dealer
         dataSubset = [], // dealer data filtered by date or website
+        currentSiteIds = [],
         dealersList = [],
         mainChart,
         g,
@@ -48,6 +49,7 @@ var dashboard = (function() {
     
     var dealerSelect = jQuery('.dealerSelect');
     var dateRangeBtn = jQuery('#dateRangeBtn');
+    var dateRangeResetBtn = jQuery('#dateRangeResetBtn');
     var dateSlider = jQuery('#slider-range');
     
     var propertyRows = jQuery('.single-prop');
@@ -87,6 +89,10 @@ var dashboard = (function() {
                 return d.date_recorded >= startDate && d.date_recorded <= endDate;
             });
             updateChart(prepData(revisedDataset));
+        });
+        dateRangeResetBtn.click(function() {
+            updateChart(prepData(dataset));
+            resetDateSlider(prepData(dataset));
         });
     }
     function closeMenu(id) {
@@ -184,6 +190,10 @@ var dashboard = (function() {
         var end = new Date(d[d.length - 1].date_recorded).getTime();
         dateSlider.slider('option', 'min', start / 1000);
         dateSlider.slider('option', 'max', end / 1000);
+        dateSlider.slider('values', 0, start / 1000);
+        dateSlider.slider('values', 1, end / 1000);
+        dateRangeBtn.data('startdate', start);
+        dateRangeBtn.data('enddate', end);
         setDateFields(start, end);
     }
     function setDateFields(start, end) {
