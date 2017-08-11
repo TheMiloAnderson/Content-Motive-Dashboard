@@ -1,12 +1,13 @@
-/*** Global CSS here, might need to get moved later ***/
 body > div.wrap > nav.navbar {
   height: 74px;
+  z-index: 1000;
+  margin-bottom: 0px;
 }
 nav #w1 .active {
   border-bottom: solid 1px #cd2128;
 }
 body > .wrap > .container {
-  padding-top: 90px;
+  padding-top: 74px;
 }
 .navbar-header .navbar-brand {
   padding-top: 10px;
@@ -27,8 +28,5 @@ body > .wrap > .container {
 }
 #logoTxt .MOT {
   color: #3AC0BE;
-}
-.tertiary-nav {
-  padding-top: 74px;
 }
 /*# sourceMappingURL=global.css.map */

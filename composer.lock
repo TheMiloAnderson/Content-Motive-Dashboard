@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6abcee99d6c177f67f8b801144c9a4cd",
+    "content-hash": "ff871f7f0d1f0d2ced3391de1810c47c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -209,16 +209,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
-                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/25b28bae8a6f185b5030673af77b32e1163d5c6e",
+                "reference": "25b28bae8a6f185b5030673af77b32e1163d5c6e",
                 "shasum": ""
             },
             "require": {
@@ -265,7 +265,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14T20:40:20+00:00"
+            "time": "2017-07-16T21:13:23+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -418,16 +418,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.14",
+            "version": "v0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "b8c3ee8adab9eaffc3825cabc12740ad6e2ed76f"
+                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/b8c3ee8adab9eaffc3825cabc12740ad6e2ed76f",
-                "reference": "b8c3ee8adab9eaffc3825cabc12740ad6e2ed76f",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/018f3288dc686345bd6d82deea81b6f56171bfc0",
+                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-07-10T00:18:15+00:00"
+            "time": "2017-08-06T00:19:44+00:00"
         },
         {
             "name": "google/auth",
@@ -801,28 +801,28 @@
         },
         {
             "name": "npm-asset/d3",
-            "version": "4.9.1",
+            "version": "4.10.0",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3/-/d3-4.9.1.tgz",
+                "url": "https://registry.npmjs.org/d3/-/d3-4.10.0.tgz",
                 "reference": null,
-                "shasum": "f860be9252261a3c14eea64b1d2590d14f4db838"
+                "shasum": "0bcca3a3b614e2fd45b1b5bd0b9164d57352a862"
             },
             "require": {
                 "npm-asset/d3-array": "1.2.0",
-                "npm-asset/d3-axis": "1.0.7",
+                "npm-asset/d3-axis": "1.0.8",
                 "npm-asset/d3-brush": "1.0.4",
                 "npm-asset/d3-chord": "1.0.4",
-                "npm-asset/d3-collection": "1.0.3",
+                "npm-asset/d3-collection": "1.0.4",
                 "npm-asset/d3-color": "1.0.3",
                 "npm-asset/d3-dispatch": "1.0.3",
-                "npm-asset/d3-drag": "1.1.0",
+                "npm-asset/d3-drag": "1.1.1",
                 "npm-asset/d3-dsv": "1.0.5",
                 "npm-asset/d3-ease": "1.0.3",
                 "npm-asset/d3-force": "1.0.6",
                 "npm-asset/d3-format": "1.2.0",
                 "npm-asset/d3-geo": "1.6.4",
-                "npm-asset/d3-hierarchy": "1.1.4",
+                "npm-asset/d3-hierarchy": "1.1.5",
                 "npm-asset/d3-interpolate": "1.1.5",
                 "npm-asset/d3-path": "1.0.5",
                 "npm-asset/d3-polygon": "1.0.3",
@@ -832,23 +832,23 @@
                 "npm-asset/d3-request": "1.0.5",
                 "npm-asset/d3-scale": "1.0.6",
                 "npm-asset/d3-selection": "1.1.0",
-                "npm-asset/d3-shape": "1.1.1",
-                "npm-asset/d3-time": "1.0.6",
+                "npm-asset/d3-shape": "1.2.0",
+                "npm-asset/d3-time": "1.0.7",
                 "npm-asset/d3-time-format": "2.0.5",
-                "npm-asset/d3-timer": "1.0.5",
+                "npm-asset/d3-timer": "1.0.6",
                 "npm-asset/d3-transition": "1.1.0",
                 "npm-asset/d3-voronoi": "1.1.2",
-                "npm-asset/d3-zoom": "1.2.0"
+                "npm-asset/d3-zoom": "1.5.0"
             },
             "require-dev": {
                 "npm-asset/json2module": "0.0",
                 "npm-asset/package-preamble": "0.1",
                 "npm-asset/rimraf": "~2",
-                "npm-asset/rollup": ">=0.41.4,<0.42.0",
+                "npm-asset/rollup": ">=0.45.2,<0.46.0",
                 "npm-asset/rollup-plugin-ascii": "0.0",
                 "npm-asset/rollup-plugin-node-resolve": "~3",
-                "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/tape": ">=4.7.0,<5.0.0",
+                "npm-asset/uglify-js": ">=3.0.24,<4.0.0"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -864,7 +864,7 @@
                 "npm-asset-scripts": {
                     "pretest": "rimraf build && mkdir build && json2module package.json > build/package.js && node rollup.node",
                     "test": "tape 'test/**/*-test.js'",
-                    "prepublish": "npm run test && rollup -c --banner \"$(preamble)\" -f umd -n d3 -o build/d3.js -- index.js && uglifyjs --preamble \"$(preamble)\" build/d3.js -c negate_iife=false -m -o build/d3.min.js",
+                    "prepublish": "npm run test && rollup -c --banner \"$(preamble)\" -o build/d3.js && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3.js -c negate_iife=false -m -o build/d3.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3/build/d3.js d3.v4.js && cp ../d3/build/d3.min.js d3.v4.min.js && git add d3.v4.js d3.v4.min.js && git commit -m \"d3 ${npm_package_version}\" && git push && cd - && cd ../d3-bower && git pull && cp ../d3/LICENSE ../d3/README.md ../d3/build/d3.js ../d3/build/d3.min.js . && git add -- LICENSE README.md d3.js d3.min.js && git commit -m \"${npm_package_version}\" && git tag -am \"${npm_package_version}\" v${npm_package_version} && git push && git push --tags && cd - && zip -j build/d3.zip -- LICENSE README.md API.md CHANGES.md build/d3.js build/d3.min.js"
                 }
             },
@@ -947,18 +947,20 @@
         },
         {
             "name": "npm-asset/d3-axis",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-axis/-/d3-axis-1.0.7.tgz",
+                "url": "https://registry.npmjs.org/d3-axis/-/d3-axis-1.0.8.tgz",
                 "reference": null,
-                "shasum": "048433d307061f62d1d248e2930c01d7b6738cd8"
+                "shasum": "31a705a0b535e65759de14173a31933137f18efa"
             },
             "require-dev": {
                 "npm-asset/d3-scale": "~1",
+                "npm-asset/d3-selection": ">=1.1.0,<2.0.0",
                 "npm-asset/eslint": "~3",
-                "npm-asset/package-preamble": "0.0",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/jsdom": "~11",
+                "npm-asset/package-preamble": "0.1",
+                "npm-asset/rollup": "0.42",
                 "npm-asset/tape": "~4",
                 "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
             },
@@ -1118,20 +1120,20 @@
         },
         {
             "name": "npm-asset/d3-collection",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-collection/-/d3-collection-1.0.3.tgz",
+                "url": "https://registry.npmjs.org/d3-collection/-/d3-collection-1.0.4.tgz",
                 "reference": null,
-                "shasum": "00bdea94fbc1628d435abbae2f4dc2164e37dd34"
+                "shasum": "342dfd12837c90974f33f1cc0a785aea570dcdc2"
             },
             "require-dev": {
                 "npm-asset/d3-array": "~1",
-                "npm-asset/eslint": "~3",
-                "npm-asset/package-preamble": "0.0",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/eslint": "~4",
+                "npm-asset/package-preamble": "0.1",
+                "npm-asset/rollup": "0.43",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": "~3"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -1147,7 +1149,7 @@
                 "npm-asset-scripts": {
                     "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-collection.js -- index.js",
                     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-                    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-collection.js -c -m -o build/d3-collection.min.js",
+                    "prepublish": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3-collection.js -c -m -o build/d3-collection.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-collection/build/d3-collection.js d3-collection.v1.js && cp ../d3-collection/build/d3-collection.min.js d3-collection.v1.min.js && git add d3-collection.v1.js d3-collection.v1.min.js && git commit -m \"d3-collection ${npm_package_version}\" && git push && cd - && zip -j build/d3-collection.zip -- LICENSE README.md build/d3-collection.js build/d3-collection.min.js"
                 }
             },
@@ -1285,23 +1287,23 @@
         },
         {
             "name": "npm-asset/d3-drag",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-drag/-/d3-drag-1.1.0.tgz",
+                "url": "https://registry.npmjs.org/d3-drag/-/d3-drag-1.1.1.tgz",
                 "reference": null,
-                "shasum": "4a49b4d77a42e9e3d5a0ef3b492b14aaa2e5a733"
+                "shasum": "b5155304433b18ba38726b2184d0098e820dc64b"
             },
             "require": {
                 "npm-asset/d3-dispatch": "~1",
                 "npm-asset/d3-selection": "~1"
             },
             "require-dev": {
-                "npm-asset/eslint": "~3",
+                "npm-asset/eslint": "~4",
                 "npm-asset/package-preamble": "0.1",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/rollup": "0.45",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": "~3"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -1315,9 +1317,9 @@
                     "url": "git+https://github.com/d3/d3-drag.git"
                 },
                 "npm-asset-scripts": {
-                    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -g d3-dispatch:d3,d3-selection:d3 -f umd -n d3 -o build/d3-drag.js -- index.js",
+                    "pretest": "rm -rf build && mkdir build && rollup -c --banner \"$(preamble)\" -g d3-dispatch:d3,d3-selection:d3 -o build/d3-drag.js",
                     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-                    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-drag.js -c -m -o build/d3-drag.min.js",
+                    "prepublish": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3-drag.js -c -m -o build/d3-drag.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-drag/build/d3-drag.js d3-drag.v1.js && cp ../d3-drag/build/d3-drag.min.js d3-drag.v1.min.js && git add d3-drag.v1.js d3-drag.v1.min.js && git commit -m \"d3-drag ${npm_package_version}\" && git push && cd - && zip -j build/d3-drag.zip -- LICENSE README.md build/d3-drag.js build/d3-drag.min.js"
                 }
             },
@@ -1640,21 +1642,24 @@
         },
         {
             "name": "npm-asset/d3-hierarchy",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-hierarchy/-/d3-hierarchy-1.1.4.tgz",
+                "url": "https://registry.npmjs.org/d3-hierarchy/-/d3-hierarchy-1.1.5.tgz",
                 "reference": null,
-                "shasum": "96c3942f3f21cf997a11b4edf00dde2a77b4c6d0"
+                "shasum": "a1c845c42f84a206bcf1c01c01098ea4ddaa7a26"
             },
             "require-dev": {
+                "npm-asset/benchmark": ">=2.1.4,<3.0.0",
+                "npm-asset/d3-array": ">=1.2.0,<2.0.0",
                 "npm-asset/d3-dsv": "~1",
                 "npm-asset/d3-queue": "~3",
+                "npm-asset/d3-random": ">=1.1.0,<2.0.0",
                 "npm-asset/eslint": "~3",
                 "npm-asset/package-preamble": "0.0",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/rollup": "0.42",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": ">=3.0.15,<4.0.0"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -1670,7 +1675,7 @@
                 "npm-asset-scripts": {
                     "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-hierarchy.js -- index.js",
                     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-                    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-hierarchy.js -c -m -o build/d3-hierarchy.min.js",
+                    "prepublish": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3-hierarchy.js -c -m -o build/d3-hierarchy.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-hierarchy/build/d3-hierarchy.js d3-hierarchy.v1.js && cp ../d3-hierarchy/build/d3-hierarchy.min.js d3-hierarchy.v1.min.js && git add d3-hierarchy.v1.js d3-hierarchy.v1.min.js && git commit -m \"d3-hierarchy ${npm_package_version}\" && git push && cd - && zip -j build/d3-hierarchy.zip -- LICENSE README.md build/d3-hierarchy.js build/d3-hierarchy.min.js"
                 }
             },
@@ -2261,12 +2266,12 @@
         },
         {
             "name": "npm-asset/d3-shape",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-shape/-/d3-shape-1.1.1.tgz",
+                "url": "https://registry.npmjs.org/d3-shape/-/d3-shape-1.2.0.tgz",
                 "reference": null,
-                "shasum": "50a1037e48a79f5b8fd9d58cde52799aeb1f7723"
+                "shasum": "45d01538f064bafd05ea3d6d2cb748fd8c41f777"
             },
             "require": {
                 "npm-asset/d3-path": "~1"
@@ -2319,19 +2324,19 @@
         },
         {
             "name": "npm-asset/d3-time",
-            "version": "1.0.6",
+            "version": "1.0.7",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-time/-/d3-time-1.0.6.tgz",
+                "url": "https://registry.npmjs.org/d3-time/-/d3-time-1.0.7.tgz",
                 "reference": null,
-                "shasum": "a55b13d7d15d3a160ae91708232e0835f1d5e945"
+                "shasum": "94caf6edbb7879bb809d0d1f7572bc48482f7270"
             },
             "require-dev": {
-                "npm-asset/eslint": "~3",
-                "npm-asset/package-preamble": "0.0",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/eslint": "~4",
+                "npm-asset/package-preamble": "0.1",
+                "npm-asset/rollup": "0.43",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": "~3"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -2347,7 +2352,7 @@
                 "npm-asset-scripts": {
                     "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-time.js -- index.js",
                     "test": "TZ=America/Los_Angeles tape 'test/**/*-test.js' && test/test-time-zones && eslint index.js src",
-                    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-time.js -c -m -o build/d3-time.min.js",
+                    "prepublish": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3-time.js -c -m -o build/d3-time.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-time/build/d3-time.js d3-time.v1.js && cp ../d3-time/build/d3-time.min.js d3-time.v1.min.js && git add d3-time.v1.js d3-time.v1.min.js && git commit -m \"d3-time ${npm_package_version}\" && git push && cd - && zip -j build/d3-time.zip -- LICENSE README.md build/d3-time.js build/d3-time.min.js"
                 }
             },
@@ -2430,19 +2435,19 @@
         },
         {
             "name": "npm-asset/d3-timer",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-timer/-/d3-timer-1.0.5.tgz",
+                "url": "https://registry.npmjs.org/d3-timer/-/d3-timer-1.0.6.tgz",
                 "reference": null,
-                "shasum": "b266d476c71b0d269e7ac5f352b410a3b6fe6ef0"
+                "shasum": "4044bf15d7025c06ce7d1149f73cd07b54dbd784"
             },
             "require-dev": {
                 "npm-asset/eslint": "~3",
-                "npm-asset/package-preamble": "0.0",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/package-preamble": "0.1",
+                "npm-asset/rollup": "0.42",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": "~3"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -2600,12 +2605,12 @@
         },
         {
             "name": "npm-asset/d3-zoom",
-            "version": "1.2.0",
+            "version": "1.5.0",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/d3-zoom/-/d3-zoom-1.2.0.tgz",
+                "url": "https://registry.npmjs.org/d3-zoom/-/d3-zoom-1.5.0.tgz",
                 "reference": null,
-                "shasum": "b3231f4f9386241475defe1c557bfd3fde1065fb"
+                "shasum": "8417de9a077f98f9ce83b1998efb8ee12b4db26e"
             },
             "require": {
                 "npm-asset/d3-dispatch": "~1",
@@ -2615,11 +2620,11 @@
                 "npm-asset/d3-transition": "~1"
             },
             "require-dev": {
-                "npm-asset/eslint": "~3",
+                "npm-asset/eslint": "~4",
                 "npm-asset/package-preamble": "0.1",
-                "npm-asset/rollup": "0.41",
+                "npm-asset/rollup": "0.45",
                 "npm-asset/tape": "~4",
-                "npm-asset/uglify-js": ">=2.8.11,<3.0.0"
+                "npm-asset/uglify-js": "~3"
             },
             "type": "npm-asset-library",
             "extra": {
@@ -2633,9 +2638,9 @@
                     "url": "git+https://github.com/d3/d3-zoom.git"
                 },
                 "npm-asset-scripts": {
-                    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -g d3-dispatch:d3,d3-drag:d3,d3-interpolate:d3,d3-selection:d3,d3-transition:d3 -f umd -n d3 -o build/d3-zoom.js -- index.js",
+                    "pretest": "rm -rf build && mkdir build && rollup -c --banner \"$(preamble)\" -g d3-dispatch:d3,d3-drag:d3,d3-interpolate:d3,d3-selection:d3,d3-transition:d3 -o build/d3-zoom.js",
                     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-                    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-zoom.js -c -m -o build/d3-zoom.min.js",
+                    "prepublish": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" build/d3-zoom.js -c -m -o build/d3-zoom.min.js",
                     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-zoom/build/d3-zoom.js d3-zoom.v1.js && cp ../d3-zoom/build/d3-zoom.min.js d3-zoom.v1.min.js && git add d3-zoom.v1.js d3-zoom.v1.min.js && git commit -m \"d3-zoom ${npm_package_version}\" && git push && cd - && zip -j build/d3-zoom.zip -- LICENSE README.md build/d3-zoom.js build/d3-zoom.min.js"
                 }
             },
@@ -2798,6 +2803,151 @@
                 "stdin",
                 "stdout",
                 "writeFile"
+            ]
+        },
+        {
+            "name": "npm-asset/vue",
+            "version": "2.4.2",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/vue/-/vue-2.4.2.tgz",
+                "reference": null,
+                "shasum": "a9855261f191c978cc0dc1150531b8d08149b58c"
+            },
+            "require-dev": {
+                "npm-asset/babel-core": ">=6.25.0,<7.0.0",
+                "npm-asset/babel-eslint": ">=7.2.3,<8.0.0",
+                "npm-asset/babel-helper-vue-jsx-merge-props": ">=2.0.2,<3.0.0",
+                "npm-asset/babel-loader": ">=7.0.0,<8.0.0",
+                "npm-asset/babel-plugin-istanbul": ">=4.1.4,<5.0.0",
+                "npm-asset/babel-plugin-syntax-dynamic-import": ">=6.18.0,<7.0.0",
+                "npm-asset/babel-plugin-syntax-jsx": ">=6.18.0,<7.0.0",
+                "npm-asset/babel-plugin-transform-vue-jsx": ">=3.4.3,<4.0.0",
+                "npm-asset/babel-preset-es2015": ">=6.24.1,<7.0.0",
+                "npm-asset/babel-preset-flow-vue": ">=1.0.0,<2.0.0",
+                "npm-asset/buble": ">=0.15.2,<0.16.0",
+                "npm-asset/chalk": ">=1.1.3,<2.0.0",
+                "npm-asset/chromedriver": ">=2.30.1,<3.0.0",
+                "npm-asset/codecov.io": ">=0.1.6,<0.2.0",
+                "npm-asset/commitizen": ">=2.9.6,<3.0.0",
+                "npm-asset/conventional-changelog": ">=1.1.3,<2.0.0",
+                "npm-asset/cross-spawn": ">=5.1.0,<6.0.0",
+                "npm-asset/cz-conventional-changelog": ">=2.0.0,<3.0.0",
+                "npm-asset/de-indent": ">=1.0.2,<2.0.0",
+                "npm-asset/es6-promise": ">=4.1.0,<5.0.0",
+                "npm-asset/eslint": ">=3.0.0,<4.0.0",
+                "npm-asset/eslint-loader": ">=1.7.1,<2.0.0",
+                "npm-asset/eslint-plugin-flowtype": ">=2.34.0,<3.0.0",
+                "npm-asset/eslint-plugin-jasmine": ">=2.2.0,<3.0.0",
+                "npm-asset/eslint-plugin-vue-libs": ">=1.2.0,<2.0.0",
+                "npm-asset/file-loader": ">=0.11.2,<0.12.0",
+                "npm-asset/flow-bin": ">=0.48.0,<0.49.0",
+                "npm-asset/hash-sum": ">=1.0.2,<2.0.0",
+                "npm-asset/he": ">=1.1.1,<2.0.0",
+                "npm-asset/http-server": ">=0.10.0,<0.11.0",
+                "npm-asset/jasmine": ">=2.6.0,<3.0.0",
+                "npm-asset/jasmine-core": ">=2.6.3,<3.0.0",
+                "npm-asset/karma": ">=1.7.0,<2.0.0",
+                "npm-asset/karma-chrome-launcher": ">=2.1.1,<3.0.0",
+                "npm-asset/karma-coverage": ">=1.1.1,<2.0.0",
+                "npm-asset/karma-firefox-launcher": ">=1.0.1,<2.0.0",
+                "npm-asset/karma-jasmine": ">=1.1.0,<2.0.0",
+                "npm-asset/karma-mocha-reporter": ">=2.2.3,<3.0.0",
+                "npm-asset/karma-phantomjs-launcher": ">=1.0.4,<2.0.0",
+                "npm-asset/karma-safari-launcher": ">=1.0.0,<2.0.0",
+                "npm-asset/karma-sauce-launcher": ">=1.1.0,<2.0.0",
+                "npm-asset/karma-sourcemap-loader": ">=0.3.7,<0.4.0",
+                "npm-asset/karma-webpack": ">=2.0.3,<3.0.0",
+                "npm-asset/lodash": ">=4.17.4,<5.0.0",
+                "npm-asset/lodash.template": ">=4.4.0,<5.0.0",
+                "npm-asset/lodash.uniq": ">=4.5.0,<5.0.0",
+                "npm-asset/lru-cache": ">=4.1.1,<5.0.0",
+                "npm-asset/nightwatch": ">=0.9.16,<0.10.0",
+                "npm-asset/nightwatch-helpers": ">=1.2.0,<2.0.0",
+                "npm-asset/phantomjs-prebuilt": ">=2.1.14,<3.0.0",
+                "npm-asset/resolve": ">=1.3.3,<2.0.0",
+                "npm-asset/rollup": ">=0.45.1,<0.46.0",
+                "npm-asset/rollup-plugin-alias": ">=1.3.1,<2.0.0",
+                "npm-asset/rollup-plugin-babel": ">=2.7.1,<3.0.0",
+                "npm-asset/rollup-plugin-buble": ">=0.15.0,<0.16.0",
+                "npm-asset/rollup-plugin-commonjs": ">=8.0.2,<9.0.0",
+                "npm-asset/rollup-plugin-flow-no-whitespace": ">=1.0.0,<2.0.0",
+                "npm-asset/rollup-plugin-node-resolve": ">=3.0.0,<4.0.0",
+                "npm-asset/rollup-plugin-replace": ">=1.1.1,<2.0.0",
+                "npm-asset/rollup-watch": ">=4.0.0,<5.0.0",
+                "npm-asset/selenium-server": ">=2.53.1,<3.0.0",
+                "npm-asset/serialize-javascript": ">=1.3.0,<2.0.0",
+                "npm-asset/shelljs": ">=0.7.8,<0.8.0",
+                "npm-asset/typescript": ">=2.3.4,<3.0.0",
+                "npm-asset/uglify-js": ">=3.0.15,<4.0.0",
+                "npm-asset/webpack": ">=2.6.1,<3.0.0",
+                "npm-asset/weex-js-runtime": ">=0.20.5,<0.21.0",
+                "npm-asset/weex-vdom-tester": ">=0.2.0,<0.3.0"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/vuejs/vue/issues"
+                },
+                "npm-asset-files": [
+                    "src",
+                    "dist/*.js",
+                    "types/*.d.ts"
+                ],
+                "npm-asset-main": "dist/vue.runtime.common.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git+https://github.com/vuejs/vue.git"
+                },
+                "npm-asset-scripts": {
+                    "dev": "rollup -w -c build/config.js --environment TARGET:web-full-dev",
+                    "dev:cjs": "rollup -w -c build/config.js --environment TARGET:web-runtime-cjs",
+                    "dev:esm": "rollup -w -c build/config.js --environment TARGET:web-runtime-esm",
+                    "dev:test": "karma start test/unit/karma.dev.config.js",
+                    "dev:ssr": "rollup -w -c build/config.js --environment TARGET:web-server-renderer",
+                    "dev:compiler": "rollup -w -c build/config.js --environment TARGET:web-compiler ",
+                    "dev:weex": "rollup -w -c build/config.js --environment TARGET:weex-framework ",
+                    "dev:weex:compiler": "rollup -w -c build/config.js --environment TARGET:weex-compiler ",
+                    "build": "node build/build.js",
+                    "build:ssr": "npm run build -- vue.runtime.common.js,vue-server-renderer",
+                    "build:weex": "npm run build -- weex-vue-framework,weex-template-compiler",
+                    "test": "npm run lint && flow check && npm run test:types && npm run test:cover && npm run test:e2e -- --env phantomjs && npm run test:ssr && npm run test:weex",
+                    "test:unit": "karma start test/unit/karma.unit.config.js",
+                    "test:cover": "karma start test/unit/karma.cover.config.js",
+                    "test:e2e": "npm run build -- vue.min.js && node test/e2e/runner.js",
+                    "test:weex": "npm run build:weex && jasmine JASMINE_CONFIG_PATH=test/weex/jasmine.json",
+                    "test:ssr": "npm run build:ssr && jasmine JASMINE_CONFIG_PATH=test/ssr/jasmine.json",
+                    "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2",
+                    "test:types": "tsc -p ./types/test/tsconfig.json",
+                    "lint": "eslint src build test",
+                    "flow": "flow check",
+                    "sauce": "karma start test/unit/karma.sauce.config.js",
+                    "bench:ssr": "npm run build:ssr && node benchmarks/ssr/renderToString.js && node benchmarks/ssr/renderToStream.js",
+                    "release": "bash build/release.sh",
+                    "release:weex": "bash build/release-weex.sh",
+                    "release:note": "node build/gen-release-note.js",
+                    "setup": "node build/install-hooks.js",
+                    "commit": "git-cz"
+                },
+                "npm-asset-config": {
+                    "commitizen": {
+                        "path": "./node_modules/cz-conventional-changelog"
+                    }
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Evan You"
+                }
+            ],
+            "description": "Reactive, component-oriented view layer for modern web interfaces.",
+            "homepage": "https://github.com/vuejs/vue#readme",
+            "keywords": [
+                "vue"
             ]
         },
         {
@@ -3135,7 +3285,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -3188,7 +3338,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
@@ -4054,22 +4204,22 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "3.1.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/8331b5efe816ae05461b7ca1e721c01b46bafb3e",
-                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/4aada1f93c72c35e22fb1383b47fee43b8f1d157",
+                "reference": "4aada1f93c72c35e22fb1383b47fee43b8f1d157",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "phpdocumentor/reflection-common": "^1.0@dev",
-                "phpdocumentor/type-resolver": "^0.2.0",
+                "phpdocumentor/type-resolver": "^0.3.0",
                 "webmozart/assert": "^1.0"
             },
             "require-dev": {
@@ -4095,24 +4245,24 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2016-09-30T07:12:33+00:00"
+            "time": "2017-08-08T06:39:58+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
+                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
-                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fb3933512008d8162b3cdf9e18dba9309b7c3773",
+                "reference": "fb3933512008d8162b3cdf9e18dba9309b7c3773",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": "^5.5 || ^7.0",
                 "phpdocumentor/reflection-common": "^1.0"
             },
             "require-dev": {
@@ -4142,7 +4292,7 @@
                     "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2016-11-25T06:54:22+00:00"
+            "time": "2017-06-03T08:32:36+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -5195,16 +5345,16 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "3a4435e79a8401746e8525e98039199d0924b4e5"
+                "reference": "8079a6b3668ef15cdbf73a4c7d31081abb8bb5f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3a4435e79a8401746e8525e98039199d0924b4e5",
-                "reference": "3a4435e79a8401746e8525e98039199d0924b4e5",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/8079a6b3668ef15cdbf73a4c7d31081abb8bb5f0",
+                "reference": "8079a6b3668ef15cdbf73a4c7d31081abb8bb5f0",
                 "shasum": ""
             },
             "require": {
@@ -5248,20 +5398,20 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-24T09:29:48+00:00"
+            "time": "2017-07-12T13:03:20+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546"
+                "reference": "b0878233cb5c4391347e5495089c7af11b8e6201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a97e45d98c59510f085fa05225a1acb74dfe0546",
-                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546",
+                "url": "https://api.github.com/repos/symfony/console/zipball/b0878233cb5c4391347e5495089c7af11b8e6201",
+                "reference": "b0878233cb5c4391347e5495089c7af11b8e6201",
                 "shasum": ""
             },
             "require": {
@@ -5317,20 +5467,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T13:19:36+00:00"
+            "time": "2017-07-29T21:27:59+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743"
+                "reference": "7c13ae8ce1e2adbbd574fc39de7be498e1284e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
-                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/7c13ae8ce1e2adbbd574fc39de7be498e1284e13",
+                "reference": "7c13ae8ce1e2adbbd574fc39de7be498e1284e13",
                 "shasum": ""
             },
             "require": {
@@ -5373,11 +5523,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-05T13:02:37+00:00"
+            "time": "2017-07-28T15:27:31+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -5440,7 +5590,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -5489,16 +5639,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.4",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "1f93a8d19b8241617f5074a123e282575b821df8"
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/1f93a8d19b8241617f5074a123e282575b821df8",
-                "reference": "1f93a8d19b8241617f5074a123e282575b821df8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
                 "shasum": ""
             },
             "require": {
@@ -5540,7 +5690,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-15T12:58:50+00:00"
+            "time": "2017-07-23T12:43:26+00:00"
         },
         {
             "name": "webmozart/assert",

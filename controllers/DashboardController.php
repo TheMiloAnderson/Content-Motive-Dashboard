@@ -6,28 +6,10 @@ use Yii;
 use yii\web\Controller;
 use app\models\Users;
 use app\models\DashboardData;
+use app\commands\models\GoogleAnalytics;
 use yii\grid\GridView;
 
 class DashboardController extends Controller {
-    
-    private function getCurrentUser() {
-        $currentUserId = Yii::$app->user->id;
-        return Users::find()->where(['id' => $currentUserId])->one();
-    }
-    
-    private function simplifyArray(&$array, $key) {
-        foreach ($array as &$item) {
-            $item['properties'] = $item[$key];
-            unset($item[$key]);
-        }
-        $count = count($array) - 1;
-        for ($i=$count; $i>=0; $i--) {
-            if (empty($array[$i]['properties'])) {
-                unset($array[$i]);
-            }
-        }
-        $array = array_values($array);
-    }
     
     public function actionContent() {
         $currentUser = $this->getCurrentUser();
@@ -71,9 +53,9 @@ class DashboardController extends Controller {
         return json_encode($data);
     }
     
-    public function actionDetails($pid) {
+    public function actionDetails(array $pids) {
         $model = new DashboardData();
-        $dataProvider = $model->details($pid);
+        $dataProvider = $model->details($pids);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
@@ -86,6 +68,49 @@ class DashboardController extends Controller {
             ]
         ]);
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        return $html;        
+        return $html;
+    }
+    
+    public function actionKeywords($start, $end, $view) {
+//        $model = new GoogleAnalytics();
+//        $data = $model->fetchKeywords($start, $end, $view);
+//        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+//        ini_set('xdebug.var_display_max_depth', '100');  
+//        return var_dump($data);
+    }
+    
+    public function actionContentAll() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'contentProperties');
+        foreach($dealers as &$dealer) {
+            foreach($dealer['properties'] as &$property) {
+                $model = new DashboardData();
+                $data = $model->aggregates($property['id']);
+                $property['aggregates'] = $data;
+            }
+        }
+        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        return json_encode($dealers);
+    }
+    
+    //*** utility functions ***//
+    private function getCurrentUser() {
+        $currentUserId = Yii::$app->user->id;
+        return Users::find()->where(['id' => $currentUserId])->one();
+    }
+    private function simplifyArray(&$array, $key) {
+        // this makes it easier to handle Content, Blogs, Micro in the same view template
+        foreach ($array as &$item) {
+            $item['properties'] = $item[$key];
+            unset($item[$key]);
+        }
+        $count = count($array) - 1;
+        for ($i=$count; $i>=0; $i--) {
+            if (empty($array[$i]['properties'])) {
+                unset($array[$i]);
+            }
+        }
+        $array = array_values($array);
     }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "yiisoft/yii2-app-basic",
+    "name": "milo/content-motive-dashboard",
     "description": "Yii 2 Basic Project Template",
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "http://www.yiiframework.com/",
@@ -21,7 +21,8 @@
 		"wbraganca/yii2-dynamicform": "*",
 		"google/apiclient": "2.0",
 		"npm-asset/d3": "4.*",
-		"npm-asset/d3-interpolate-path": "~1.0.0"
+		"npm-asset/d3-interpolate-path": "~1.0.0",
+		"npm-asset/vue": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

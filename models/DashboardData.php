@@ -24,8 +24,8 @@ class DashboardData {
         return $data;
     }
     
-    public function details($pid) {
-        $query  = GoogleAnalyticsDetails::find()->where(['property_id' => $pid]);
+    public function details($pids) {
+        $query  = GoogleAnalyticsDetails::find()->where(['in', 'property_id', $pids]);
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
