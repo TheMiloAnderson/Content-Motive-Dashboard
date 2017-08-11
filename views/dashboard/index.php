@@ -13,22 +13,14 @@ $this->title = 'Dashboard';
 ?>
 <div class="tertiary-nav">
     <div class="control-panel">
-        <p>Date Range:</p>
-        <input id="startDate" type="text" class="form-control date"> - <input id="endDate" type="text" class="form-control date">
-        <br /><br />
-        <div id="slider-range"></div>
-        <div class="text-center">
-            <button id="dateRangeBtn" type="button" class="btn btn-primary">Update Data</button>
-        </div>
-    </div>
-    <div class="control-panel">
         <ul id="menu-content" class="menu-content out">
         <?php
         if (count($dealers) > 1) { ?>
             <li data-toggle="collapse" data-target="#dealers" class="collapsed">
-                <a href="#">Dealers<span class="arrow"></span></a>
+                <a href="#"><span id="dealersSelectTitle">Dealers</span>
+                    <div class="glyphicon glyphicon-menu-down" aria-hidden="true"></div></a>
             </li>
-            <ul class="sub-menu collapse in" id="dealers">
+            <ul class="sub-menu collapse" id="dealers">
                 <?php foreach ($dealers as $dealer) {
                     $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
                     if ($pids) {
@@ -40,9 +32,10 @@ $this->title = 'Dashboard';
             </ul>
         <?php } ?>
             <li id="websites-head" data-toggle="collapse" data-target="#websites" class="collapsed">
-                <a href="#">Websites<span class="arrow"></span></a>
+                <a href="#"><span id="websitesSelectTitle">Websites</span>
+                    <div class="glyphicon glyphicon-menu-down" aria-hidden="true"></div></a>
             </li>
-            <ul class="sub-menu collapse in" id="websites">
+            <ul class="sub-menu collapse" id="websites">
                 <li class="single-prop all-websites"><a class="prop-click" href="">All Websites</a></li>
                 <?php foreach ($dealers as $dealer) {
                     foreach ($dealer['properties'] as $property) {
@@ -53,6 +46,19 @@ $this->title = 'Dashboard';
                 } ?>
             </ul>
         </ul>
+    </div>
+    <div class="control-panel">
+        <div id="dateRow1">
+            <input id="startDate" type="text" class="form-control date">
+            <input id="endDate" type="text" class="form-control date">
+        </div>
+        <div id="dateRow2">
+            <div id="slider-range"></div>
+        </div>
+        <div id="dateRow3" class="text-center">
+            <button id="dateRangeBtn" type="button" class="btn btn-primary">Update</button>
+            <button id="dateRangeResetBtn" type="button" class="btn btn-primary">Reset</button>
+        </div>
     </div>
 </div>
 <script>

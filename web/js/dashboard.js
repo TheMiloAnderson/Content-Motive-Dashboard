@@ -1,13 +1,13 @@
 var dashboard = (function() {
     'use strict';
-    //var t0, t1;
+
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
         height: d3.select('#dash-panel-secondary').node().getBoundingClientRect().height - d3.select('#dash-right-col h3').node().getBoundingClientRect().height,
         x: 50,
         y: 50,
-        duration: 2000,
+        duration: 1500,
         dataLines: {
             lineWidth: 1,
             pageViewColor: 'steelblue',
@@ -24,10 +24,9 @@ var dashboard = (function() {
             bottom: 25,
             left: 60
         },
-        tableColumns: ['', 'Pageviews', 'Visitors', 'Entrances', 'Avg. Visit Duration']
     };
     var ajaxUrl,
-        dataCache = [], // all data for a user
+        dataCache = [], // all data for a user (eventually)
         dataset = [], // all data for a dealer
         dataSubset = [], // dealer data filtered by date or website
         dealersList = [],
@@ -44,6 +43,9 @@ var dashboard = (function() {
     var websiteSubhead = jQuery('#websiteSubhead');
     var dateRangeSubhead = jQuery('#dateRangeSubhead');
     
+    var dealersSelectTitle = document.getElementById('dealersSelectTitle');
+    var websitesSelectTitle = document.getElementById('websitesSelectTitle');
+    
     var dealerSelect = jQuery('.dealerSelect');
     var dateRangeBtn = jQuery('#dateRangeBtn');
     var dateSlider = jQuery('#slider-range');
@@ -56,6 +58,7 @@ var dashboard = (function() {
     function initUi() {
         jQuery('.prop-click').click(function(e) {
             e.preventDefault();
+            closeMenu('#websites');
             var pid = jQuery(this).attr('href').split(',');
             for (var i=0; i<pid.length; i++) {pid[i] = +pid[i]; }
             var revisedDataset = dataset.filter(function(d) {
@@ -69,7 +72,7 @@ var dashboard = (function() {
         dealerSelect.click(function(e) {
             e.preventDefault();
             var dealerId = this.dataset.id;
-            jQuery('#dealers').collapse('toggle');
+            closeMenu('#dealers');
             ajaxUrl = jQuery(this).attr('href');
             changeData(function() {
                 updateChart(dataset);
@@ -85,6 +88,10 @@ var dashboard = (function() {
             });
             updateChart(prepData(revisedDataset));
         });
+    }
+    function closeMenu(id) {
+        var el = jQuery(id);
+        el.collapse('toggle');
     }
     function updateSiteSelect(d) {
         var siteSelect = d3.select('#websites');
@@ -107,7 +114,6 @@ var dashboard = (function() {
             all.select('.prop-click').attr('href', pids.join());
         }
     }
-    //  ?r=dashboard%2Faggregate&pids%5B0%5D=58&pids%5B1%5D=59
     function detailTables(d) {
         var sites = getCurrentSites(d);
         var url = '?r=/dashboard/details&';
@@ -115,26 +121,16 @@ var dashboard = (function() {
             url += 'pids[' + i +  ']=' + sites[i][1] + '&';
         }
         jQuery.get(url, function(data) {
-            console.log(data);
             data = '<div id="p0">' + data + '</div>';
             detailsTable.show();
             detailsTable.html(data);
         });
-        console.log(url);
-//        if (sites.length === 1) {
-//            jQuery.get(url, function(data) {
-//                data = '<div id="p0">' + data + '</div>';
-//                detailsTable.show();
-//                detailsTable.html(data);
-//            });
-//        } else {
-//            detailsTable.html('<div id="p0">Select a website to view details</div>');
-//        }
     }
     function updateSubheads(d) {
         var id = d[0].dealer_id;
         var dealer = jQuery.grep(dealersList, function(obj) { return obj.id === id; });
         dealerSubhead.text(dealer[0].named);
+        dealersSelectTitle.textContent = dealer[0].named;
         
         var sites = getCurrentSites(d);
         var sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';
@@ -142,6 +138,7 @@ var dashboard = (function() {
             websiteSubhead.text(sitesText);
             websiteSubhead.animate({opacity: 1}, 300);
         });
+        websitesSelectTitle.textContent = sitesText;
     }
     function getCurrentSites(d) {
         var sites = d.map(function(d) { return d.url + '__' + d.property_id; });

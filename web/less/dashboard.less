@@ -121,6 +121,27 @@
 .tertiary-nav .control-panel input {
     display: inline-block;
     width: 40%;
+    height: 2em;
+    background-color: #eeeeee;
+}
+#dateRow1 {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+#dateRow2 {
+    margin: auto;
+    width: 90%;
+    margin-bottom: 10px;
+}
+#dateRow3 {
+    display: flex;
+    justify-content: center;
+}
+#dateRow3 button {
+    width: 6em;
+    padding: 3px;
+    margin: 0px 5px;
 }
 body > .wrap > .container {
     margin: 0px 0px 0px @tertiaryNavWidth;
@@ -187,4 +208,13 @@ body > .wrap > .container {
 }
 .selector option:hover {
     background-color: #000;
+}
+.tertiary-nav .glyphicon {
+    float: right;
+    margin: 5px;
+}
+#menu-content .collapsing {
+  -webkit-transition: height .01s ease;
+       -o-transition: height .01s ease;
+          transition: height .01s ease;
 }
