@@ -22,7 +22,8 @@
 		"google/apiclient": "2.0",
 		"npm-asset/d3": "4.*",
 		"npm-asset/d3-interpolate-path": "~1.0.0",
-		"npm-asset/vue": "^2.0"
+		"npm-asset/vue": "^2.0",
+		"npm-asset/simplify-js": "1.2.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

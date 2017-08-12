@@ -14,6 +14,7 @@ class DashboardAssets extends AssetBundle {
         'js/dashboard.js',
         'js/vue.js',
         'js/dash.js',
+        'js/simplify.js',
     ];
     public $css = [
         'css/jquery-ui.min.css',

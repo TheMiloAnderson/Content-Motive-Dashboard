@@ -24,6 +24,7 @@ var dashboard = (function() {
             bottom: 25,
             left: 60
         },
+        dateGuideOpacity: 0.3
     };
     var ajaxUrl,
         dataCache = [], // all data for a user (eventually)
@@ -160,7 +161,7 @@ var dashboard = (function() {
                 .attr('height', height)
                 .attr('width', 0)
                 .attr('fill', 'black')
-                .attr('opacity', .04)
+                .attr('opacity', prms.dateGuideOpacity)
             ;
         }
         var startDateGuide = addDateGuide('startDateGuide');
@@ -444,11 +445,50 @@ var dashboard = (function() {
             .x(function(d) { return xScale(d.date_recorded); })
             .y1(function(d) { return yScale(d[dataCol]); });
         lineD.y0(yScale(0));
+        lineD = lineD(d);//.replace(/(\.\d{2})\d+/g, '$1');
+        var originalPath = lineD.substring(1, lineD.length-1);
+        originalPath = originalPath.split('L');
+        var pathCoordinates1 = [];
+        var pathCoordinates2 = [];
+        var endLine = '';
+        var secondSegment = false;
+        var previousX;
+        var lineLength = originalPath.length;
+        for (var i=0; i<lineLength; i++) {
+            var coords = originalPath[i].split(',');
+            coords[0] = Number(coords[0]);
+            coords[1] = Number(coords[1]);
+            var coordsObj = {x: coords[0], y: coords[1]};
+            if ((coords[0] < width) && (!secondSegment)) {
+                pathCoordinates1.push(coordsObj);
+            } else if (coords[0] === width) {
+                secondSegment = true;
+                endLine += originalPath[i] + 'L';
+            } else if (secondSegment) {
+                pathCoordinates2.push(coordsObj);
+            }
+        }
+        pathCoordinates1 = simplify(pathCoordinates1, .5);
+        pathCoordinates2 = simplify(pathCoordinates2, .5);
+        var increment = pathCoordinates2[0]['x'] / pathCoordinates1.length;
+        for (var i=1; i<=pathCoordinates1.length; i++) {
+            var item = {x: pathCoordinates2[0]['x'] - increment * i, y: pathCoordinates2[0]['y']};
+            pathCoordinates2.splice(i, 0, item);
+        }
+        lineD = 'M';
+        for (var i=0; i<pathCoordinates1.length; i++) {
+            lineD += pathCoordinates1[i]['x'] + ',' + pathCoordinates1[i]['y'] + 'L';
+        }
+        lineD += endLine;
+        for (var i=0; i<pathCoordinates2.length; i++) {
+            lineD += pathCoordinates2[i]['x'] + ',' + pathCoordinates2[i]['y'] + 'L';
+        }
+        lineD = lineD.substring(0, lineD.length-1) + 'Z';
         mainChart.transition().select(lineClass)
             .duration(prms.duration)
             .attrTween('d', function() {
-                var previous = d3.select(this).attr('d') || lineD(d);
-                var current = lineD(d);
+                var previous = d3.select(this).attr('d') || lineD;
+                var current = lineD;
                 function exclude(a, b) {
                     return a.x === b.x;
                 }
