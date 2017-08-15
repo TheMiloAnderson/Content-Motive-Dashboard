@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Users;
 use app\models\DashboardData;
-use app\commands\models\GoogleAnalytics;
+//use app\commands\models\GoogleAnalytics;
 use yii\grid\GridView;
 
 class DashboardController extends Controller {

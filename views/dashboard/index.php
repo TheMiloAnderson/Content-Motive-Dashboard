@@ -109,12 +109,12 @@ $this->title = 'Dashboard';
         </div>
     </div>
 </div>
-<div id="dash-right-col">
+<div class="chartBox">
     <h3><span id="websiteSubhead"></span></h3>
-    <svg class="mainChart" x="0" y="0"></svg>
+    <svg class="mainChart"></svg>
 </div>
-<div id="dash-bottom-row">
-    <?php Pjax::begin(); ?>
+<div id="tableBox">
+    <?php Pjax::begin(['enablePushState' => false]); ?>
         <div id="p0">
         </div>
     <?php Pjax::end(); ?>

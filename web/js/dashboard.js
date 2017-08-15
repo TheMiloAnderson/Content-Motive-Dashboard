@@ -3,8 +3,8 @@ var dashboard = (function() {
 
     //***** Parameters & global variables *****//
     var prms = {
-        width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
-        height: d3.select('#dash-panel-secondary').node().getBoundingClientRect().height - d3.select('#dash-right-col h3').node().getBoundingClientRect().height,
+        width: d3.select('.chartBox').node().getBoundingClientRect().width,
+        height: d3.select('.chartBox').node().getBoundingClientRect().height - d3.select('.chartBox h3').node().getBoundingClientRect().height,
         x: 50,
         y: 50,
         duration: 1500,
@@ -22,7 +22,7 @@ var dashboard = (function() {
             top: 20,
             right: 120,
             bottom: 25,
-            left: 60
+            left: 80
         },
         dateGuideOpacity: 0.3
     };
@@ -86,10 +86,10 @@ var dashboard = (function() {
         dateRangeBtn.click(function() {
             var startDate = $(this).data('startdate');
             var endDate = $(this).data('enddate');
-            var revisedDataset = dataSubset.filter(function(d) {
+            var revisedData = dataSubset.filter(function(d) {
                 return d.date_recorded >= startDate && d.date_recorded <= endDate;
             });
-            updateChart(prepData(revisedDataset));
+            updateChart(prepData(revisedData));
         });
         dateRangeResetBtn.click(function() {
             updateChart(prepData(dataset));
@@ -334,7 +334,11 @@ var dashboard = (function() {
     //***** Chart rendering & updating *****//
      function createChart() {
         // Chart size, margins
-        mainChart = d3.select('.mainChart').attr('width', prms.width).attr('height', prms.height);
+        mainChart = d3.select('.mainChart')
+            .attr('width', prms.width)
+            .attr('height', prms.height)
+            //.attr('viewbox', '0 0 ' + prms.width + ' ' + prms.height)
+        ;
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
         g = mainChart.append('g')
@@ -373,7 +377,7 @@ var dashboard = (function() {
     };
     
     function updateChart(d) {
-        var svg = d3.select('.mainChart').transition();
+        var svg = mainChart.transition();
         // Define the D3 scales
         xScale = d3.scaleTime()
             .range([0, width])
@@ -468,8 +472,8 @@ var dashboard = (function() {
                 pathCoordinates2.push(coordsObj);
             }
         }
-        pathCoordinates1 = simplify(pathCoordinates1, .5);
-        pathCoordinates2 = simplify(pathCoordinates2, .5);
+        pathCoordinates1 = simplify(pathCoordinates1, .6);
+        pathCoordinates2 = simplify(pathCoordinates2, .6);
         var increment = pathCoordinates2[0]['x'] / pathCoordinates1.length;
         for (var i=1; i<=pathCoordinates1.length; i++) {
             var item = {x: pathCoordinates2[0]['x'] - increment * i, y: pathCoordinates2[0]['y']};
@@ -519,7 +523,18 @@ var dashboard = (function() {
             })
         }, 100);
     };
-
+    var resizeId;
+    d3.select(window).on('resize', function() {
+        clearTimeout(resizeId);
+        resizeId = setTimeout(resize, 100);
+    });
+    function resize() {
+        prms.width = parseInt(d3.select('.chartBox').style('width'), 10);
+        mainChart.attr('width', prms.width).attr('height', prms.height);
+        width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
+        height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
+        updateChart(dataSubset);
+    }
     return {
         init: function(url, dealers) {
             ajaxUrl = url;
