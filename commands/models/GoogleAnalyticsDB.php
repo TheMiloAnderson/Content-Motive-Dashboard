@@ -91,7 +91,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 unset($item['ga:pagePath']);
             $item['pageviews'] = $item['ga:pageviews'];
                 unset($item['ga:pageviews']);
-            $item['unique_pageviews'] = $item['ga:uniquePageviews'];
+            $item['visitors'] = $item['ga:uniquePageviews'];
                 unset($item['ga:uniquePageviews']);
             $item['entrances'] = $item['ga:entrances'];
                 unset($item['ga:entrances']);
@@ -116,7 +116,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 property_id,
                 date_recorded, 
                 SUM(pageviews) AS pageviews, 
-                SUM(unique_pageviews) AS visitors, 
+                SUM(visitors) AS visitors, 
                 SUM(entrances) AS entrances, 
                 AVG(avg_time) AS avg_time, 
                 IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
@@ -139,10 +139,10 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 property_id,
                 page,
                 SUM(pageviews) as pageviews,
-                SUM(unique_pageviews) as visitors,
+                SUM(visitors) as visitors,
                 SUM(entrances) as entrances,
                 AVG(avg_time) as avg_time,
-                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
+                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) / 100 AS bounce_rate
             FROM ga_analytics 
             GROUP BY page, property_id;')
             ->execute();

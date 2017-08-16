@@ -69,6 +69,7 @@ var dashboard = (function() {
             });
             dataSubset = prepData(revisedDataset);
             updateChart(dataSubset);
+            detailTables(dataSubset);
             resetDateSlider(dataSubset);
         });
         // Click dealer/host names, get new dataset
@@ -79,6 +80,7 @@ var dashboard = (function() {
             ajaxUrl = jQuery(this).attr('href');
             changeData(function() {
                 updateChart(dataset);
+                detailTables(dataset);
                 resetDateSlider(dataset);
             }, dealerId);
         });
@@ -90,10 +92,13 @@ var dashboard = (function() {
                 return d.date_recorded >= startDate && d.date_recorded <= endDate;
             });
             updateChart(prepData(revisedData));
+            detailTables(prepData(revisedData), startDate, endDate);
         });
         dateRangeResetBtn.click(function() {
-            updateChart(prepData(dataset));
-            resetDateSlider(prepData(dataset));
+            var d = prepData(dataset);
+            updateChart(d);
+            detailTables(d);
+            resetDateSlider(d);
         });
     }
     function closeMenu(id) {
@@ -121,13 +126,23 @@ var dashboard = (function() {
             all.select('.prop-click').attr('href', pids.join());
         }
     }
-    function detailTables(d) {
+    function detailTables(d, start = false, end = false) {
         var sites = getCurrentSites(d);
         var url = '?r=/dashboard/details&';
         for (var i=0; i < sites.length; i++) {
             url += 'pids[' + i +  ']=' + sites[i][1] + '&';
         }
+        if (start) { 
+            start = start.getFullYear() + '-' + ('0' + (start.getMonth() + 1)).slice(-2) + '-' + ('0' + start.getDate()).slice(-2);
+            url += 'start=' + start + '&';
+        }
+        if (end) { 
+            end = end.getFullYear() + '-' + ('0' + (end.getMonth() + 1)).slice(-2) + '-' + ('0' + end.getDate()).slice(-2);
+            url += 'end=' + end + '&';
+            console.log(url);
+        }
         jQuery.get(url, function(data) {
+            console.log(data);
             data = '<div id="p0">' + data + '</div>';
             detailsTable.show();
             detailsTable.html(data);
@@ -374,6 +389,7 @@ var dashboard = (function() {
 
         initializeDateSlider();
         updateChart(dataset);
+        detailTables(dataset);
     };
     
     function updateChart(d) {
@@ -441,7 +457,6 @@ var dashboard = (function() {
         metricReadouts(d);
         updateSiteSelect(dataset);
         updateSubheads(d);
-        detailTables(d);
         formatTicks();
     }
     function lineTransitions(d, dataCol, lineClass, txtId) {
@@ -449,14 +464,13 @@ var dashboard = (function() {
             .x(function(d) { return xScale(d.date_recorded); })
             .y1(function(d) { return yScale(d[dataCol]); });
         lineD.y0(yScale(0));
-        lineD = lineD(d);//.replace(/(\.\d{2})\d+/g, '$1');
+        lineD = lineD(d);
         var originalPath = lineD.substring(1, lineD.length-1);
         originalPath = originalPath.split('L');
         var pathCoordinates1 = [];
         var pathCoordinates2 = [];
         var endLine = '';
         var secondSegment = false;
-        var previousX;
         var lineLength = originalPath.length;
         for (var i=0; i<lineLength; i++) {
             var coords = originalPath[i].split(',');
@@ -475,7 +489,7 @@ var dashboard = (function() {
         pathCoordinates1 = simplify(pathCoordinates1, .6);
         pathCoordinates2 = simplify(pathCoordinates2, .6);
         var increment = pathCoordinates2[0]['x'] / pathCoordinates1.length;
-        for (var i=1; i<=pathCoordinates1.length; i++) {
+        for (var i=1; i<=pathCoordinates1.length - 1; i++) {
             var item = {x: pathCoordinates2[0]['x'] - increment * i, y: pathCoordinates2[0]['y']};
             pathCoordinates2.splice(i, 0, item);
         }

@@ -114,7 +114,7 @@ $this->title = 'Dashboard';
     <svg class="mainChart"></svg>
 </div>
 <div id="tableBox">
-    <?php Pjax::begin(['enablePushState' => false]); ?>
+    <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
         <div id="p0">
         </div>
     <?php Pjax::end(); ?>

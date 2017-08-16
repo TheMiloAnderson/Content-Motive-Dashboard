@@ -53,18 +53,36 @@ class DashboardController extends Controller {
         return json_encode($data);
     }
     
-    public function actionDetails(array $pids) {
+    public function actionDetails(array $pids, $start='', $end='') {
         $model = new DashboardData();
-        $dataProvider = $model->details($pids);
+        $dataProvider = $model->details($pids, $start, $end);
+        $dataProvider->setSort([
+                    'attributes' => [
+                        'page',
+                        'pageviews' => ['default' => SORT_DESC],
+                        'visitors' => ['default' => SORT_DESC],
+                        'entrances' => ['default' => SORT_DESC],
+                        'avg_time' => ['default' => SORT_DESC],
+                        'bounce_rate',
+                    ],
+                    'defaultOrder' => [
+                        'entrances' => SORT_DESC,
+                    ],
+                ]);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
                 'page',
-                'pageviews',
-                'visitors',
-                'entrances',
-                'avg_time',
-                'bounce_rate',
+                ['attribute' => 'entrances',
+                'format' => 'integer'],
+                ['attribute' => 'visitors',
+                'format' => 'integer'],
+                ['attribute' => 'pageviews',
+                'format' => 'integer'],
+                ['attribute' => 'avg_time',
+                'value' => function($data) {return $this->formatTime($data);}],
+                ['attribute' => 'bounce_rate',
+                'format' => 'percent'],
             ]
         ]);
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
@@ -112,5 +130,14 @@ class DashboardController extends Controller {
             }
         }
         $array = array_values($array);
+    }
+    private function formatTime($data) {
+        if (is_object($data)) {
+            $seconds = '0' . ($data->avg_time % 60);
+            return (int)($data->avg_time / 60) . ':' . substr($seconds, -2);
+        } else {
+            $seconds = '0' . ($data['avg_time'] % 60);
+            return (int)($data['avg_time'] / 60) . ':' . substr($seconds, -2);
+        }
     }
 }
