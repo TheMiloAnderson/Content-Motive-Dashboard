@@ -50,7 +50,7 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
             'id' => 'ID',
             'property_id' => 'Property ID',
             'date_recorded' => 'Date Recorded',
-            'page' => 'Page',
+            'page' => 'Content Strategy',
             'pageviews' => 'Pageviews',
             'visitors' => 'Visitors',
             'avg_time' => 'Avg Time',

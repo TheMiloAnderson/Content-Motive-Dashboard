@@ -1,10 +1,16 @@
 var dashboard = (function() {
     'use strict';
-
+console.log(d3.select('.chartBox').node().getBoundingClientRect().height 
+            - d3.select('.chartBox .left h3').node().getBoundingClientRect().height 
+            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height);
+    
+    console.log(d3.select('.chartBox h1#subhead').node().getBoundingClientRect());
     //***** Parameters & global variables *****//
     var prms = {
-        width: d3.select('.chartBox').node().getBoundingClientRect().width,
-        height: d3.select('.chartBox').node().getBoundingClientRect().height - d3.select('.chartBox h3').node().getBoundingClientRect().height,
+        width: d3.select('.chartBox .left').node().getBoundingClientRect().width,
+        height: d3.select('.chartBox').node().getBoundingClientRect().height 
+            - d3.select('.chartBox h3').node().getBoundingClientRect().height 
+            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height,
         x: 50,
         y: 50,
         duration: 1500,
@@ -139,10 +145,8 @@ var dashboard = (function() {
         if (end) { 
             end = end.getFullYear() + '-' + ('0' + (end.getMonth() + 1)).slice(-2) + '-' + ('0' + end.getDate()).slice(-2);
             url += 'end=' + end + '&';
-            console.log(url);
         }
         jQuery.get(url, function(data) {
-            console.log(data);
             data = '<div id="p0">' + data + '</div>';
             detailsTable.show();
             detailsTable.html(data);
@@ -486,8 +490,8 @@ var dashboard = (function() {
                 pathCoordinates2.push(coordsObj);
             }
         }
-        pathCoordinates1 = simplify(pathCoordinates1, .6);
-        pathCoordinates2 = simplify(pathCoordinates2, .6);
+        pathCoordinates1 = simplify(pathCoordinates1, .5);
+        pathCoordinates2 = simplify(pathCoordinates2, .5);
         var increment = pathCoordinates2[0]['x'] / pathCoordinates1.length;
         for (var i=1; i<=pathCoordinates1.length - 1; i++) {
             var item = {x: pathCoordinates2[0]['x'] - increment * i, y: pathCoordinates2[0]['y']};

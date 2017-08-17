@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use app\assets\DashboardAssets;
@@ -9,10 +8,10 @@ use yii\widgets\Pjax;
 DashboardAssets::register($this);
 
 $this->title = 'Dashboard';
-//$this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="tertiary-nav">
-    <div class="control-panel">
+<div id="controls">
+    <div class="control-panel select">
         <ul id="menu-content" class="menu-content out">
         <?php
         if (count($dealers) > 1) { ?>
@@ -47,7 +46,7 @@ $this->title = 'Dashboard';
             </ul>
         </ul>
     </div>
-    <div class="control-panel">
+    <div class="control-panel date">
         <div id="dateRow1">
             <input id="startDate" type="text" class="form-control date">
             <input id="endDate" type="text" class="form-control date">
@@ -69,51 +68,52 @@ $this->title = 'Dashboard';
             } ?>
         ]);
     });
-
 </script>
-<!--<h1><?= Html::encode($this->title) ?></h1>-->
-<div class="dash-panel" id="dash-panel-main">
-    <h1 id="subhead">Content: 
-        <span id="dealerSubhead"></span>
-    </h1>
-    <div class="dash-panel" id="dash-panel-secondary">
-        <div class="metric-panel">
-            <h4 class="metric-title">Pageviews</h3>
-            <div id="pageviews-readout" class="readout pageviews">
-                0
+
+<div class="chartBox">
+    <div class="left">
+        <h1 id="subhead">Content: 
+            <span id="dealerSubhead"></span>
+        </h1>
+        <h3><span id="websiteSubhead"></span></h3>
+        <svg class="mainChart"></svg>
+    </div>
+    <div class="right">
+        <div id="chart-sidebar">
+            <div class="metric-panel">
+                <h4 class="metric-title">Pageviews</h3>
+                <div id="pageviews-readout" class="readout pageviews">
+                    0
+                </div>
             </div>
-        </div>
-        <div class="metric-panel">
-            <h4 class="metric-title">Visitors</h3>
-            <div id="visitors-readout" class="readout visitors">
-                0
+            <div class="metric-panel">
+                <h4 class="metric-title">Visitors</h3>
+                <div id="visitors-readout" class="readout visitors">
+                    0
+                </div>
             </div>
-        </div>
-        <div class="metric-panel">
-            <h4 class="metric-title">Entrances</h3>
-            <div id="entrances-readout" class="readout entrances">
-                0
+            <div class="metric-panel">
+                <h4 class="metric-title">Entrances</h3>
+                <div id="entrances-readout" class="readout entrances">
+                    0
+                </div>
             </div>
-        </div>
-        <div class="metric-panel">
-            <h4 class="metric-title">Avg Time</h3>
-            <div id="duration-readout" class="readout duration">
-                0:00
+            <div class="metric-panel">
+                <h4 class="metric-title">Avg Time</h3>
+                <div id="duration-readout" class="readout duration">
+                    0:00
+                </div>
             </div>
-        </div>
-        <div class="metric-panel">
-            <h4 class="metric-title">Bounce Rate</h3>
-            <div id="bounce-readout" class="readout bounce">
-                0%
+            <div class="metric-panel">
+                <h4 class="metric-title">Bounce Rate</h3>
+                <div id="bounce-readout" class="readout bounce">
+                    0%
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="chartBox">
-    <h3><span id="websiteSubhead"></span></h3>
-    <svg class="mainChart"></svg>
-</div>
-<div id="tableBox">
+<div class="tableBox">
     <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
         <div id="p0">
         </div>

@@ -6,7 +6,6 @@ use Yii;
 use yii\web\Controller;
 use app\models\Users;
 use app\models\DashboardData;
-//use app\commands\models\GoogleAnalytics;
 use yii\grid\GridView;
 
 class DashboardController extends Controller {
@@ -71,48 +70,35 @@ class DashboardController extends Controller {
                 ]);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
+            'layout'=>"{summary}{pager}\n{items}",
+            'tableOptions' => ['class' => 'table table-bordered'],
             'columns' => [
-                'page',
+                ['attribute' => 'page',
+                'label' => 'Content Strategy',
+                'value' => function($data) {return $this->formatPage($data);},
+                'contentOptions' => ['class' => 'content-strategy']],
                 ['attribute' => 'entrances',
-                'format' => 'integer'],
+                'format' => 'integer',
+                'contentOptions' => ['class' => 'entrances']],
                 ['attribute' => 'visitors',
-                'format' => 'integer'],
+                'format' => 'integer',
+                'contentOptions' => ['class' => 'visitors']],
                 ['attribute' => 'pageviews',
-                'format' => 'integer'],
+                'format' => 'integer',
+                'contentOptions' => ['class' => 'pageviews']],
                 ['attribute' => 'avg_time',
-                'value' => function($data) {return $this->formatTime($data);}],
+                'value' => function($data) {return $this->formatTime($data);},
+                'contentOptions' => ['class' => 'avg_time']],
                 ['attribute' => 'bounce_rate',
-                'format' => 'percent'],
+                'format' => 'percent',
+                'contentOptions' => ['class' => 'bounce_rate']],
             ]
         ]);
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return $html;
     }
     
-    public function actionKeywords($start, $end, $view) {
-//        $model = new GoogleAnalytics();
-//        $data = $model->fetchKeywords($start, $end, $view);
-//        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-//        ini_set('xdebug.var_display_max_depth', '100');  
-//        return var_dump($data);
-    }
-    
-    public function actionContentAll() {
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'contentProperties');
-        foreach($dealers as &$dealer) {
-            foreach($dealer['properties'] as &$property) {
-                $model = new DashboardData();
-                $data = $model->aggregates($property['id']);
-                $property['aggregates'] = $data;
-            }
-        }
-        Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        return json_encode($dealers);
-    }
-    
-    //*** utility functions ***//
+    ///***** Utility Functions *****///
     private function getCurrentUser() {
         $currentUserId = Yii::$app->user->id;
         return Users::find()->where(['id' => $currentUserId])->one();
@@ -139,5 +125,19 @@ class DashboardController extends Controller {
             $seconds = '0' . ($data['avg_time'] % 60);
             return (int)($data['avg_time'] / 60) . ':' . substr($seconds, -2);
         }
+    }
+    private function formatPage($data) {
+        if (is_object($data)) {
+            $page = $data->page;
+        } else {
+            $page = $data['page'];
+        }
+        $patterns = [
+            '/\/op/',
+            '/\-/',
+            '/\//',
+        ];
+        $page = preg_replace($patterns, ' ', $page);
+        return trim($page);
     }
 }
