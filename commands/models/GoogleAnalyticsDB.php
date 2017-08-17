@@ -28,7 +28,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         // loop through the missing dates, query API, save records
         $count = 0;
         $start = microtime(true);
-        while($getUpdateDate <= $endUpdateDate) {
+        while($getUpdateDate <= $endUpdateDate && $this->requestCount < 49999) {
             $this->recordDate = $getUpdateDate->format('Y-m-d');
             try {
                 $report = $this->fetchReport();
@@ -53,8 +53,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         }
         echo "Done with " . $this->property->url . "; added $count records between $startUpdateDate and " . $endUpdateDate->format('Y-m-d') ."\n";
         echo 'Added ga_analytics_aggregates: ' . $this->updateAggregates($startUpdateDate, $endUpdateDate->format('Y-m-d')) ."\n\n";
+        if ($this->requestCount >= 49999) {echo "We've hit Google's threshold of 50,000 requests / day. Run this script again tomorrow to finish up";}
     }
-    
     private function formatAnalyticsData() {
         $report = $this->report[0];
         // get labels and data out of Google object, put in simple array
@@ -81,7 +81,6 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         }
         return $dataArray;
     }
-    
     public function saveAnalytics() {
         $data = $this->formatAnalyticsData();
         // fix the GA array keys so they match the DB fields
@@ -108,7 +107,6 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         }
         return $data;
     }
-    
     public function updateAggregates($start, $end) {
         $result = Yii::$app->db->createCommand('
             INSERT INTO ga_analytics_aggregates
@@ -130,7 +128,6 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             ->execute();
         return $result;
     }
-    
     public function updateDetails() {
         Yii::$app->db->createCommand('DELETE FROM ga_analytics_details;')->execute();
         $result = Yii::$app->db->createCommand('
