@@ -1,10 +1,5 @@
 var dashboard = (function() {
     'use strict';
-console.log(d3.select('.chartBox').node().getBoundingClientRect().height 
-            - d3.select('.chartBox .left h3').node().getBoundingClientRect().height 
-            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height);
-    
-    console.log(d3.select('.chartBox h1#subhead').node().getBoundingClientRect());
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('.chartBox .left').node().getBoundingClientRect().width,
@@ -58,6 +53,8 @@ console.log(d3.select('.chartBox').node().getBoundingClientRect().height
     var dateRangeBtn = jQuery('#dateRangeBtn');
     var dateRangeResetBtn = jQuery('#dateRangeResetBtn');
     var dateSlider = jQuery('#slider-range');
+    var startDateField = jQuery('#startDate');
+    var endDateField = jQuery('#endDate');
     
     var propertyRows = jQuery('.single-prop');
     var detailsTable = jQuery('#p0');
@@ -91,6 +88,16 @@ console.log(d3.select('.chartBox').node().getBoundingClientRect().height
             }, dealerId);
         });
         // Filter dataset by date, update the chart
+        startDateField.on('change', function() {
+            var start = new Date(startDateField.val()).getTime();
+            dateSlider.slider('values', 0, start / 1000);
+            dateRangeBtn.data('startdate', start);
+        });
+        endDateField.on('change', function() {
+            var end = new Date(endDateField.val()).getTime();
+            dateSlider.slider('values', 1, end / 1000);
+            dateRangeBtn.data('enddate', end);
+        });
         dateRangeBtn.click(function() {
             var startDate = $(this).data('startdate');
             var endDate = $(this).data('enddate');
@@ -219,8 +226,8 @@ console.log(d3.select('.chartBox').node().getBoundingClientRect().height
     function setDateFields(start, end) {
         start = new Date(start);
         end = new Date(end);
-        jQuery('#startDate').val(('0' + (start.getMonth() + 1)).slice(-2) + '/' + ('0' + start.getDate()).slice(-2) + '/' + start.getFullYear());
-        jQuery('#endDate').val(('0' + (end.getMonth() + 1)).slice(-2) + '/' + ('0' + end.getDate()).slice(-2) + '/' + end.getFullYear());
+        startDateField.val(('0' + (start.getMonth() + 1)).slice(-2) + '/' + ('0' + start.getDate()).slice(-2) + '/' + start.getFullYear());
+        endDateField.val(('0' + (end.getMonth() + 1)).slice(-2) + '/' + ('0' + end.getDate()).slice(-2) + '/' + end.getFullYear());
     }
     
     //***** Data processing & display *****//

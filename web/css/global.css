@@ -7,7 +7,7 @@ html {
 }
 body > div.wrap > nav.navbar {
   height: 74px;
-  z-index: 1000;
+  z-index: 2000;
   margin-bottom: 0px;
 }
 nav #w1 .active {
