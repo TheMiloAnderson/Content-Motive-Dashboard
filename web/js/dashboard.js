@@ -3,9 +3,10 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('.chartBox .left').node().getBoundingClientRect().width,
-        height: d3.select('.chartBox').node().getBoundingClientRect().height 
-            - d3.select('.chartBox h3').node().getBoundingClientRect().height 
-            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height,
+//        height: d3.select('.chartBox').node().getBoundingClientRect().height 
+//            - d3.select('.chartBox h3').node().getBoundingClientRect().height 
+//            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height,
+        height: 500,
         x: 50,
         y: 50,
         duration: 1500,
@@ -16,7 +17,7 @@ var dashboard = (function() {
             entrancesColor: 'darkred',
             textDx: 5,
             textDy: '.3em',
-            fontSize: '1.2em',
+            fontSize: '1.4em',
             opacity: 0.7
         },
         margin: {
@@ -37,6 +38,8 @@ var dashboard = (function() {
         g,
         bottomAxis,
         leftAxis,
+        startDateGuide,
+        endDateGuide,
         height,
         width,
         xScale,
@@ -92,11 +95,13 @@ var dashboard = (function() {
             var start = new Date(startDateField.val()).getTime();
             dateSlider.slider('values', 0, start / 1000);
             dateRangeBtn.data('startdate', start);
+            startDateGuide.attr('width', xScale(start));
         });
         endDateField.on('change', function() {
             var end = new Date(endDateField.val()).getTime();
             dateSlider.slider('values', 1, end / 1000);
             dateRangeBtn.data('enddate', end);
+            endDateGuide.attr('width', width - xScale(end)).attr('x', xScale(end));
         });
         dateRangeBtn.click(function() {
             var startDate = $(this).data('startdate');
@@ -190,8 +195,8 @@ var dashboard = (function() {
                 .attr('opacity', prms.dateGuideOpacity)
             ;
         }
-        var startDateGuide = addDateGuide('startDateGuide');
-        var endDateGuide = addDateGuide('endDateGuide');
+        startDateGuide = addDateGuide('startDateGuide');
+        endDateGuide = addDateGuide('endDateGuide');
         dateSlider.slider({
             range: true,
             min: min,
@@ -554,7 +559,7 @@ var dashboard = (function() {
         resizeId = setTimeout(resize, 100);
     });
     function resize() {
-        prms.width = parseInt(d3.select('.chartBox').style('width'), 10);
+        prms.width = parseInt(d3.select('.chartBox .left').style('width'), 10);
         mainChart.attr('width', prms.width).attr('height', prms.height);
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;

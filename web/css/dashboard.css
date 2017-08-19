@@ -1,44 +1,6 @@
-body,
-html {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-}
-body > div.wrap > nav.navbar {
-  height: 74px;
-  z-index: 2000;
-  margin-bottom: 0px;
-}
-nav #w1 .active {
-  border-bottom: solid 1px #cd2128;
-}
-body > .wrap > .container {
-  padding-top: 74px;
-}
-.navbar-header .navbar-brand {
-  padding-top: 10px;
-}
-.navbar-brand > img {
-  float: left;
-}
-#logoTxt {
-  display: inline-block;
-  margin-left: 10px;
-  margin-top: 7px;
-  font-family: 'Bree Serif', serif;
-  line-height: 20px;
-  font-size: 26px;
-}
-#logoTxt .con {
-  color: #CF2129;
-}
-#logoTxt .MOT {
-  color: #3AC0BE;
-}
 .readout {
   font-weight: bold;
-  font-size: 32px;
+  font-size: 24px;
 }
 .ui-state-active {
   border: 1px solid dimgray;
@@ -153,7 +115,18 @@ body > .wrap > .container {
   padding-right: 0px;
   width: 100%;
   overflow: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: -moz-box;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-flex;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
 }
 .dash-panel h1 {
   margin-top: 0px;
@@ -163,7 +136,6 @@ body > .wrap > .container {
 #chart-sidebar {
   color: silver;
   background-color: #333333;
-  height: 100%;
 }
 .pageviews {
   color: #84accd;
@@ -198,15 +170,16 @@ body > .wrap > .container {
   background-color: #000;
 }
 #menu-content .collapsing {
-  -webkit-transition: height .01s ease;
-  -o-transition: height .01s ease;
-  transition: height .01s ease;
+  -webkit-transition: height .1s ease;
+  -o-transition: height .1s ease;
+  transition: height .1s ease;
 }
 .chartBox {
-  display: flex;
   width: 60%;
-  height: 500px;
   margin-top: 120px;
+  padding-left: 20px;
+  background-color: white;
+  display: flex;
 }
 .chartBox .left {
   width: 80%;
@@ -214,17 +187,22 @@ body > .wrap > .container {
 #chart-sidebar {
   margin: 0;
   padding: 0;
+  width: 100%;
+  font-size: 1.4em;
 }
 .chartBox .right {
   width: 20%;
   margin: 0;
   padding: 0;
+  display: flex;
 }
 .tableBox {
   width: 40%;
   margin-top: 120px;
   background-color: #333333;
   color: silver;
+  font-size: .9em;
+  padding-right: 20px;
 }
 .tableBox table colgroup .content-strategy {
   width: 25%;
@@ -234,7 +212,7 @@ body > .wrap > .container {
 .tableBox .pageviews,
 .tableBox .avg_time,
 .tableBox .bounce_rate {
-  font-size: 1.2em;
+  font-size: 1.1em;
   width: 13%;
   vertical-align: middle;
 }
