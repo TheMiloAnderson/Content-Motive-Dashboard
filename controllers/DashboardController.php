@@ -70,7 +70,7 @@ class DashboardController extends Controller {
                 ]);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
-            'layout'=>"{summary}{pager}\n{items}",
+            'layout'=>"{summary}{items}{pager}",
             'tableOptions' => ['class' => 'table table-bordered'],
             'columns' => [
                 ['attribute' => 'page',
