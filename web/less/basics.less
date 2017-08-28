@@ -10,8 +10,9 @@ and open the template in the editor.
 
 ///***** Colors *****///
 @dark1: #222222;
-@dark2: #333333;
-@gunmetal: #2d3947;
+@dark2: #333333; 
+@gunmetal: #000;//2d3947;
+@interface: #FFBC56;
 
 @pageviews: #4682b4;
 @visitors: #191970;
@@ -19,6 +20,7 @@ and open the template in the editor.
 
 ///***** Layout *****///
 @controlsHeight: 120px;
+@navHeight: 74px;
 
 ///***** Mixins *****///
 .dark2 {
@@ -56,8 +58,14 @@ body > .wrap > .container {
 .entrances {
     color: screen(@entrances, #505050);
 }
+.glyphicon {
+    float: right;
+    margin: 5px;
+    color: @interface;
+}
 .chartBox {
     width: 50%;
+    height: calc(~"100vh - "@controlsHeight);
     display: flex;
     flex-direction: column;
     .chart {
@@ -93,7 +101,7 @@ body > .wrap > .container {
         }
         li {
             line-height: 28px;
-            font-weight: bold;
+            //font-weight: bold;
             border-bottom: 1px solid #23282e;
             background-color: @gunmetal;
             padding-left: 10px;
@@ -101,7 +109,7 @@ body > .wrap > .container {
                 display: block;
                 width: 100%;
                 text-decoration: none;
-                color: #e1ffff;
+                color: silver;
             }
         }
         ul .sub-menu li {
@@ -153,10 +161,6 @@ body > .wrap > .container {
             }
         }
     }
-    .glyphicon {
-        float: right;
-        margin: 5px;
-    }
 }
 .tableBox {
     .dark2;
@@ -191,9 +195,10 @@ body > .wrap > .container {
             border-color: @dark2;
         }
         .content-strategy {
-            width: 25%;
+            //width: 25%;
         }
-        .tableData {font-size: 1.1em;  width: 13%;  vertical-align: middle;}
+        .tableData {font-size: 1.1em;  //width: 13%;  
+                   vertical-align: middle;}
         .entrances, .visitors, .pageviews {
             .tableData;
             font-weight: bold;
