@@ -1,0 +1,204 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 23, 2017, 2:43:51 PM
+    Author     : milo anderson
+*/
+.dark2 {
+  background-color: #333333;
+  color: silver;
+}
+body {
+  background-color: #333333;
+}
+.wrap {
+  display: flex;
+  align-content: stretch;
+}
+body > .wrap > .container {
+  display: -moz-box;
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  padding: 0px;
+  background-color: #333333;
+}
+.pageviews {
+  color: #84accd;
+}
+.visitors {
+  color: #6666a0;
+}
+.entrances {
+  color: #af5050;
+}
+.chartBox {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.chartBox .chart {
+  background-color: white;
+  padding-left: 10px;
+}
+.chartBox #controlsBox {
+  background-color: #333333;
+  color: silver;
+  height: 120px;
+  width: 100%;
+  display: flex;
+}
+.chartBox #controlsBox .controls {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  margin: 10px;
+  background-color: #222222;
+  width: 100%;
+}
+.chartBox #controlsBox #menu-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.chartBox #controlsBox ul,
+.chartBox #controlsBox li {
+  list-style: none;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+  left: 0;
+}
+.chartBox #controlsBox li {
+  line-height: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid #23282e;
+  background-color: #2d3947;
+  padding-left: 10px;
+}
+.chartBox #controlsBox li a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #e1ffff;
+}
+.chartBox #controlsBox ul .sub-menu li {
+  background-color: #181c20;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid #23282e;
+  margin-left: 0px;
+  padding-left: 20px;
+  font-weight: lighter;
+}
+.chartBox #controlsBox ul .sub-menu li:hover {
+  background-color: #020203;
+}
+.chartBox #controlsBox .control-panel.select {
+  position: relative;
+}
+.chartBox #controlsBox .control-panel.date {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3em;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 90%;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol1 {
+  display: flex;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol1 input {
+  width: 6.4em;
+  height: 2em;
+  padding-left: 5px;
+  background-color: #eeeeee;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 {
+  display: flex;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 button {
+  padding: 3px;
+}
+.chartBox #controlsBox .control-panel.date #dateRow2 {
+  width: 90%;
+  margin-bottom: 5px;
+}
+.chartBox .glyphicon {
+  float: right;
+  margin: 5px;
+}
+.tableBox {
+  background-color: #333333;
+  color: silver;
+  width: 50%;
+  padding: 0px 25px;
+  font-size: .9em;
+}
+.tableBox .readoutBox {
+  background-color: #333333;
+  color: silver;
+  display: flex;
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 20px;
+}
+.tableBox .readoutBox .metric-panel {
+  background-color: #222222;
+  text-align: center;
+  padding: 4px;
+  margin: 10px;
+  border-radius: 2px;
+  width: 20%;
+}
+.tableBox .readoutBox .metric-panel h4 {
+  padding: 2px;
+  margin: 0px;
+}
+.tableBox table.table-bordered {
+  background-color: #222222;
+  border-color: #333333;
+}
+.tableBox table.table-bordered tbody > tr > td {
+  padding: 5px 10px;
+  border-color: #333333;
+}
+.tableBox table.table-bordered .content-strategy {
+  width: 25%;
+}
+.tableBox table.table-bordered .tableData {
+  font-size: 1.1em;
+  width: 13%;
+  vertical-align: middle;
+}
+.tableBox table.table-bordered .entrances,
+.tableBox table.table-bordered .visitors,
+.tableBox table.table-bordered .pageviews {
+  font-size: 1.1em;
+  width: 13%;
+  vertical-align: middle;
+  font-weight: bold;
+}
+.tableBox table.table-bordered .avg_time,
+.tableBox table.table-bordered .bounce_rate {
+  font-size: 1.1em;
+  width: 13%;
+  vertical-align: middle;
+}
+#p0 .table-bordered > thead > tr > th {
+  border-color: #333333;
+}
+.wanker {
+  margin-left: -17px !important;
+}
+/*# sourceMappingURL=basics.css.map */

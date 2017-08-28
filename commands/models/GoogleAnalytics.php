@@ -21,6 +21,7 @@ class GoogleAnalytics extends Object {
     public $recordDate;
     public $report;
     private $_property;
+    protected $requestCount;
     
     public function setProperty($property) {
         $this->_property = $property;
@@ -42,6 +43,7 @@ class GoogleAnalytics extends Object {
         $analytics = new Google_Service_AnalyticsReporting($client);
 
         $this->analytics_connection = $analytics;
+        $this->requestCount = 0;
         
         parent::__construct($config);
     }

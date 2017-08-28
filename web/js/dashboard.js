@@ -1,10 +1,12 @@
 var dashboard = (function() {
     'use strict';
-
     //***** Parameters & global variables *****//
     var prms = {
-        width: d3.select('#dash-right-col').node().getBoundingClientRect().width,
-        height: d3.select('#dash-panel-secondary').node().getBoundingClientRect().height - d3.select('#dash-right-col h3').node().getBoundingClientRect().height,
+        width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
+//        height: d3.select('.chartBox').node().getBoundingClientRect().height 
+//            - d3.select('.chartBox h3').node().getBoundingClientRect().height 
+//            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height,
+        height: 400,
         x: 50,
         y: 50,
         duration: 1500,
@@ -15,15 +17,16 @@ var dashboard = (function() {
             entrancesColor: 'darkred',
             textDx: 5,
             textDy: '.3em',
-            fontSize: '1.2em',
+            fontSize: '1.1em',
             opacity: 0.7
         },
         margin: {
             top: 20,
-            right: 120,
-            bottom: 25,
-            left: 60
+            right: 100,
+            bottom: 30,
+            left: 80
         },
+        dateGuideOpacity: 0.3
     };
     var ajaxUrl,
         dataCache = [], // all data for a user (eventually)
@@ -35,6 +38,8 @@ var dashboard = (function() {
         g,
         bottomAxis,
         leftAxis,
+        startDateGuide,
+        endDateGuide,
         height,
         width,
         xScale,
@@ -51,6 +56,8 @@ var dashboard = (function() {
     var dateRangeBtn = jQuery('#dateRangeBtn');
     var dateRangeResetBtn = jQuery('#dateRangeResetBtn');
     var dateSlider = jQuery('#slider-range');
+    var startDateField = jQuery('#startDate');
+    var endDateField = jQuery('#endDate');
     
     var propertyRows = jQuery('.single-prop');
     var detailsTable = jQuery('#p0');
@@ -68,6 +75,7 @@ var dashboard = (function() {
             });
             dataSubset = prepData(revisedDataset);
             updateChart(dataSubset);
+            detailTables(dataSubset);
             resetDateSlider(dataSubset);
         });
         // Click dealer/host names, get new dataset
@@ -78,21 +86,37 @@ var dashboard = (function() {
             ajaxUrl = jQuery(this).attr('href');
             changeData(function() {
                 updateChart(dataset);
+                detailTables(dataset);
                 resetDateSlider(dataset);
             }, dealerId);
         });
         // Filter dataset by date, update the chart
+        startDateField.on('change', function() {
+            var start = new Date(startDateField.val()).getTime();
+            dateSlider.slider('values', 0, start / 1000);
+            dateRangeBtn.data('startdate', start);
+            startDateGuide.attr('width', xScale(start));
+        });
+        endDateField.on('change', function() {
+            var end = new Date(endDateField.val()).getTime();
+            dateSlider.slider('values', 1, end / 1000);
+            dateRangeBtn.data('enddate', end);
+            endDateGuide.attr('width', width - xScale(end)).attr('x', xScale(end));
+        });
         dateRangeBtn.click(function() {
             var startDate = $(this).data('startdate');
             var endDate = $(this).data('enddate');
-            var revisedDataset = dataSubset.filter(function(d) {
+            var revisedData = dataSubset.filter(function(d) {
                 return d.date_recorded >= startDate && d.date_recorded <= endDate;
             });
-            updateChart(prepData(revisedDataset));
+            updateChart(prepData(revisedData));
+            detailTables(prepData(revisedData), startDate, endDate);
         });
         dateRangeResetBtn.click(function() {
-            updateChart(prepData(dataset));
-            resetDateSlider(prepData(dataset));
+            var d = prepData(dataset);
+            updateChart(d);
+            detailTables(d);
+            resetDateSlider(d);
         });
     }
     function closeMenu(id) {
@@ -120,11 +144,19 @@ var dashboard = (function() {
             all.select('.prop-click').attr('href', pids.join());
         }
     }
-    function detailTables(d) {
+    function detailTables(d, start = false, end = false) {
         var sites = getCurrentSites(d);
         var url = '?r=/dashboard/details&';
         for (var i=0; i < sites.length; i++) {
             url += 'pids[' + i +  ']=' + sites[i][1] + '&';
+        }
+        if (start) { 
+            start = start.getFullYear() + '-' + ('0' + (start.getMonth() + 1)).slice(-2) + '-' + ('0' + start.getDate()).slice(-2);
+            url += 'start=' + start + '&';
+        }
+        if (end) { 
+            end = end.getFullYear() + '-' + ('0' + (end.getMonth() + 1)).slice(-2) + '-' + ('0' + end.getDate()).slice(-2);
+            url += 'end=' + end + '&';
         }
         jQuery.get(url, function(data) {
             data = '<div id="p0">' + data + '</div>';
@@ -160,11 +192,11 @@ var dashboard = (function() {
                 .attr('height', height)
                 .attr('width', 0)
                 .attr('fill', 'black')
-                .attr('opacity', .04)
+                .attr('opacity', prms.dateGuideOpacity)
             ;
         }
-        var startDateGuide = addDateGuide('startDateGuide');
-        var endDateGuide = addDateGuide('endDateGuide');
+        startDateGuide = addDateGuide('startDateGuide');
+        endDateGuide = addDateGuide('endDateGuide');
         dateSlider.slider({
             range: true,
             min: min,
@@ -175,7 +207,7 @@ var dashboard = (function() {
             },
             slide: function(event, ui) {
                 var startDate = new Date(ui.values[0] * 1000);
-                var endDate = new Date(ui.values[1] * 1000);              
+                var endDate = new Date(ui.values[1] * 1000);
                 setDateFields(startDate, endDate);
                 dateRangeBtn.data('startdate', startDate);
                 dateRangeBtn.data('enddate', endDate);
@@ -183,6 +215,10 @@ var dashboard = (function() {
                 endDateGuide.attr('width', width - xScale(endDate)).attr('x', xScale(endDate));
             }
         });
+        var handles = jQuery('.ui-slider-handle');
+        var handleWidth = handles.width();
+        handles.eq(0).css('margin-left', 0);
+        handles.eq(1).addClass('wanker');
         resetDateSlider(dataset);
     }
     function resetDateSlider(d) {
@@ -199,8 +235,8 @@ var dashboard = (function() {
     function setDateFields(start, end) {
         start = new Date(start);
         end = new Date(end);
-        jQuery('#startDate').val(('0' + (start.getMonth() + 1)).slice(-2) + '/' + ('0' + start.getDate()).slice(-2) + '/' + start.getFullYear());
-        jQuery('#endDate').val(('0' + (end.getMonth() + 1)).slice(-2) + '/' + ('0' + end.getDate()).slice(-2) + '/' + end.getFullYear());
+        startDateField.val(('0' + (start.getMonth() + 1)).slice(-2) + '/' + ('0' + start.getDate()).slice(-2) + '/' + start.getFullYear());
+        endDateField.val(('0' + (end.getMonth() + 1)).slice(-2) + '/' + ('0' + end.getDate()).slice(-2) + '/' + end.getFullYear());
     }
     
     //***** Data processing & display *****//
@@ -333,7 +369,11 @@ var dashboard = (function() {
     //***** Chart rendering & updating *****//
      function createChart() {
         // Chart size, margins
-        mainChart = d3.select('.mainChart').attr('width', prms.width).attr('height', prms.height);
+        mainChart = d3.select('.mainChart')
+            .attr('width', prms.width)
+            .attr('height', prms.height)
+            //.attr('viewbox', '0 0 ' + prms.width + ' ' + prms.height)
+        ;
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
         g = mainChart.append('g')
@@ -369,10 +409,11 @@ var dashboard = (function() {
 
         initializeDateSlider();
         updateChart(dataset);
+        detailTables(dataset);
     };
     
     function updateChart(d) {
-        var svg = d3.select('.mainChart').transition();
+        var svg = mainChart.transition();
         // Define the D3 scales
         xScale = d3.scaleTime()
             .range([0, width])
@@ -436,7 +477,6 @@ var dashboard = (function() {
         metricReadouts(d);
         updateSiteSelect(dataset);
         updateSubheads(d);
-        detailTables(d);
         formatTicks();
     }
     function lineTransitions(d, dataCol, lineClass, txtId) {
@@ -444,11 +484,49 @@ var dashboard = (function() {
             .x(function(d) { return xScale(d.date_recorded); })
             .y1(function(d) { return yScale(d[dataCol]); });
         lineD.y0(yScale(0));
+        lineD = lineD(d);
+        var originalPath = lineD.substring(1, lineD.length-1);
+        originalPath = originalPath.split('L');
+        var pathCoordinates1 = [];
+        var pathCoordinates2 = [];
+        var endLine = '';
+        var secondSegment = false;
+        var lineLength = originalPath.length;
+        for (var i=0; i<lineLength; i++) {
+            var coords = originalPath[i].split(',');
+            coords[0] = Number(coords[0]);
+            coords[1] = Number(coords[1]);
+            var coordsObj = {x: coords[0], y: coords[1]};
+            if ((coords[0] < width) && (!secondSegment)) {
+                pathCoordinates1.push(coordsObj);
+            } else if (coords[0] === width) {
+                secondSegment = true;
+                endLine += originalPath[i] + 'L';
+            } else if (secondSegment) {
+                pathCoordinates2.push(coordsObj);
+            }
+        }
+        pathCoordinates1 = simplify(pathCoordinates1, .5);
+        pathCoordinates2 = simplify(pathCoordinates2, .5);
+        var increment = pathCoordinates2[0]['x'] / pathCoordinates1.length;
+        for (var i=1; i<=pathCoordinates1.length - 1; i++) {
+            var item = {x: pathCoordinates2[0]['x'] - increment * i, y: pathCoordinates2[0]['y']};
+            pathCoordinates2.splice(i, 0, item);
+        }
+        lineD = 'M';
+        for (var i=0; i<pathCoordinates1.length; i++) {
+            lineD += pathCoordinates1[i]['x'] + ',' + pathCoordinates1[i]['y'] + 'L';
+        }
+        lineD += endLine;
+        for (var i=0; i<pathCoordinates2.length; i++) {
+            lineD += pathCoordinates2[i]['x'] + ',' + pathCoordinates2[i]['y'] + 'L';
+        }
+        lineD = lineD.substring(0, lineD.length-1) + 'Z';
         mainChart.transition().select(lineClass)
             .duration(prms.duration)
             .attrTween('d', function() {
-                var previous = d3.select(this).attr('d') || lineD(d);
-                var current = lineD(d);
+                var previous = d3.select(this).attr('d') || lineD;
+                var current = lineD;
                 function exclude(a, b) {
                     return a.x === b.x;
                 }
@@ -479,7 +557,18 @@ var dashboard = (function() {
             })
         }, 100);
     };
-
+    var resizeId;
+    d3.select(window).on('resize', function() {
+        clearTimeout(resizeId);
+        resizeId = setTimeout(resize, 100);
+    });
+    function resize() {
+        prms.width = parseInt(d3.select('.chartBox .chart').style('width'), 10);
+        mainChart.attr('width', prms.width).attr('height', prms.height);
+        width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
+        height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
+        updateChart(dataSubset);
+    }
     return {
         init: function(url, dealers) {
             ajaxUrl = url;

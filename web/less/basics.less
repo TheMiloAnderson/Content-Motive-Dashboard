@@ -1,0 +1,212 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 23, 2017, 2:43:51 PM
+    Author     : milo anderson
+*/
+
+///***** Colors *****///
+@dark1: #222222;
+@dark2: #333333;
+@gunmetal: #2d3947;
+
+@pageviews: #4682b4;
+@visitors: #191970;
+@entrances: #8b0000;
+
+///***** Layout *****///
+@controlsHeight: 120px;
+
+///***** Mixins *****///
+.dark2 {
+    background-color: @dark2;
+    color: silver;
+}
+
+///***** Meat & Potatoes *****///
+body {
+    background-color: @dark2;
+}
+.wrap {
+    display: flex;
+    align-content: stretch;
+}
+body > .wrap > .container {
+    display: -moz-box;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    padding: 0px;
+    background-color: @dark2;
+}
+.pageviews {
+    color: screen(@pageviews, #555555);
+}
+.visitors {
+    color: screen(@visitors, #555555);
+}
+.entrances {
+    color: screen(@entrances, #505050);
+}
+.chartBox {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    .chart {
+        background-color: white;
+        padding-left: 10px;
+    }
+    #controlsBox {
+        .dark2;
+        height: @controlsHeight;
+        width: 100%;
+        display: flex;
+        .controls {
+            display: flex;
+            flex-direction: column;
+            padding: 2px;
+            margin: 10px;
+            background-color: @dark1;
+            width: 100%;
+        }
+        #menu-content {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #menu-content > li, #menu-content > ul {
+            //width: 10em;
+        }
+        ul, li {
+            list-style: none;
+            cursor: pointer;
+            padding: 0px;
+            margin: 0px;
+            left: 0;
+        }
+        li {
+            line-height: 28px;
+            font-weight: bold;
+            border-bottom: 1px solid #23282e;
+            background-color: @gunmetal;
+            padding-left: 10px;
+            a {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+                color: #e1ffff;
+            }
+        }
+        ul .sub-menu li {
+            background-color: #181c20;
+            border: none;
+            line-height: 28px;
+            border-bottom: 1px solid #23282e;
+            margin-left: 0px;
+            padding-left: 20px;
+            font-weight: lighter;
+        }
+        ul .sub-menu li:hover {
+            background-color: #020203;
+        }
+        .control-panel.select {
+            position: relative;
+        }
+        .control-panel.date {
+            display: flex;
+            flex-direction: column;
+            margin-top: 3em;
+            #dateRow1 {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 5px;
+                width: 90%;
+                div {
+                    //border: 1px solid #ff0000;
+                }
+                #dateCol1 {
+                    display: flex;
+                    input {
+                        width: 6.4em;
+                        height: 2em;
+                        padding-left: 5px;
+                        background-color: #eeeeee;
+                    }
+                }
+                #dateCol2 {
+                    display: flex;
+                    button {
+                        padding: 3px;
+                    }
+                }
+            }
+            #dateRow2 {
+                width: 90%;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .glyphicon {
+        float: right;
+        margin: 5px;
+    }
+}
+.tableBox {
+    .dark2;
+    width: 50%;
+    padding: 0px 25px;
+    font-size: .9em;
+    .readoutBox {
+        .dark2;
+        display: flex;
+        font-weight: bold;
+        font-size: 24px;
+        margin-top: 20px;
+        .metric-panel {
+            background-color: @dark1;
+            text-align: center;
+            padding: 4px;
+            margin: 10px;
+            border-radius: 2px;
+            //border: 1px solid #000;
+            width: 20%;
+            h4 {
+                padding: 2px;
+                margin: 0px;
+            }
+        }
+    }
+    table.table-bordered {
+        background-color: @dark1;
+        border-color: @dark2;
+        tbody > tr > td {
+            padding: 5px 10px;
+            border-color: @dark2;
+        }
+        .content-strategy {
+            width: 25%;
+        }
+        .tableData {font-size: 1.1em;  width: 13%;  vertical-align: middle;}
+        .entrances, .visitors, .pageviews {
+            .tableData;
+            font-weight: bold;
+        }
+        .avg_time, .bounce_rate {
+            .tableData;
+        }
+    }
+}
+///***** Horrors *****///
+#p0 .table-bordered > thead > tr > th {
+    border-color: @dark2;
+}
+.wanker {
+    margin-left: -17px!important;
+}

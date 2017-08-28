@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff871f7f0d1f0d2ced3391de1810c47c",
+    "content-hash": "0d4ef1db01a88ecf7bf38bffde251f1f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -418,16 +418,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.18",
+            "version": "v0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0"
+                "reference": "430b7125af4f76f38f786222117a9ac1436e0e28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/018f3288dc686345bd6d82deea81b6f56171bfc0",
-                "reference": "018f3288dc686345bd6d82deea81b6f56171bfc0",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/430b7125af4f76f38f786222117a9ac1436e0e28",
+                "reference": "430b7125af4f76f38f786222117a9ac1436e0e28",
                 "shasum": ""
             },
             "require": {
@@ -451,7 +451,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-08-06T00:19:44+00:00"
+            "time": "2017-08-13T00:18:21+00:00"
         },
         {
             "name": "google/auth",
@@ -671,6 +671,54 @@
                 "uri"
             ],
             "time": "2016-02-18T21:54:00+00:00"
+        },
+        {
+            "name": "insolita/yii2-migration-generator",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Insolita/yii2-migrik.git",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Insolita/yii2-migrik/zipball/455c8dfc035085d56051a16b3cfc5f010662170d",
+                "reference": "455c8dfc035085d56051a16b3cfc5f010662170d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "nesbot/carbon": "*",
+                "vlucas/phpdotenv": "*",
+                "yiisoft/yii2-gii": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "insolita\\migrik\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "insolita\\migrik\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "insolita",
+                    "email": "donnainsolita@gmail.com"
+                }
+            ],
+            "description": "Set of gii tools for generating  files for migration by schema of table , phpdoc or table data",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2017-04-29T12:37:47+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2806,6 +2854,49 @@
             ]
         },
         {
+            "name": "npm-asset/simplify-js",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mourner/simplify-js.git",
+                "reference": "2bcd7ce5fb2e9767571b82718a9175a256a56da8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mourner/simplify-js/zipball/2bcd7ce5fb2e9767571b82718a9175a256a56da8",
+                "reference": "2bcd7ce5fb2e9767571b82718a9175a256a56da8",
+                "shasum": ""
+            },
+            "require-dev": {
+                "npm-asset/benchmark": ">=1.0.0,<2.0.0",
+                "npm-asset/faucet": "0.0.1",
+                "npm-asset/jshint": ">=2.6.3,<3.0.0",
+                "npm-asset/tape": ">=3.5.0,<4.0.0"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-main": "simplify.js",
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git://github.com/mourner/simplify-js.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "jshint simplify.js test/test.js && node test/test.js | faucet"
+                }
+            },
+            "authors": [
+                "Vladimir Agafonkin"
+            ],
+            "description": "A high-performance JavaScript 2D/3D polyline simplification library",
+            "homepage": "http://mourner.github.com/simplify-js/",
+            "keywords": [
+                "geometry",
+                "math",
+                "polyline",
+                "simplification"
+            ]
+        },
+        {
             "name": "npm-asset/vue",
             "version": "2.4.2",
             "dist": {
@@ -3394,16 +3485,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "f29dca382a6485c3cbe6379f0c61230167681937"
+                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f29dca382a6485c3cbe6379f0c61230167681937",
-                "reference": "f29dca382a6485c3cbe6379f0c61230167681937",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
+                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
                 "shasum": ""
             },
             "require": {
@@ -3415,7 +3506,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -3449,7 +3540,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-09T14:24:12+00:00"
+            "time": "2017-06-14T15:44:48+00:00"
         },
         {
             "name": "wbraganca/yii2-dynamicform",
@@ -3837,16 +3928,16 @@
         },
         {
             "name": "codeception/base",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/base.git",
-                "reference": "c146cf4888f5789d9dbd35d6204e2aa7aa2e94e9"
+                "reference": "eb3274a5dddeef8d8ca64b0414c0bf3c75bc9be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/base/zipball/c146cf4888f5789d9dbd35d6204e2aa7aa2e94e9",
-                "reference": "c146cf4888f5789d9dbd35d6204e2aa7aa2e94e9",
+                "url": "https://api.github.com/repos/Codeception/base/zipball/eb3274a5dddeef8d8ca64b0414c0bf3c75bc9be9",
+                "reference": "eb3274a5dddeef8d8ca64b0414c0bf3c75bc9be9",
                 "shasum": ""
             },
             "require": {
@@ -3926,7 +4017,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2017-07-10T20:30:59+00:00"
+            "time": "2017-08-10T20:41:08+00:00"
         },
         {
             "name": "codeception/specify",
@@ -4060,29 +4151,31 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.6.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123"
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44f9a286a04b80c76a4e5fb7aad8bb539b920123",
-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3|^7.0"
+                "php": "^5.3.3 || ^7.0"
             },
             "require-dev": {
                 "ext-intl": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~1.5"
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
             },
             "type": "library",
             "extra": {
-                "branch-alias": []
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -4104,7 +4197,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29T12:21:54+00:00"
+            "time": "2017-08-15T16:48:10+00:00"
         },
         {
             "name": "myclabs/deep-copy",

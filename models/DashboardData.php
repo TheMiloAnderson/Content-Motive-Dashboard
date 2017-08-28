@@ -6,6 +6,7 @@ use Yii;
 use app\models\GoogleAnalyticsAggregates;
 use app\models\GoogleAnalyticsDetails;
 use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 
 class DashboardData {
     
@@ -24,19 +25,53 @@ class DashboardData {
         return $data;
     }
     
-    public function details($pids) {
-        $query  = GoogleAnalyticsDetails::find()->where(['in', 'property_id', $pids]);
-        $provider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'pageviews' => SORT_DESC,
+    public function details($pids, $start, $end) {
+        if ($start == null && $end == null) {
+            $query  = GoogleAnalyticsDetails::find()
+                ->where(['in', 'property_id', $pids]);
+            $provider = new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => [
+                    'pageSize' => 10,
                 ],
-            ],
-        ]);
-        return $provider;        
+            ]);
+            return $provider; 
+        } else {
+            $totalCount = Yii::$app->db->createCommand('SELECT COUNT(*) FROM 
+                (SELECT page
+                FROM ga_analytics
+                WHERE property_id IN (:pids)
+                AND date_recorded BETWEEN :start AND :end
+                GROUP BY page) as c')
+                ->bindValue(':pids', implode(',', $pids))
+                ->bindValue(':start', $start)
+                ->bindValue(':end', $end)
+                ->queryScalar();
+            $query = 'SELECT
+                property_id,
+                page,
+                SUM(pageviews) as pageviews,
+                SUM(visitors) as visitors,
+                SUM(entrances) as entrances,
+                AVG(avg_time) as avg_time,
+                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) / 100 AS bounce_rate
+            FROM ga_analytics
+            WHERE property_id IN (:pids)
+                AND date_recorded BETWEEN :start AND :end
+            GROUP BY page';
+            $provider = new SqlDataProvider([
+                'sql' => $query,
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+                'totalCount' => $totalCount,
+                'params' => [
+                    ':pids' => implode(',', $pids),
+                    ':start' => $start,
+                    ':end' => $end,
+                ],
+            ]);
+            return $provider; 
+        }
     }
 }
