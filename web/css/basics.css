@@ -40,11 +40,6 @@ body > .wrap > .container {
 .entrances {
   color: #af5050;
 }
-.glyphicon {
-  float: right;
-  margin: 5px;
-  color: #FFBC56;
-}
 .chartBox {
   width: 50%;
   height: calc(100vh -  120px);
@@ -74,23 +69,27 @@ body > .wrap > .container {
   display: flex;
   flex-wrap: wrap;
 }
-.chartBox #controlsBox ul,
-.chartBox #controlsBox li {
+.chartBox #controlsBox #menu-content ul {
+  top: 28px;
+}
+.chartBox #controlsBox #menu-content > li:nth-of-type(2),
+.chartBox #controlsBox #menu-content > ul:nth-of-type(2) {
+  margin-left: 20em;
+}
+.chartBox #controlsBox #menu-content > ul,
+.chartBox #controlsBox #menu-content > li {
+  position: absolute;
   list-style: none;
   cursor: pointer;
-  padding: 0px;
   margin: 0px;
-  left: 0;
+  padding-left: 0px;
+  width: 18em;
 }
-.chartBox #controlsBox li {
+.chartBox #controlsBox #menu-content > li {
   line-height: 28px;
   border-bottom: 1px solid #23282e;
-  background-color: #000;
+  background-color: #2d3947;
   padding-left: 10px;
-}
-.chartBox #controlsBox li a {
-  display: block;
-  width: 100%;
   text-decoration: none;
   color: silver;
 }
@@ -100,7 +99,8 @@ body > .wrap > .container {
   line-height: 28px;
   border-bottom: 1px solid #23282e;
   margin-left: 0px;
-  padding-left: 20px;
+  padding-left: 10px;
+  width: 100%;
   font-weight: lighter;
 }
 .chartBox #controlsBox ul .sub-menu li:hover {
@@ -166,29 +166,46 @@ body > .wrap > .container {
   padding: 2px;
   margin: 0px;
 }
-.tableBox table.table-bordered {
+.tableBox table {
   background-color: #222222;
   border-color: #333333;
 }
-.tableBox table.table-bordered tbody > tr > td {
+.tableBox table tbody > tr > td {
   padding: 5px 10px;
   border-color: #333333;
 }
-.tableBox table.table-bordered .tableData {
+.tableBox table .tableData {
   font-size: 1.1em;
   vertical-align: middle;
 }
-.tableBox table.table-bordered .entrances,
-.tableBox table.table-bordered .visitors,
-.tableBox table.table-bordered .pageviews {
+.tableBox table .entrances,
+.tableBox table .visitors,
+.tableBox table .pageviews {
   font-size: 1.1em;
   vertical-align: middle;
   font-weight: bold;
 }
-.tableBox table.table-bordered .avg_time,
-.tableBox table.table-bordered .bounce_rate {
+.tableBox table .avg_time,
+.tableBox table .bounce_rate {
   font-size: 1.1em;
   vertical-align: middle;
+}
+.tableBox table a {
+  text-decoration: none;
+}
+.tableBox table a:after {
+  font-family: 'Glyphicons Halflings';
+  content: '\e114';
+  color: silver;
+  font-weight: normal;
+}
+.tableBox table a.asc:after {
+  color: #FFBC56;
+  content: '\e113';
+}
+.tableBox table a.desc:after {
+  color: #FFBC56;
+  content: '\e114';
 }
 #p0 .table-bordered > thead > tr > th {
   border-color: #333333;

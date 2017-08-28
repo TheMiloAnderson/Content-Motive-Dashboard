@@ -11,7 +11,7 @@ and open the template in the editor.
 ///***** Colors *****///
 @dark1: #222222;
 @dark2: #333333; 
-@gunmetal: #000;//2d3947;
+@gunmetal: #2d3947;
 @interface: #FFBC56;
 
 @pageviews: #4682b4;
@@ -21,6 +21,7 @@ and open the template in the editor.
 ///***** Layout *****///
 @controlsHeight: 120px;
 @navHeight: 74px;
+@menuItemHeight: 28px;
 
 ///***** Mixins *****///
 .dark2 {
@@ -58,11 +59,6 @@ body > .wrap > .container {
 .entrances {
     color: screen(@entrances, #505050);
 }
-.glyphicon {
-    float: right;
-    margin: 5px;
-    color: @interface;
-}
 .chartBox {
     width: 50%;
     height: calc(~"100vh - "@controlsHeight);
@@ -88,37 +84,37 @@ body > .wrap > .container {
         #menu-content {
             display: flex;
             flex-wrap: wrap;
+            ul {
+                top: @menuItemHeight;
+            }
         }
-        #menu-content > li, #menu-content > ul {
-            //width: 10em;
+        #menu-content > li:nth-of-type(2), #menu-content > ul:nth-of-type(2) {
+            margin-left: 20em;
         }
-        ul, li {
+        #menu-content > ul, #menu-content > li {
+            position: absolute;
             list-style: none;
             cursor: pointer;
-            padding: 0px;
             margin: 0px;
-            left: 0;
+            padding-left: 0px;
+            width: 18em;
         }
-        li {
-            line-height: 28px;
-            //font-weight: bold;
+        #menu-content > li {
+            line-height: @menuItemHeight;
             border-bottom: 1px solid #23282e;
             background-color: @gunmetal;
             padding-left: 10px;
-            a {
-                display: block;
-                width: 100%;
-                text-decoration: none;
-                color: silver;
-            }
+            text-decoration: none;
+            color: silver;
         }
         ul .sub-menu li {
             background-color: #181c20;
             border: none;
-            line-height: 28px;
+            line-height: @menuItemHeight;
             border-bottom: 1px solid #23282e;
             margin-left: 0px;
-            padding-left: 20px;
+            padding-left: 10px;
+            width: 100%;
             font-weight: lighter;
         }
         ul .sub-menu li:hover {
@@ -136,9 +132,6 @@ body > .wrap > .container {
                 justify-content: space-between;
                 margin-bottom: 5px;
                 width: 90%;
-                div {
-                    //border: 1px solid #ff0000;
-                }
                 #dateCol1 {
                     display: flex;
                     input {
@@ -179,7 +172,6 @@ body > .wrap > .container {
             padding: 4px;
             margin: 10px;
             border-radius: 2px;
-            //border: 1px solid #000;
             width: 20%;
             h4 {
                 padding: 2px;
@@ -187,18 +179,17 @@ body > .wrap > .container {
             }
         }
     }
-    table.table-bordered {
+    table {
         background-color: @dark1;
         border-color: @dark2;
         tbody > tr > td {
             padding: 5px 10px;
             border-color: @dark2;
         }
-        .content-strategy {
-            //width: 25%;
+        .tableData {
+            font-size: 1.1em;
+            vertical-align: middle;
         }
-        .tableData {font-size: 1.1em;  //width: 13%;  
-                   vertical-align: middle;}
         .entrances, .visitors, .pageviews {
             .tableData;
             font-weight: bold;
@@ -206,6 +197,24 @@ body > .wrap > .container {
         .avg_time, .bounce_rate {
             .tableData;
         }
+        a {
+            text-decoration: none;
+        }
+        a:after {
+            font-family: 'Glyphicons Halflings';
+            content: '\e114';
+            color: silver;
+            font-weight: normal;
+        }
+        a.asc:after {
+            color: @interface;
+            content: '\e113';
+        }
+        a.desc:after {
+            color: @interface;
+            content: '\e114';
+        }
+        
     }
 }
 ///***** Horrors *****///

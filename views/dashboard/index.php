@@ -28,31 +28,29 @@ $this->title = 'Dashboard';
                 <?php
                 if (count($dealers) > 1) { ?>
                     <li data-toggle="collapse" data-target="#dealers" class="collapsed">
-                        <a href="#"><span id="dealersSelectTitle">Dealers</span>
-                            <div class="glyphicon glyphicon-menu-down" aria-hidden="true"></div></a>
+                        <div id="dealersSelectTitle">Dealers</div>
                     </li>
                     <ul class="sub-menu collapse" id="dealers">
                         <?php foreach ($dealers as $dealer) {
                             $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
                             if ($pids) {
-                                echo '<li><a class="dealerSelect" data-id="' . $dealer['id'] . '" ';
+                                echo '<li class="dealerSelect" data-id="' . $dealer['id'] . '" ';
                                 echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
-                                echo $dealer['name'] . '&nbsp;(' . count($pids) . ')' . '</a></li>';
+                                echo $dealer['name'] . '&nbsp;(' . count($pids) . ')' . '</li>';
                             }
                         } ?>
                     </ul>
                 <?php } ?>
                     <li id="websites-head" data-toggle="collapse" data-target="#websites" class="collapsed">
-                        <a href="#"><span id="websitesSelectTitle">Websites</span>
-                            <div class="glyphicon glyphicon-menu-down" aria-hidden="true"></div></a>
+                        <div id="websitesSelectTitle">Websites</div>
                     </li>
                     <ul class="sub-menu collapse" id="websites">
-                        <li class="single-prop all-websites"><a class="prop-click" href="">All Websites</a></li>
+                        <li class="propertyFilter all-websites"><a class="prop-click" href="">All Websites</a></li>
                         <?php foreach ($dealers as $dealer) {
                             foreach ($dealer['properties'] as $property) {
-                                echo '<li class="single-prop" id="' . $property['id'] . '">';
-                                echo '<a class="prop-click" href="' . $property['id'] . '">';
-                                echo $property['url'] . '</a></li>';
+                                echo '<li class="propertyFilter" id="' . $property['id'] . '">';
+                                //echo '<a class="prop-click" href="' . $property['id'] . '">';
+                                echo $property['url'] . '</li>';
                             }
                         } ?>
                     </ul>

@@ -3,9 +3,11 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
-        height: d3.select('.chartBox').node().getBoundingClientRect().height 
-            - d3.select('#controlsBox').node().getBoundingClientRect().height - 100,
-        //height: 400,
+        height: function() {
+            var room = d3.select('.chartBox').node().getBoundingClientRect().height 
+            - d3.select('#controlsBox').node().getBoundingClientRect().height - 100;
+            return room > 400 ? 400 : room;
+        },
         x: 50,
         y: 50,
         duration: 1500,
@@ -58,16 +60,15 @@ var dashboard = (function() {
     var startDateField = jQuery('#startDate');
     var endDateField = jQuery('#endDate');
     
-    var propertyRows = jQuery('.single-prop');
+    var propertyRows = jQuery('.propertyFilter');
     var detailsTable = jQuery('#p0');
     
     //***** UI controls *****//
     //
     function initUi() {
-        jQuery('.prop-click').click(function(e) {
-            e.preventDefault();
+        propertyRows.click(function() {
             closeMenu('#websites');
-            var pid = jQuery(this).attr('href').split(',');
+            var pid = jQuery(this).attr('id').split(',');
             for (var i=0; i<pid.length; i++) {pid[i] = +pid[i]; }
             var revisedDataset = dataset.filter(function(d) {
                 return pid.includes(d.property_id);
@@ -124,7 +125,7 @@ var dashboard = (function() {
     }
     function updateSiteSelect(d) {
         var siteSelect = d3.select('#websites');
-        siteSelect.selectAll('.single-prop').style('display', 'none');
+        siteSelect.selectAll('.propertyFilter').style('display', 'none');
         var dByUrl = getCurrentSites(d);
         if (dByUrl.length < 2) { 
             siteSelect.style('display', 'none');
