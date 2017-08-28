@@ -40,8 +40,14 @@ body > .wrap > .container {
 .entrances {
   color: #af5050;
 }
+.glyphicon {
+  float: right;
+  margin: 5px;
+  color: #FFBC56;
+}
 .chartBox {
   width: 50%;
+  height: calc(100vh -  120px);
   display: flex;
   flex-direction: column;
 }
@@ -78,16 +84,15 @@ body > .wrap > .container {
 }
 .chartBox #controlsBox li {
   line-height: 28px;
-  font-weight: bold;
   border-bottom: 1px solid #23282e;
-  background-color: #2d3947;
+  background-color: #000;
   padding-left: 10px;
 }
 .chartBox #controlsBox li a {
   display: block;
   width: 100%;
   text-decoration: none;
-  color: #e1ffff;
+  color: silver;
 }
 .chartBox #controlsBox ul .sub-menu li {
   background-color: #181c20;
@@ -134,10 +139,6 @@ body > .wrap > .container {
   width: 90%;
   margin-bottom: 5px;
 }
-.chartBox .glyphicon {
-  float: right;
-  margin: 5px;
-}
 .tableBox {
   background-color: #333333;
   color: silver;
@@ -173,26 +174,20 @@ body > .wrap > .container {
   padding: 5px 10px;
   border-color: #333333;
 }
-.tableBox table.table-bordered .content-strategy {
-  width: 25%;
-}
 .tableBox table.table-bordered .tableData {
   font-size: 1.1em;
-  width: 13%;
   vertical-align: middle;
 }
 .tableBox table.table-bordered .entrances,
 .tableBox table.table-bordered .visitors,
 .tableBox table.table-bordered .pageviews {
   font-size: 1.1em;
-  width: 13%;
   vertical-align: middle;
   font-weight: bold;
 }
 .tableBox table.table-bordered .avg_time,
 .tableBox table.table-bordered .bounce_rate {
   font-size: 1.1em;
-  width: 13%;
   vertical-align: middle;
 }
 #p0 .table-bordered > thead > tr > th {

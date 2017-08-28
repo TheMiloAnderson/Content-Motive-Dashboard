@@ -78,6 +78,8 @@ class DashboardController extends Controller {
                 'value' => function($data) {return $this->formatPage($data);},
                 'contentOptions' => ['class' => 'content-strategy']],
                 ['attribute' => 'entrances',
+                'label' => '<div class="glyphicon glyphicon-menu-down" aria-hidden="true"></div>',
+                'encodeLabel' => false,
                 'format' => 'integer',
                 'contentOptions' => ['class' => 'entrances']],
                 ['attribute' => 'visitors',

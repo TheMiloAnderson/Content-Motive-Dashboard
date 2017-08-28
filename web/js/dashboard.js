@@ -3,10 +3,9 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
-//        height: d3.select('.chartBox').node().getBoundingClientRect().height 
-//            - d3.select('.chartBox h3').node().getBoundingClientRect().height 
-//            - d3.select('.chartBox h1#subhead').node().getBoundingClientRect().height,
-        height: 400,
+        height: d3.select('.chartBox').node().getBoundingClientRect().height 
+            - d3.select('#controlsBox').node().getBoundingClientRect().height - 100,
+        //height: 400,
         x: 50,
         y: 50,
         duration: 1500,
