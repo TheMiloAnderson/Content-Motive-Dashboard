@@ -5,7 +5,7 @@ var dashboard = (function() {
         width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
         height: function() {
             var room = d3.select('.chartBox').node().getBoundingClientRect().height 
-            - d3.select('#controlsBox').node().getBoundingClientRect().height - 100;
+            - d3.select('#controlsBox').node().getBoundingClientRect().height - 60;
             return room > 400 ? 400 : room;
         },
         x: 50,

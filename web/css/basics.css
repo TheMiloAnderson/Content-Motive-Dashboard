@@ -42,9 +42,14 @@ body > .wrap > .container {
 }
 .chartBox {
   width: 50%;
-  height: calc(100vh -  120px);
   display: flex;
   flex-direction: column;
+}
+.chartBox h2,
+.chartBox h3,
+.chartBox h4,
+.chartBox h5 {
+  text-align: center;
 }
 .chartBox .chart {
   background-color: white;
@@ -53,28 +58,52 @@ body > .wrap > .container {
 .chartBox #controlsBox {
   background-color: #333333;
   color: silver;
-  height: 120px;
   width: 100%;
   display: flex;
 }
 .chartBox #controlsBox .controls {
   display: flex;
   flex-direction: column;
-  padding: 2px;
-  margin: 10px;
+  padding: 15px;
+  margin: 10px 0px;
   background-color: #222222;
   width: 100%;
 }
 .chartBox #controlsBox #menu-content {
   display: flex;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 .chartBox #controlsBox #menu-content ul {
-  top: 24px;
+  bottom: 100%;
+}
+.chartBox #controlsBox #menu-content li.controls-title {
+  width: 8em;
+  background-color: #222222;
+  cursor: default;
+  color: silver;
+  padding: 0px;
+}
+.chartBox #controlsBox #menu-content div:after {
+  font-family: 'Glyphicons Halflings';
+  color: #FFBC56;
+  content: '\e113';
+  font-weight: normal;
+  float: right;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.chartBox #controlsBox #menu-content > li:nth-of-type(1) {
+  left: 0;
+  font-weight: bold;
 }
 .chartBox #controlsBox #menu-content > li:nth-of-type(2),
+.chartBox #controlsBox #menu-content > ul:nth-of-type(1) {
+  margin-left: 2em;
+}
+.chartBox #controlsBox #menu-content > li:nth-of-type(3),
 .chartBox #controlsBox #menu-content > ul:nth-of-type(2) {
-  margin-left: 20em;
+  margin-left: 19em;
 }
 .chartBox #controlsBox #menu-content > ul,
 .chartBox #controlsBox #menu-content > li {
@@ -113,31 +142,38 @@ body > .wrap > .container {
 .chartBox #controlsBox .control-panel.date {
   display: flex;
   flex-direction: column;
-  margin-top: 3em;
+  margin-top: 2.5em;
+  width: 80%;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
-  width: 90%;
+  width: 100%;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 #dateCol1 {
   display: flex;
+  justify-content: flex-start;
+  width: 40%;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 #dateCol1 input {
-  width: 6.4em;
+  width: 7em;
   height: 2em;
-  padding-left: 5px;
+  margin-right: 1em;
   background-color: #eeeeee;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 {
   display: flex;
+  justify-content: flex-end;
+  width: 30%;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 button {
   padding: 3px;
+  width: 7em;
+  height: 2em;
+  margin-left: 1em;
 }
 .chartBox #controlsBox .control-panel.date #dateRow2 {
-  width: 90%;
   margin-bottom: 5px;
 }
 .tableBox {
@@ -210,6 +246,9 @@ body > .wrap > .container {
 .tableBox table a.desc:after {
   color: #FFBC56;
   content: '\e114';
+}
+.tableBox .pagination {
+  margin: 0px;
 }
 #p0 .table-bordered > thead > tr > th {
   border-color: #333333;

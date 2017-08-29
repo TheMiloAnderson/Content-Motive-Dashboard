@@ -73,12 +73,12 @@ class DashboardController extends Controller {
             'tableOptions' => ['class' => 'table table-bordered'],
             'columns' => [
                 ['attribute' => 'page',
-                    'label' => function() {return $this->summary;},
+                    'label' => $this->createSummary($dataProvider),
+                    'encodeLabel' => false,
                     'value' => function($data) {return $this->formatPage($data);},
                     'contentOptions' => ['class' => 'content-strategy']],
                 ['attribute' => 'entrances',
                     'label' => '',
-                    'encodeLabel' => false,
                     'format' => 'integer',
                     'contentOptions' => ['class' => 'entrances']],
                 ['attribute' => 'visitors',
@@ -121,6 +121,17 @@ class DashboardController extends Controller {
             }
         }
         $array = array_values($array);
+    }
+    private function createSummary($dataProvider) {
+        $dataProvider->prepare();
+        $paginationObj = $dataProvider->getPagination();
+        $rangeStart = (($paginationObj->pageSize * $paginationObj->page) + 1);
+        $rangeEnd = ($paginationObj->pageSize * ($paginationObj->page + 1));
+        $total = $paginationObj->totalCount;
+        $summary = 'Showing ' . $rangeStart . '-';
+        $summary .= $rangeEnd > $total ? $total : $rangeEnd;
+        $summary .= ' of ' . $total . ' items.';
+        return $summary;
     }
     private function formatTime($data) {
         if (is_object($data)) {

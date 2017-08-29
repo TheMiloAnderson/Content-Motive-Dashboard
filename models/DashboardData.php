@@ -32,7 +32,7 @@ class DashboardData {
             $provider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => [
-                    'pageSize' => 10,
+                    'pageSize' => 15,
                 ],
             ]);
             return $provider; 
@@ -62,7 +62,7 @@ class DashboardData {
             $provider = new SqlDataProvider([
                 'sql' => $query,
                 'pagination' => [
-                    'pageSize' => 10,
+                    'pageSize' => 15,
                 ],
                 'totalCount' => $totalCount,
                 'params' => [

@@ -21,14 +21,22 @@ $this->title = 'Dashboard';
 </script>
 
 <div class="chartBox">
+    <div class="chart">
+        <h3 id="subhead">Content: 
+            <span id="dealerSubhead"></span>
+        </h3>
+        <h4><span id="websiteSubhead"></span></h4>
+        <svg class="mainChart"></svg>
+    </div>
     <div id="controlsBox">
         <div class="controls">
             <div class="control-panel select">
                 <ul id="menu-content" class="menu-content out">
                 <?php
                 if (count($dealers) > 1) { ?>
+                    <li class="controls-title">Select: </li>
                     <li data-toggle="collapse" data-target="#dealers" class="collapsed">
-                        <div id="dealersSelectTitle">Dealers</div>
+                        <div class="asc" id="dealersSelectTitle">Dealers</div>
                     </li>
                     <ul class="sub-menu collapse" id="dealers">
                         <?php foreach ($dealers as $dealer) {
@@ -71,13 +79,6 @@ $this->title = 'Dashboard';
                 </div>
             </div>
         </div>
-    </div>
-    <div class="chart">
-        <h3 id="subhead">Content: 
-            <span id="dealerSubhead"></span>
-        </h3>
-        <h4><span id="websiteSubhead"></span></h4>
-        <svg class="mainChart"></svg>
     </div>
 </div>
 <div class="tableBox">

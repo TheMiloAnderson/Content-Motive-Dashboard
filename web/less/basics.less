@@ -63,35 +63,62 @@ body > .wrap > .container {
 }
 .chartBox {
     width: 50%;
-    height: calc(~"100vh - "@controlsHeight);
+    //height: calc(~"100vh - "@controlsHeight);
     display: flex;
     flex-direction: column;
+    h2, h3, h4, h5 {
+        text-align: center;
+    }
     .chart {
         background-color: white;
         padding-left: 10px;
     }
     #controlsBox {
         .dark2;
-        height: @controlsHeight;
+        //height: @controlsHeight;
         width: 100%;
         display: flex;
         .controls {
             display: flex;
             flex-direction: column;
-            padding: 2px;
-            margin: 10px;
+            padding: 15px;
+            margin: 10px 0px;
             background-color: @dark1;
             width: 100%;
         }
         #menu-content {
             display: flex;
+            justify-content: flex-start;
             flex-wrap: wrap;
             ul {
-                top: @menuItemHeight;
+                bottom: 100%;
+            }
+            li.controls-title {
+                width: 8em;
+                background-color: @dark1;
+                cursor: default;
+                color: silver;
+                padding: 0px;
+            }
+            div:after {
+                font-family: 'Glyphicons Halflings';
+                color: @interface;
+                content: '\e113';
+                font-weight: normal;
+                float: right;
+                margin-right: 10px;
+                margin-top: 5px;
             }
         }
-        #menu-content > li:nth-of-type(2), #menu-content > ul:nth-of-type(2) {
-            margin-left: 20em;
+        #menu-content > li:nth-of-type(1) {
+            left: 0;
+            font-weight: bold;
+        }
+        #menu-content > li:nth-of-type(2), #menu-content > ul:nth-of-type(1) {
+            margin-left: 2em;
+        }
+        #menu-content > li:nth-of-type(3), #menu-content > ul:nth-of-type(2) {
+            margin-left: 19em;
         }
         #menu-content > ul, #menu-content > li {
             position: absolute;
@@ -129,30 +156,37 @@ body > .wrap > .container {
         .control-panel.date {
             display: flex;
             flex-direction: column;
-            margin-top: 3em;
+            margin-top: 2.5em;
+            width: 80%;
             #dateRow1 {
                 display: flex;
                 justify-content: space-between;
                 margin-bottom: 5px;
-                width: 90%;
+                width: 100%;
                 #dateCol1 {
                     display: flex;
+                    justify-content: flex-start;
+                    width: 40%;
                     input {
-                        width: 6.4em;
+                        width: 7em;
                         height: 2em;
-                        padding-left: 5px;
+                        margin-right: 1em;
                         background-color: #eeeeee;
                     }
                 }
                 #dateCol2 {
                     display: flex;
+                    justify-content: flex-end;
+                    width: 30%;
                     button {
                         padding: 3px;
+                        width: 7em;
+                        height: 2em;
+                        margin-left: 1em;
                     }
                 }
             }
             #dateRow2 {
-                width: 90%;
                 margin-bottom: 5px;
             }
         }
@@ -220,7 +254,9 @@ body > .wrap > .container {
             color: @interface;
             content: '\e114';
         }
-        
+    }
+    .pagination {
+        margin: 0px;
     }
 }
 ///***** Horrors *****///
