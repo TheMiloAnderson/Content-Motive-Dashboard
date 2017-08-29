@@ -68,7 +68,7 @@ var dashboard = (function() {
     function initUi() {
         propertyRows.click(function() {
             closeMenu('#websites');
-            var pid = jQuery(this).attr('id').split(',');
+            var pid = jQuery(this).attr('data-properties').split(',');
             for (var i=0; i<pid.length; i++) {pid[i] = +pid[i]; }
             var revisedDataset = dataset.filter(function(d) {
                 return pid.includes(d.property_id);
@@ -134,14 +134,13 @@ var dashboard = (function() {
             siteSelect.style('display', '');
             var pids = [];
             for (var i=0; i<dByUrl.length; i++) {
-                    var row = d3.select("li[id='" + dByUrl[i][1] + "']");
+                    var row = d3.select("li[data-properties='" + dByUrl[i][1] + "']");
                     row.style('display', '');
                     pids.push(dByUrl[i][1]);
                 }
-            d3.select('#websites-head').style('display', '');
-            var all = d3.select('.all-websites');
-            all.style('display', '');
-            all.select('.prop-click').attr('href', pids.join());
+            jQuery('#websites-head').css('display', '');
+            jQuery('.allWebsites').css('display', '');
+            jQuery('.propertyFilter.allWebsites').attr('data-properties', pids.join());
         }
     }
     function detailTables(d, start = false, end = false) {

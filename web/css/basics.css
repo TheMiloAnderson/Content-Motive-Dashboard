@@ -70,7 +70,7 @@ body > .wrap > .container {
   flex-wrap: wrap;
 }
 .chartBox #controlsBox #menu-content ul {
-  top: 28px;
+  top: 26px;
 }
 .chartBox #controlsBox #menu-content > li:nth-of-type(2),
 .chartBox #controlsBox #menu-content > ul:nth-of-type(2) {
@@ -83,10 +83,11 @@ body > .wrap > .container {
   cursor: pointer;
   margin: 0px;
   padding-left: 0px;
-  width: 18em;
+  width: 16em;
+  z-index: 1100;
 }
 .chartBox #controlsBox #menu-content > li {
-  line-height: 28px;
+  line-height: 26px;
   border-bottom: 1px solid #23282e;
   background-color: #2d3947;
   padding-left: 10px;
@@ -96,7 +97,7 @@ body > .wrap > .container {
 .chartBox #controlsBox ul .sub-menu li {
   background-color: #181c20;
   border: none;
-  line-height: 28px;
+  line-height: 26px;
   border-bottom: 1px solid #23282e;
   margin-left: 0px;
   padding-left: 10px;

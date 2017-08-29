@@ -36,7 +36,7 @@ $this->title = 'Dashboard';
                             if ($pids) {
                                 echo '<li class="dealerSelect" data-id="' . $dealer['id'] . '" ';
                                 echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
-                                echo $dealer['name'] . '&nbsp;(' . count($pids) . ')' . '</li>';
+                                echo $dealer['name'] . '</li>';
                             }
                         } ?>
                     </ul>
@@ -45,11 +45,10 @@ $this->title = 'Dashboard';
                         <div id="websitesSelectTitle">Websites</div>
                     </li>
                     <ul class="sub-menu collapse" id="websites">
-                        <li class="propertyFilter all-websites"><a class="prop-click" href="">All Websites</a></li>
+                        <li class="propertyFilter allWebsites" data-properties="">All Websites</li>
                         <?php foreach ($dealers as $dealer) {
                             foreach ($dealer['properties'] as $property) {
-                                echo '<li class="propertyFilter" id="' . $property['id'] . '">';
-                                //echo '<a class="prop-click" href="' . $property['id'] . '">';
+                                echo '<li class="propertyFilter" data-properties="' . $property['id'] . '">';
                                 echo $property['url'] . '</li>';
                             }
                         } ?>
