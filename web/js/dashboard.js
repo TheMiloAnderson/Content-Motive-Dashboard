@@ -23,7 +23,7 @@ var dashboard = (function() {
         },
         margin: {
             top: 20,
-            right: 100,
+            right: 40,
             bottom: 30,
             left: 80
         },
@@ -283,7 +283,6 @@ var dashboard = (function() {
     }
 
     function metricReadouts(d) {
-        // Pageviews
         d3.select('#pageviews-readout')
             .transition().duration(prms.duration)
             .tween('text', function() {
@@ -295,7 +294,6 @@ var dashboard = (function() {
                     element.text(f(i(t)));
                 };
             });
-        // Visitors
         d3.select('#visitors-readout')
             .transition().duration(prms.duration)
             .tween('text', function() {
@@ -307,7 +305,6 @@ var dashboard = (function() {
                     element.text(f(i(t)));
                 };
             });
-        // Entrances
         d3.select('#entrances-readout')
             .transition().duration(prms.duration)
             .tween('text', function() {
@@ -319,7 +316,6 @@ var dashboard = (function() {
                     element.text(f(i(t)));
                 };
             });  
-        // Avg. Duration
         d3.select('#duration-readout')
             .transition().duration(prms.duration)
             .tween('text', function() {
@@ -347,7 +343,6 @@ var dashboard = (function() {
                     element.text(makeTime(i(t)));
                 };
             });
-        // Bounce Rate
         d3.select('#bounce-readout')
             .transition().duration(prms.duration)
             .tween('text', function() {
@@ -371,7 +366,6 @@ var dashboard = (function() {
         mainChart = d3.select('.mainChart')
             .attr('width', prms.width)
             .attr('height', prms.height)
-            //.attr('viewbox', '0 0 ' + prms.width + ' ' + prms.height)
         ;
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
@@ -392,15 +386,15 @@ var dashboard = (function() {
                 .attr("stroke", 'black')
                 .attr("stroke-width", prms.dataLines.lineWidth)
             ;
-            g.append('text')
-                .text(txt)
-                .attr('id', txtId)
-                .attr('font-size', prms.dataLines.fontSize)
-                .attr('dx', prms.dataLines.textDx)
-                .attr('dy', prms.dataLines.textDy)
-                .attr('fill', color)
-                .attr("transform", "translate("+(width)+","+(height)+")")
-            ;
+//            g.append('text')
+//                .text(txt)
+//                .attr('id', txtId)
+//                .attr('font-size', prms.dataLines.fontSize)
+//                .attr('dx', prms.dataLines.textDx)
+//                .attr('dy', prms.dataLines.textDy)
+//                .attr('fill', color)
+//                .attr("transform", "translate("+(width)+","+(height)+")")
+//            ;
         }
         addPath('pageviews', 'Pageviews', 'pageviewsText', prms.dataLines.pageViewColor);
         addPath('visitors', 'Visitors', 'visitorsText', prms.dataLines.uniqueVisitorColor);
@@ -436,7 +430,7 @@ var dashboard = (function() {
         }
         bottomAxis = function() {
             return d3.axisBottom(xScale)
-                .ticks(8)
+                .ticks(7)
                 .tickFormat(multiFormat)
                 .tickPadding(10)
                 .tickSizeInner((-1 * height))

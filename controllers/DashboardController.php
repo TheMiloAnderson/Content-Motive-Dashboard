@@ -69,11 +69,11 @@ class DashboardController extends Controller {
                 ]);
         $html = GridView::widget([
             'dataProvider' => $dataProvider,
-            'layout'=>"{items}{summary}{pager}",
+            'layout'=>"{items}{pager}",
             'tableOptions' => ['class' => 'table table-bordered'],
             'columns' => [
                 ['attribute' => 'page',
-                    'label' => '',
+                    'label' => function() {return $this->summary;},
                     'value' => function($data) {return $this->formatPage($data);},
                     'contentOptions' => ['class' => 'content-strategy']],
                 ['attribute' => 'entrances',

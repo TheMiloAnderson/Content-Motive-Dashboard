@@ -70,7 +70,7 @@ body > .wrap > .container {
   flex-wrap: wrap;
 }
 .chartBox #controlsBox #menu-content ul {
-  top: 26px;
+  top: 24px;
 }
 .chartBox #controlsBox #menu-content > li:nth-of-type(2),
 .chartBox #controlsBox #menu-content > ul:nth-of-type(2) {
@@ -87,7 +87,7 @@ body > .wrap > .container {
   z-index: 1100;
 }
 .chartBox #controlsBox #menu-content > li {
-  line-height: 26px;
+  line-height: 24px;
   border-bottom: 1px solid #23282e;
   background-color: #2d3947;
   padding-left: 10px;
@@ -97,7 +97,7 @@ body > .wrap > .container {
 .chartBox #controlsBox ul .sub-menu li {
   background-color: #181c20;
   border: none;
-  line-height: 26px;
+  line-height: 24px;
   border-bottom: 1px solid #23282e;
   margin-left: 0px;
   padding-left: 10px;
@@ -151,17 +151,17 @@ body > .wrap > .container {
   background-color: #333333;
   color: silver;
   display: flex;
+  justify-content: space-between;
+  padding: 10px 1px;
   font-weight: bold;
   font-size: 24px;
-  margin-top: 20px;
 }
 .tableBox .readoutBox .metric-panel {
   background-color: #222222;
   text-align: center;
   padding: 4px;
-  margin: 10px;
   border-radius: 2px;
-  width: 20%;
+  width: 18%;
 }
 .tableBox .readoutBox .metric-panel h4 {
   padding: 2px;
@@ -170,6 +170,9 @@ body > .wrap > .container {
 .tableBox table {
   background-color: #222222;
   border-color: #333333;
+}
+.tableBox table thead > tr > th:nth-child(1) {
+  background-color: #333333;
 }
 .tableBox table tbody > tr > td {
   padding: 5px 10px;
