@@ -67,6 +67,12 @@ class Dealers extends \yii\db\ActiveRecord {
             ->onCondition(['type' => 'Blogs']);
     }
     
+    public function getReviewProperties() {
+        $links = ['dealer_id' => 'id'];
+        return $this->hasMany(GaProperties::className(), $links)
+            ->onCondition(['type' => 'Reviews']);
+    }
+    
     public function getMicroProperties() {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GaProperties::className(), $links)

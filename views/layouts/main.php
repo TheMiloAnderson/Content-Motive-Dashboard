@@ -40,6 +40,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Content', 'url' => ['/dashboard/content']],
             ['label' => 'Blogs', 'url' => ['/dashboard/blogs']],
+            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']],
             ['label' => 'Microsites', 'url' => ['/dashboard/microsites']],
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],

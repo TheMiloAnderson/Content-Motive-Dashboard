@@ -26,7 +26,16 @@ class DashboardController extends Controller {
         return $this->render('index', [
             'dealers' => $dealers,
         ]);
-    }   
+    } 
+    
+    public function actionReviews() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('reviewProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'reviewProperties');
+        return $this->render('index', [
+            'dealers' => $dealers,
+        ]);
+    } 
     
     public function actionMicrosites() {
         $currentUser = $this->getCurrentUser();
@@ -36,14 +45,6 @@ class DashboardController extends Controller {
             'dealers' => $dealers,
         ]);
     }  
-    
-    public function actionIndex() {
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('gaProperties')->all();
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
-    }
     
     public function actionAggregate(array $pids) {
         $model = new DashboardData();
