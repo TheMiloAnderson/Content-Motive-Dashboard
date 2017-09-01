@@ -22,7 +22,7 @@ $this->title = 'Dashboard';
 
 <div class="chartBox">
     <div class="chart">
-        <h3 id="subhead">Content: 
+        <h3 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
             <span id="dealerSubhead"></span>
         </h3>
         <h4><span id="websiteSubhead"></span></h4>
@@ -50,7 +50,7 @@ $this->title = 'Dashboard';
                     </ul>
                 <?php } ?>
                     <li id="websites-head" data-toggle="collapse" data-target="#websites" class="collapsed">
-                        <div id="websitesSelectTitle">Websites</div>
+                        <div class="asc" id="websitesSelectTitle">Websites</div>
                     </li>
                     <ul class="sub-menu collapse" id="websites">
                         <li class="propertyFilter allWebsites" data-properties="">All Websites</li>

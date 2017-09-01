@@ -66,7 +66,7 @@ body > .wrap > .container {
   flex-direction: column;
   padding: 15px;
   margin: 10px 0px;
-  background-color: #222222;
+  background-color: #191919;
   width: 100%;
 }
 .chartBox #controlsBox #menu-content {
@@ -79,7 +79,7 @@ body > .wrap > .container {
 }
 .chartBox #controlsBox #menu-content li.controls-title {
   width: 8em;
-  background-color: #222222;
+  background-color: #191919;
   cursor: default;
   color: silver;
   padding: 0px;
@@ -118,7 +118,7 @@ body > .wrap > .container {
 .chartBox #controlsBox #menu-content > li {
   line-height: 24px;
   border-bottom: 1px solid #23282e;
-  background-color: #2d3947;
+  background-color: #565656;
   padding-left: 10px;
   text-decoration: none;
   color: silver;
@@ -193,7 +193,7 @@ body > .wrap > .container {
   font-size: 24px;
 }
 .tableBox .readoutBox .metric-panel {
-  background-color: #222222;
+  background-color: #191919;
   text-align: center;
   padding: 4px;
   border-radius: 2px;
@@ -204,8 +204,9 @@ body > .wrap > .container {
   margin: 0px;
 }
 .tableBox table {
-  background-color: #222222;
+  background-color: #191919;
   border-color: #333333;
+  margin-bottom: 5px;
 }
 .tableBox table thead > tr > th:nth-child(1) {
   background-color: #333333;

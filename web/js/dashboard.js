@@ -23,7 +23,7 @@ var dashboard = (function() {
         },
         margin: {
             top: 20,
-            right: 40,
+            right: 45,
             bottom: 30,
             left: 80
         },
