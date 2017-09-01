@@ -11,6 +11,63 @@ and open the template in the editor.
   background-color: #333333;
   color: silver;
 }
+.tableData {
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+.interface {
+  outline: 0;
+  color: #3ac0a8;
+  font-weight: bold;
+  text-shadow: 1px 1px #1f272b;
+  border: 1px solid #1c252b;
+  background: #232B30;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0);
+  /* ie */
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* CSS3 */
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Safari, Chrome */
+}
+.interface-hover {
+  color: #3aaf97;
+  background: #4C5A64;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #4C5A64 3%, #404F5A 4%, #2E3940 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #4C5A64), color-stop(4%, #404F5A), color-stop(100%, #2E3940));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4C5A64', endColorstr='#2E3940', GradientType=0);
+  /* ie */
+}
+.interface-active {
+  background-position: 0 top;
+  position: relative;
+  top: 1px;
+  color: #3ac0a8;
+  padding: 6px 12px 4px;
+  background: #20282D;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #20282D 3%, #252E34 51%, #222A30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #20282D), color-stop(51%, #252E34), color-stop(100%, #222A30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#20282D', endColorstr='#222A30', GradientType=0);
+  /* ie */
+  -moz-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* CSS3 */
+}
 body {
   background-color: #333333;
 }
@@ -86,7 +143,7 @@ body > .wrap > .container {
 }
 .chartBox #controlsBox #menu-content div:after {
   font-family: 'Glyphicons Halflings';
-  color: #FFBC56;
+  color: #3ac0a8;
   content: '\e113';
   font-weight: normal;
   float: right;
@@ -118,7 +175,7 @@ body > .wrap > .container {
 .chartBox #controlsBox #menu-content > li {
   line-height: 24px;
   border-bottom: 1px solid #23282e;
-  background-color: #565656;
+  background-color: #404646;
   padding-left: 10px;
   text-decoration: none;
   color: silver;
@@ -168,10 +225,60 @@ body > .wrap > .container {
   width: 30%;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 button {
-  padding: 3px;
-  width: 7em;
-  height: 2em;
-  margin-left: 1em;
+  outline: 0;
+  color: #3ac0a8;
+  font-weight: bold;
+  text-shadow: 1px 1px #1f272b;
+  border: 1px solid #1c252b;
+  background: #232B30;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0);
+  /* ie */
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* CSS3 */
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Safari, Chrome */
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 button:hover {
+  color: #3aaf97;
+  background: #4C5A64;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #4C5A64 3%, #404F5A 4%, #2E3940 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #4C5A64), color-stop(4%, #404F5A), color-stop(100%, #2E3940));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4C5A64', endColorstr='#2E3940', GradientType=0);
+  /* ie */
+}
+.chartBox #controlsBox .control-panel.date #dateRow1 #dateCol2 button:active {
+  background-position: 0 top;
+  position: relative;
+  top: 1px;
+  color: #3ac0a8;
+  padding: 6px 12px 4px;
+  background: #20282D;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #20282D 3%, #252E34 51%, #222A30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #20282D), color-stop(51%, #252E34), color-stop(100%, #222A30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#20282D', endColorstr='#222A30', GradientType=0);
+  /* ie */
+  -moz-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* CSS3 */
 }
 .chartBox #controlsBox .control-panel.date #dateRow2 {
   margin-bottom: 5px;
@@ -207,17 +314,83 @@ body > .wrap > .container {
   background-color: #191919;
   border-color: #333333;
   margin-bottom: 5px;
+  height: 100%;
+}
+.tableBox table thead > tr > th:not(:nth-child(1)) {
+  outline: 0;
+  color: #3ac0a8;
+  font-weight: bold;
+  text-shadow: 1px 1px #1f272b;
+  border: 1px solid #1c252b;
+  background: #232B30;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #3D4850 3%, #313d45 4%, #232B30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #3D4850), color-stop(4%, #313d45), color-stop(100%, #232B30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3D4850', endColorstr='#232B30', GradientType=0);
+  /* ie */
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* CSS3 */
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  /* Safari, Chrome */
+  text-align: center;
+  padding: 0px;
+  height: 100%;
+}
+.tableBox table thead > tr > th:not(:nth-child(1)) a {
+  display: block;
+  height: 100%;
+  padding-top: 10px;
+}
+.tableBox table thead > tr > th:last-child {
+  border-right: 0;
+}
+.tableBox table thead > tr > th:hover:not(:nth-child(1)) {
+  color: #3aaf97;
+  background: #4C5A64;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #4C5A64 3%, #404F5A 4%, #2E3940 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #4C5A64), color-stop(4%, #404F5A), color-stop(100%, #2E3940));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4C5A64', endColorstr='#2E3940', GradientType=0);
+  /* ie */
+}
+.tableBox table thead > tr > th:active:not(:nth-child(1)) {
+  background-position: 0 top;
+  position: relative;
+  top: 1px;
+  color: #3ac0a8;
+  padding: 6px 12px 4px;
+  background: #20282D;
+  /* old browsers */
+  background: -moz-linear-gradient(top, #20282D 3%, #252E34 51%, #222A30 100%);
+  /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(3%, #20282D), color-stop(51%, #252E34), color-stop(100%, #222A30));
+  /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#20282D', endColorstr='#222A30', GradientType=0);
+  /* ie */
+  -moz-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Firefox */
+  -webkit-box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* Safari, Chrome */
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  /* CSS3 */
 }
 .tableBox table thead > tr > th:nth-child(1) {
   background-color: #333333;
+  border-bottom: none;
 }
 .tableBox table tbody > tr > td {
   padding: 5px 10px;
   border-color: #333333;
+  text-align: right;
 }
-.tableBox table .tableData {
-  font-size: 1.1em;
-  vertical-align: middle;
+.tableBox table tbody > tr > td:nth-child(1) {
+  text-align: left;
 }
 .tableBox table .entrances,
 .tableBox table .visitors,
@@ -241,11 +414,11 @@ body > .wrap > .container {
   font-weight: normal;
 }
 .tableBox table a.asc:after {
-  color: #FFBC56;
+  color: #3ac0a8;
   content: '\e113';
 }
 .tableBox table a.desc:after {
-  color: #FFBC56;
+  color: #3ac0a8;
   content: '\e114';
 }
 .tableBox .pagination {
