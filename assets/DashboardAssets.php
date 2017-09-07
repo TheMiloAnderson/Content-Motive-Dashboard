@@ -17,6 +17,9 @@ class DashboardAssets extends AssetBundle {
         'js/simplify.js',
     ];
     public $css = [
+        '//fonts.googleapis.com/css?family=Lato',
+        '//fonts.googleapis.com/css?family=Open+Sans',
+        '//fonts.googleapis.com/css?family=Open+Sans+Condensed:700',
         'css/jquery-ui.min.css',
         'css/jquery-ui.structure.min.css',
         'css/jquery-ui.theme.min.css',

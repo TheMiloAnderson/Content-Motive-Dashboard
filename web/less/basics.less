@@ -12,7 +12,7 @@ and open the template in the editor.
 @dark1: #191919;
 @dark2: #333333; 
 @gunmetal: #404646;
-@interface: #3ac0a8;
+@interface: #fab972;
 
 @pageviews: #4682b4;
 @visitors: #191970;
@@ -26,6 +26,9 @@ and open the template in the editor.
 @zindexMenu: 1100;
 
 ///***** Mixins *****///
+.label {
+    font-family: "Open Sans", sans-serif;
+}
 .dark2 {
     background-color: @dark2;
     color: silver;
@@ -37,7 +40,8 @@ and open the template in the editor.
 .interface {
     outline: 0;
     color: @interface; //#9fa8b0;
-    font-weight: bold;
+    //font-weight: bold;
+    font-family: 'Open Sans Condensed', sans-serif;
     text-shadow: 1px 1px #1f272b;
     border: 1px solid #1c252b;
     background: #232B30; /* old browsers */
@@ -101,19 +105,21 @@ body > .wrap > .container {
 }
 .chartBox {
     width: 50%;
-    //height: calc(~"100vh - "@controlsHeight);
     display: flex;
     flex-direction: column;
     h2, h3, h4, h5 {
         text-align: center;
+        .label;
     }
     .chart {
         background-color: white;
         padding-left: 10px;
+        .xAxis, .yAxis {
+            .label;
+        }
     }
     #controlsBox {
         .dark2;
-        //height: @controlsHeight;
         width: 100%;
         display: flex;
         .controls {
@@ -154,9 +160,13 @@ body > .wrap > .container {
         }
         #menu-content > li:nth-of-type(2), #menu-content > ul:nth-of-type(1) {
             margin-left: 2em;
+            .interface;
+            color: silver;
         }
         #menu-content > li:nth-of-type(3), #menu-content > ul:nth-of-type(2) {
             margin-left: 19em;
+            .interface;
+            color: silver;
         }
         #menu-content > ul, #menu-content > li {
             position: absolute;
@@ -247,14 +257,18 @@ body > .wrap > .container {
         justify-content: space-between;
         padding: 10px 1px;
         font-weight: bold;
-        font-size: 24px;
+        h4 {
+            font-size: 18px;
+        }
         .metric-panel {
             background-color: @dark1;
             text-align: center;
+            font-size: 24px;
             padding: 4px;
             border-radius: 2px;
-            width: 18%;
-            h4 {
+            width: 19%;
+            .metric-title {
+                .label;
                 padding: 2px;
                 margin: 0px;
             }
@@ -288,6 +302,9 @@ body > .wrap > .container {
         thead > tr > th:nth-child(1) {
             background-color: @dark2;
             border-bottom: none;
+            .label;
+            font-weight: normal;
+            font-size: 1.2em;
         }
         tbody > tr > td {
             padding: 5px 10px;
@@ -324,6 +341,15 @@ body > .wrap > .container {
     }
     .pagination {
         margin: 0px;
+        li > a, li.disabled span {
+            .interface;
+        }
+        li > a:hover {
+            .interface-hover;
+        }
+        li.active a {
+            .interface-active;
+        }
     }
 }
 ///***** Horrors *****///
