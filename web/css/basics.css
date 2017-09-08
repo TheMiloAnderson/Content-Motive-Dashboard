@@ -10,6 +10,9 @@ and open the template in the editor.
 .label {
   font-family: "Open Sans", sans-serif;
 }
+.data {
+  font-family: Roboto, sans-serif;
+}
 .dark2 {
   background-color: #333333;
   color: silver;
@@ -17,6 +20,7 @@ and open the template in the editor.
 .tableData {
   font-size: 1.1em;
   vertical-align: middle;
+  font-family: Roboto, sans-serif;
 }
 .interface {
   outline: 0;
@@ -270,6 +274,8 @@ body > .wrap > .container {
   /* Firefox */
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   /* Safari, Chrome */
+  height: 32px;
+  width: 50%;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -308,7 +314,7 @@ body > .wrap > .container {
 }
 .chartBox #controlsBox .control-panel.date input {
   width: 7em;
-  height: 2em;
+  height: 1.8em;
   background-color: #eeeeee;
 }
 .chartBox #controlsBox .control-panel.date #dateRow1 {
@@ -342,15 +348,16 @@ body > .wrap > .container {
   display: flex;
   justify-content: space-between;
   padding: 10px 1px;
-  font-weight: bold;
+  font-weight: 700;
 }
 .tableBox .readoutBox h4 {
   font-size: 18px;
 }
 .tableBox .readoutBox .metric-panel {
+  font-family: Roboto, sans-serif;
   background-color: #191919;
   text-align: center;
-  font-size: 24px;
+  font-size: 25px;
   padding: 4px;
   border-radius: 2px;
   width: 19%;
@@ -441,6 +448,7 @@ body > .wrap > .container {
   padding: 5px 10px;
   border-color: #333333;
   text-align: right;
+  font-family: Roboto, sans-serif;
 }
 .tableBox table tbody > tr > td:nth-child(1) {
   text-align: left;
@@ -450,12 +458,14 @@ body > .wrap > .container {
 .tableBox table .pageviews {
   font-size: 1.1em;
   vertical-align: middle;
-  font-weight: bold;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
 }
 .tableBox table .avg_time,
 .tableBox table .bounce_rate {
   font-size: 1.1em;
   vertical-align: middle;
+  font-family: Roboto, sans-serif;
 }
 .tableBox table a {
   text-decoration: none;

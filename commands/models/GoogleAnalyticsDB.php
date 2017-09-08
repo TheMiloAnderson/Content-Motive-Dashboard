@@ -46,7 +46,6 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             // mind Google's speed limit (100 reqs in 100 secs, per user)
             if (($dur = (microtime(true)) - $start) < 1) {
                 $nap = 1 - $dur;
-                echo "Nap! $nap \n";
                 usleep($nap * 1000000);
             }
             $start = microtime(true);
