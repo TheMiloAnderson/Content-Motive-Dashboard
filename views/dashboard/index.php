@@ -29,54 +29,51 @@ $this->title = 'Dashboard';
         <svg class="mainChart"></svg>
     </div>
     <div id="controlsBox">
-        <div class="controls">
-            <div class="control-panel select">
-                <ul id="menu-content" class="menu-content out">
-                <?php
-                if (count($dealers) > 1) { ?>
-                    <li class="controls-title">Select: </li>
-                    <li data-toggle="collapse" data-target="#dealers" class="collapsed">
-                        <div class="asc" id="dealersSelectTitle">Dealers</div>
-                    </li>
-                    <ul class="sub-menu collapse" id="dealers">
-                        <?php foreach ($dealers as $dealer) {
-                            $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
-                            if ($pids) {
-                                echo '<li class="dealerSelect" data-id="' . $dealer['id'] . '" ';
-                                echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
-                                echo $dealer['name'] . '</li>';
-                            }
-                        } ?>
-                    </ul>
-                <?php } ?>
-                    <li id="websites-head" data-toggle="collapse" data-target="#websites" class="collapsed">
-                        <div class="asc" id="websitesSelectTitle">Websites</div>
-                    </li>
-                    <ul class="sub-menu collapse" id="websites">
-                        <li class="propertyFilter allWebsites" data-properties="">All Websites</li>
-                        <?php foreach ($dealers as $dealer) {
-                            foreach ($dealer['properties'] as $property) {
-                                echo '<li class="propertyFilter" data-properties="' . $property['id'] . '">';
-                                echo $property['url'] . '</li>';
-                            }
-                        } ?>
-                    </ul>
+        <div class="control-panel select">
+            <ul id="menu-content" class="menu-content out">
+            <?php
+            if (count($dealers) > 1) { ?>
+                <li class="controls-title">Select: </li>
+                <li data-toggle="collapse" data-target="#dealers" class="collapsed">
+                    <div class="asc" id="dealersSelectTitle">Dealers</div>
+                </li>
+                <ul class="sub-menu collapse" id="dealers">
+                    <?php foreach ($dealers as $dealer) {
+                        $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
+                        if ($pids) {
+                            echo '<li class="dealerSelect" data-id="' . $dealer['id'] . '" ';
+                            echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
+                            echo $dealer['name'] . '</li>';
+                        }
+                    } ?>
                 </ul>
+            <?php } ?>
+                <li id="websites-head" data-toggle="collapse" data-target="#websites" class="collapsed">
+                    <div class="asc" id="websitesSelectTitle">Websites</div>
+                </li>
+                <ul class="sub-menu collapse" id="websites">
+                    <li class="propertyFilter allWebsites" data-properties="">All Websites</li>
+                    <?php foreach ($dealers as $dealer) {
+                        foreach ($dealer['properties'] as $property) {
+                            echo '<li class="propertyFilter" data-properties="' . $property['id'] . '">';
+                            echo $property['url'] . '</li>';
+                        }
+                    } ?>
+                </ul>
+            </ul>
+        </div>
+        <div class="divider"></div>
+        <div class="control-panel date">
+            <div id="dateRow1">
+                <input id="startDate" type="text" class="form-control date">
+                <input id="endDate" type="text" class="form-control date">
             </div>
-            <div class="control-panel date">
-                <div id="dateRow1">
-                    <div id="dateCol1">
-                        <input id="startDate" type="text" class="form-control date">
-                        <input id="endDate" type="text" class="form-control date">
-                    </div>
-                    <div id="dateCol2">
-                        <button id="dateRangeBtn" type="button" class="btn btn-primary">Update</button>
-                        <button id="dateRangeResetBtn" type="button" class="btn btn-primary">Reset</button>
-                    </div>
-                </div>
-                <div id="dateRow2">
-                    <div id="slider-range"></div>
-                </div>
+            <div id="dateRow2">
+                <div id="slider-range"></div>
+            </div>
+            <div id="dateRow3">
+                <button id="dateRangeBtn" type="button" class="btn btn-primary">Update</button>
+                <button id="dateRangeResetBtn" type="button" class="btn btn-primary">Reset</button>
             </div>
         </div>
     </div>

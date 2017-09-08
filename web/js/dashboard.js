@@ -3,11 +3,12 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
-        height: function() {
-            var room = d3.select('.chartBox').node().getBoundingClientRect().height 
-            - d3.select('#controlsBox').node().getBoundingClientRect().height - 60;
-            return room > 400 ? 400 : room;
-        },
+//        height: function() {
+//            var room = d3.select('.chartBox').node().getBoundingClientRect().height 
+//            - d3.select('#controlsBox').node().getBoundingClientRect().height;
+//            return room > 400 ? 400 : room;
+//        },
+        height: 380,
         x: 50,
         y: 50,
         duration: 1500,

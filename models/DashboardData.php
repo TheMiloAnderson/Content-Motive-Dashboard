@@ -26,13 +26,14 @@ class DashboardData {
     }
     
     public function details($pids, $start, $end) {
+        $pagesize = 12;
         if ($start == null && $end == null) {
             $query  = GoogleAnalyticsDetails::find()
                 ->where(['in', 'property_id', $pids]);
             $provider = new ActiveDataProvider([
                 'query' => $query,
                 'pagination' => [
-                    'pageSize' => 15,
+                    'pageSize' => $pagesize,
                 ],
             ]);
             return $provider; 
@@ -62,7 +63,7 @@ class DashboardData {
             $provider = new SqlDataProvider([
                 'sql' => $query,
                 'pagination' => [
-                    'pageSize' => 15,
+                    'pageSize' => $pagesize,
                 ],
                 'totalCount' => $totalCount,
                 'params' => [

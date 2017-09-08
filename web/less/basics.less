@@ -22,6 +22,8 @@ and open the template in the editor.
 @controlsHeight: 120px;
 @navHeight: 74px;
 @menuItemHeight: 24px;
+@dealerMenuTop: 28px;
+@websiteMenuTop: @dealerMenuTop * 2;
 
 @zindexMenu: 1100;
 
@@ -90,7 +92,7 @@ body > .wrap > .container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: stretch;
+    align-content: flex-start;
     padding: 0px;
     background-color: @dark2;
 }
@@ -114,6 +116,7 @@ body > .wrap > .container {
     .chart {
         background-color: white;
         padding-left: 10px;
+        border-right: 3px solid @dark1;
         .xAxis, .yAxis {
             .label;
         }
@@ -121,25 +124,17 @@ body > .wrap > .container {
     #controlsBox {
         .dark2;
         width: 100%;
+        background-color: @dark1;
         display: flex;
-        .controls {
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            margin: 10px 0px;
-            background-color: @dark1;
-            width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .divider {
+            border-right: 1px solid darken(@dark1, 5%);
+            border-left: 1px solid lighten(@dark1, 5%);
         }
         #menu-content {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            ul {
-                bottom: 100%;
-            }
+            padding-left: 0px;
             li.controls-title {
-                width: 8em;
-                background-color: @dark1;
                 cursor: default;
                 color: silver;
                 padding: 0px;
@@ -153,20 +148,29 @@ body > .wrap > .container {
                 margin-right: 10px;
                 margin-top: 5px;
             }
+            #dealers {
+                bottom: calc(100% - @dealerMenuTop - 8px);
+            }
+            #websites {
+                bottom: calc(100% - @websiteMenuTop - 4px);
+            }
         }
         #menu-content > li:nth-of-type(1) {
-            left: 0;
-            font-weight: bold;
+            .label;
+            font-size: 1.2em;
+            position: relative;
+            width: 12.5em;
         }
         #menu-content > li:nth-of-type(2), #menu-content > ul:nth-of-type(1) {
-            margin-left: 2em;
             .interface;
             color: silver;
+            border: 0px;
         }
         #menu-content > li:nth-of-type(3), #menu-content > ul:nth-of-type(2) {
-            margin-left: 19em;
+            margin-top: 2em;
             .interface;
             color: silver;
+            border: 0px;
         }
         #menu-content > ul, #menu-content > li {
             position: absolute;
@@ -179,8 +183,6 @@ body > .wrap > .container {
         }
         #menu-content > li {
             line-height: @menuItemHeight;
-            border-bottom: 1px solid #23282e;
-            background-color: @gunmetal;
             padding-left: 10px;
             text-decoration: none;
             color: silver;
@@ -200,48 +202,43 @@ body > .wrap > .container {
         }
         .control-panel.select {
             position: relative;
+            padding: 15px;
         }
         .control-panel.date {
             display: flex;
             flex-direction: column;
-            margin-top: 2.5em;
-            width: 80%;
+            padding: 15px;
+            button {
+                .interface;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+            }
+            button:hover {
+                .interface-hover;
+            }
+            button:active {
+                .interface-active;
+            }
+            input {
+                width: 7em;
+                height: 2em;
+                background-color: #eeeeee;
+            }
             #dateRow1 {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 margin-bottom: 5px;
                 width: 100%;
-                #dateCol1 {
-                    display: flex;
-                    justify-content: flex-start;
-                    width: 40%;
-                    input {
-                        width: 7em;
-                        height: 2em;
-                        margin-right: 1em;
-                        background-color: #eeeeee;
-                    }
-                }
-                #dateCol2 {
-                    display: flex;
-                    justify-content: flex-end;
-                    width: 30%;
-                    button {
-                        .interface;
-                        border-radius: 3px;
-                        -moz-border-radius: 3px;
-                        -webkit-border-radius: 3px;
-                    }
-                    button:hover {
-                        .interface-hover;
-                    }
-                    button:active {
-                        .interface-active;
-                    }
-                }
             }
             #dateRow2 {
                 margin-bottom: 5px;
+                width: 100%;
+            }
+            #dateRow3 {
+                display: flex;
+                justify-content: space-around;
+                width: 100%;
             }
         }
     }
@@ -251,6 +248,9 @@ body > .wrap > .container {
     width: 50%;
     padding: 0px 25px;
     font-size: .9em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     .readoutBox {
         .dark2;
         display: flex;
@@ -282,12 +282,11 @@ body > .wrap > .container {
         thead > tr > th:not(:nth-child(1)) {
             .interface;
             text-align: center;
-            padding: 0px;
+            padding: 3px 0px 0px 0px;
             height: 100%;
             a {
                 display: block;
                 height: 100%;
-                padding-top: 10px;
             }
         }
         thead > tr > th:last-child {
@@ -305,6 +304,7 @@ body > .wrap > .container {
             .label;
             font-weight: normal;
             font-size: 1.2em;
+            padding: 0px 0px 2px 0px;
         }
         tbody > tr > td {
             padding: 5px 10px;
