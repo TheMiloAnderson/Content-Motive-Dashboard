@@ -140,11 +140,7 @@ body > .wrap > .container {
 }
 .chartBox #controlsBox #menu-content {
   padding-left: 0px;
-}
-.chartBox #controlsBox #menu-content li.controls-title {
-  cursor: default;
-  color: silver;
-  padding: 0px;
+  position: relative;
 }
 .chartBox #controlsBox #menu-content div:after {
   font-family: 'Glyphicons Halflings';
@@ -155,19 +151,7 @@ body > .wrap > .container {
   margin-right: 10px;
   margin-top: 5px;
 }
-.chartBox #controlsBox #menu-content #dealers {
-  bottom: calc(64%);
-}
-.chartBox #controlsBox #menu-content #websites {
-  bottom: calc(40%);
-}
-.chartBox #controlsBox #menu-content > li:nth-of-type(1) {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.2em;
-  position: relative;
-  width: 12.5em;
-}
-.chartBox #controlsBox #menu-content > li:nth-of-type(2),
+.chartBox #controlsBox #menu-content > li:nth-of-type(1),
 .chartBox #controlsBox #menu-content > ul:nth-of-type(1) {
   outline: 0;
   color: #fab972;
@@ -191,9 +175,8 @@ body > .wrap > .container {
   color: silver;
   border: 0px;
 }
-.chartBox #controlsBox #menu-content > li:nth-of-type(3),
+.chartBox #controlsBox #menu-content > li:nth-of-type(2),
 .chartBox #controlsBox #menu-content > ul:nth-of-type(2) {
-  margin-top: 2em;
   outline: 0;
   color: #fab972;
   font-family: 'Open Sans Condensed', sans-serif;
@@ -215,32 +198,34 @@ body > .wrap > .container {
   /* Safari, Chrome */
   color: silver;
   border: 0px;
+  margin-top: 8px;
+  bottom: 2em;
 }
-.chartBox #controlsBox #menu-content > ul,
-.chartBox #controlsBox #menu-content > li {
+.chartBox #controlsBox #menu-content > ul {
   position: absolute;
-  list-style: none;
+  bottom: 100%;
   cursor: pointer;
   margin: 0px;
   padding-left: 0px;
-  width: 16em;
+  width: 18em;
   z-index: 1100;
 }
 .chartBox #controlsBox #menu-content > li {
-  line-height: 24px;
+  line-height: 2em;
+  cursor: pointer;
   padding-left: 10px;
-  text-decoration: none;
-  color: silver;
+  list-style: none;
+  width: 18em;
 }
 .chartBox #controlsBox ul .sub-menu li {
   background-color: #181c20;
   border: none;
-  line-height: 24px;
+  line-height: 22px;
   border-bottom: 1px solid #23282e;
   margin-left: 0px;
   padding-left: 10px;
   width: 100%;
-  font-weight: lighter;
+  list-style: none;
 }
 .chartBox #controlsBox ul .sub-menu li:hover {
   background-color: #020203;
@@ -313,7 +298,7 @@ body > .wrap > .container {
   /* CSS3 */
 }
 .chartBox #controlsBox .control-panel.date input {
-  width: 7em;
+  width: 8em;
   height: 1.8em;
   background-color: #eeeeee;
 }

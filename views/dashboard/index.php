@@ -33,7 +33,6 @@ $this->title = 'Dashboard';
             <ul id="menu-content" class="menu-content out">
             <?php
             if (count($dealers) > 1) { ?>
-                <li class="controls-title">Select: </li>
                 <li data-toggle="collapse" data-target="#dealers" class="collapsed">
                     <div class="asc" id="dealersSelectTitle">Dealers</div>
                 </li>
@@ -65,7 +64,7 @@ $this->title = 'Dashboard';
         <div class="divider"></div>
         <div class="control-panel date">
             <div id="dateRow1">
-                <input id="startDate" type="text" class="form-control date">
+                <input id="startDate" type="text" class="form-control date">&nbsp;-&nbsp;
                 <input id="endDate" type="text" class="form-control date">
             </div>
             <div id="dateRow2">
