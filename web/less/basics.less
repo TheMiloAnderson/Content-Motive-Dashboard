@@ -107,17 +107,18 @@ body > .wrap > .container {
     color: screen(@entrances, #505050);
 }
 .chartBox {
-    width: 50%;
+    border-right: 1px solid #000;
     display: flex;
-    flex-direction: column;
+        flex-direction: column;
     h2, h3, h4, h5 {
         text-align: center;
         .label;
     }
+    width: 50%;
     .chart {
         background-color: white;
         padding-left: 10px;
-        border-right: 3px solid @dark1;
+        
         .xAxis, .yAxis {
             .label;
         }
@@ -130,8 +131,8 @@ body > .wrap > .container {
         justify-content: space-around;
         flex-wrap: wrap;
         .divider {
-            border-right: 1px solid darken(@dark1, 5%);
-            border-left: 1px solid lighten(@dark1, 5%);
+            border-left: 1px solid darken(@dark1, 5%);
+            border-right: 1px solid lighten(@dark1, 5%);
         }
         #menu-content {
             padding-left: 0px;
@@ -173,6 +174,10 @@ body > .wrap > .container {
             padding-left: 10px;
             list-style: none;
             width: 18em;
+        }
+        #menu-content > li:hover {
+            .interface-hover;
+            color: silver;
         }
         ul .sub-menu li {
             background-color: #181c20;
@@ -286,7 +291,7 @@ body > .wrap > .container {
             .interface-hover;
         }
         thead > tr > th:active:not(:nth-child(1)) {
-            .interface-active;
+            //.interface-active;
         }
         thead > tr > th:nth-child(1) {
             background-color: @dark2;
