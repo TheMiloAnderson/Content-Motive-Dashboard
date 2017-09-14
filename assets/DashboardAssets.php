@@ -23,8 +23,8 @@ class DashboardAssets extends AssetBundle {
         'css/jquery-ui.min.css',
         'css/jquery-ui.structure.min.css',
         'css/jquery-ui.theme.min.css',
-        'css/basics.css',
-        'css/dash.css',
+        //'css/basics.css',
+        'css/dashboard.css',
     ];
     public $depends = [
         'yii\web\YiiAsset',

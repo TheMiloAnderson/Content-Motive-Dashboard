@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use app\assets\DashboardAssets;
@@ -9,27 +8,30 @@ DashboardAssets::register($this);
 
 $this->title = 'Dashboard';
 
+$initialDataUrl = Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]);
+
+$dealerList = '';
+foreach ($dealers as $dealer) {
+    $dealerList .= '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
+}
 ?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        dashboard.init("<?php echo Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]); ?>", [
-            <?php foreach ($dealers as $dealer) {
-                echo '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
-            } ?>
-        ]);
+        dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
     });
 </script>
-
-<div class="chartBox">
-    <div class="chart">
-        <h3 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
+<div id="chart-box">
+    <div id="chart-title">
+        <h2 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
             <span id="dealerSubhead"></span>
-        </h3>
-        <h4><span id="websiteSubhead"></span></h4>
+        </h2>
+        <h3><span id="websiteSubhead"></span></h3>
+    </div>
+    <div id="chart">
         <svg class="mainChart"></svg>
     </div>
-    <div id="controlsBox">
-        <div class="control-panel select">
+    <div id="chart-controls">
+        <div id="controls-select">
             <ul id="menu-content" class="menu-content out">
             <?php
             if (count($dealers) > 1) { ?>
@@ -61,8 +63,7 @@ $this->title = 'Dashboard';
                 </ul>
             </ul>
         </div>
-        <div class="divider"></div>
-        <div class="control-panel date">
+        <div id="controls-date">
             <div id="dateRow1">
                 <input id="startDate" type="text" class="form-control date">&nbsp;-&nbsp;
                 <input id="endDate" type="text" class="form-control date">
@@ -77,8 +78,9 @@ $this->title = 'Dashboard';
         </div>
     </div>
 </div>
-<div class="tableBox">
-    <div class="readoutBox">
+
+<div id="table-box">
+    <div id="table-readouts">
         <div class="metric-panel">
             <h4 class="metric-title">Entrances</h4>
             <div id="entrances-readout" class="readout entrances">
@@ -110,8 +112,10 @@ $this->title = 'Dashboard';
             </div>
         </div>
     </div>
-    <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
-        <div id="p0">
-        </div>
-    <?php Pjax::end(); ?>
+    <div id="table">
+        <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
+            <div id="p0">
+            </div>
+        <?php Pjax::end(); ?>
+    </div>
 </div>

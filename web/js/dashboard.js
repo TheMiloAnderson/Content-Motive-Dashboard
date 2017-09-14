@@ -2,13 +2,8 @@ var dashboard = (function() {
     'use strict';
     //***** Parameters & global variables *****//
     var prms = {
-        width: d3.select('.chartBox .chart').node().getBoundingClientRect().width,
-//        height: function() {
-//            var room = d3.select('.chartBox').node().getBoundingClientRect().height 
-//            - d3.select('#controlsBox').node().getBoundingClientRect().height;
-//            return room > 400 ? 400 : room;
-//        },
-        height: 380,
+        width: d3.select('#chart-box #chart').node().getBoundingClientRect().width,
+        height: 400,
         x: 50,
         y: 50,
         duration: 1500,
@@ -25,7 +20,7 @@ var dashboard = (function() {
         margin: {
             top: 20,
             right: 45,
-            bottom: 30,
+            bottom: 45,
             left: 80
         },
         dateGuideOpacity: 0.3
@@ -34,7 +29,6 @@ var dashboard = (function() {
         dataCache = [], // all data for a user (eventually)
         dataset = [], // all data for a dealer
         dataSubset = [], // dealer data filtered by date or website
-        currentSiteIds = [],
         dealersList = [],
         mainChart,
         g,
@@ -49,7 +43,6 @@ var dashboard = (function() {
 
     var dealerSubhead = jQuery('span#dealerSubhead');
     var websiteSubhead = jQuery('#websiteSubhead');
-    var dateRangeSubhead = jQuery('#dateRangeSubhead');
     
     var dealersSelectTitle = document.getElementById('dealersSelectTitle');
     var websitesSelectTitle = document.getElementById('websitesSelectTitle');
@@ -215,10 +208,10 @@ var dashboard = (function() {
                 endDateGuide.attr('width', width - xScale(endDate)).attr('x', xScale(endDate));
             }
         });
-        var handles = jQuery('.ui-slider-handle');
-        var handleWidth = handles.width();
-        handles.eq(0).css('margin-left', 0);
-        handles.eq(1).addClass('wanker');
+        //var handles = jQuery('.ui-slider-handle');
+        //var handleWidth = handles.width();
+        //handles.eq(0).css('margin-left', 0);
+        //handles.eq(1).addClass('wanker');
         resetDateSlider(dataset);
     }
     function resetDateSlider(d) {
@@ -387,15 +380,6 @@ var dashboard = (function() {
                 .attr("stroke", 'black')
                 .attr("stroke-width", prms.dataLines.lineWidth)
             ;
-//            g.append('text')
-//                .text(txt)
-//                .attr('id', txtId)
-//                .attr('font-size', prms.dataLines.fontSize)
-//                .attr('dx', prms.dataLines.textDx)
-//                .attr('dy', prms.dataLines.textDy)
-//                .attr('fill', color)
-//                .attr("transform", "translate("+(width)+","+(height)+")")
-//            ;
         }
         addPath('pageviews', 'Pageviews', 'pageviewsText', prms.dataLines.pageViewColor);
         addPath('visitors', 'Visitors', 'visitorsText', prms.dataLines.uniqueVisitorColor);
@@ -557,7 +541,7 @@ var dashboard = (function() {
         resizeId = setTimeout(resize, 100);
     });
     function resize() {
-        prms.width = parseInt(d3.select('.chartBox .chart').style('width'), 10);
+        prms.width = parseInt(d3.select('#chart-box #chart').style('width'), 10);
         mainChart.attr('width', prms.width).attr('height', prms.height);
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;

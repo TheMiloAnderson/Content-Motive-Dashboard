@@ -10,6 +10,15 @@ use yii\grid\GridView;
 
 class DashboardController extends Controller {
     
+    public function actionTest() {
+        $currentUser = $this->getCurrentUser();
+        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
+        $this->simplifyArray($dealers, 'contentProperties');
+        return $this->render('windex', [
+            'dealers' => $dealers,
+        ]);
+    }
+    
     public function actionContent() {
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();

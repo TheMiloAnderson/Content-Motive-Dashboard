@@ -7,14 +7,11 @@ html {
 }
 body > div.wrap > nav.navbar {
   height: 74px;
-  z-index: 2000;
+  z-index: 1000;
   margin-bottom: 0px;
 }
 nav #w1 .active {
   border-bottom: solid 1px #CF2129;
-}
-body > .wrap > .container {
-  padding-top: 74px;
 }
 .navbar-header .navbar-brand {
   padding-top: 10px;
@@ -35,5 +32,11 @@ body > .wrap > .container {
 }
 #logoTxt .MOT {
   color: #3AC0BE;
+}
+@media (max-width: 760px) {
+  .navbar-collapse {
+    background-color: #222;
+    margin-top: 24px;
+  }
 }
 /*# sourceMappingURL=global.css.map */
