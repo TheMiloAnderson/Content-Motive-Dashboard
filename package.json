@@ -1,0 +1,30 @@
+{
+  "name": "cmdash",
+  "version": "1.0.0",
+  "description": "Content Motive Dashboard\r ============================",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "babel": "babel --presets es2015 web/js/main.js -o web/js/build/main.bundle.js",
+	"webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheMiloAnderson/Content-Motive-Dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheMiloAnderson/Content-Motive-Dashboard/issues"
+  },
+  "homepage": "https://github.com/TheMiloAnderson/Content-Motive-Dashboard#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^3.5.6"
+  }
+}
