@@ -75,23 +75,33 @@
     box-shadow: 1px 1px 1px rgba(255,255,255,0.1); /* CSS3 */
 }
 
+.flex {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+
 ///***** Layout *****///
 @navHeight: 74px;
 @menuItemHeight: 22px;
 @zindexMenu: 1100;
 .wrap {
-    display: flex;
+    .flex;
 }
 .wrap > .container.content {
     width: 100%;
     padding: @navHeight 0px 0px 0px;
-    display: flex;
+    .flex;
     align-self: stretch;
 }
 
 ///***** Chart Box *****///
 #chart-box {
-    display: flex;
+    .flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
@@ -99,7 +109,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        flex: 1;
+        //flex-grow: 1;
         text-align: center;
         .label;
         h2 {
@@ -110,15 +120,17 @@
         }
     }
     #chart {
+        //background-color: pink;
+        flex-grow: 1;
         .xAxis, .yAxis {
             .label;
         }
     }
     #chart-controls {
         align-self: stretch;
-        flex: 1;
+        //flex-grow: 1;
         background-color: @dark2;
-        display: flex;
+        .flex;
         justify-content: flex-end;
         flex-wrap: wrap;
         border-right: 1px solid @dark2 + #111111;
@@ -130,7 +142,7 @@
             }
         }
         #controls-date {
-            display: flex;
+            .flex;
             flex-direction: column;
             margin: 15px;
             button {

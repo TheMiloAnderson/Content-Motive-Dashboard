@@ -26,7 +26,7 @@ class DashboardData {
     }
     
     public function details($pids, $start, $end) {
-        $pagesize = 12;
+        $pagesize = 10;
         if ($start == null && $end == null) {
             $query  = GoogleAnalyticsDetails::find()
                 ->where(['in', 'property_id', $pids]);

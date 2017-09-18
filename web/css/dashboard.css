@@ -79,16 +79,43 @@
   box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
   /* CSS3 */
 }
+.flex {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
 .wrap {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
 }
 .wrap > .container.content {
   width: 100%;
   padding: 74px 0px 0px 0px;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
   align-self: stretch;
 }
 #chart-box {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -98,7 +125,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  flex: 1;
   text-align: center;
   font-family: "Open Sans", sans-serif;
 }
@@ -108,14 +134,22 @@
 #chart-box #chart-title h3 {
   margin-top: 0px;
 }
+#chart-box #chart {
+  flex-grow: 1;
+}
 #chart-box #chart .xAxis,
 #chart-box #chart .yAxis {
   font-family: "Open Sans", sans-serif;
 }
 #chart-box #chart-controls {
   align-self: stretch;
-  flex: 1;
   background-color: #444444;
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
@@ -130,6 +164,12 @@
   font-size: 1.3em;
 }
 #chart-box #chart-controls #controls-date {
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   margin: 15px;

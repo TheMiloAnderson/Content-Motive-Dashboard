@@ -3,7 +3,7 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#chart-box #chart').node().getBoundingClientRect().width,
-        height: 400,
+        height: d3.select('#chart-box #chart').node().getBoundingClientRect().height - 20,
         x: 50,
         y: 50,
         duration: 1500,
