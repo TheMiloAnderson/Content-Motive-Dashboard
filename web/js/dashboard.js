@@ -3,7 +3,14 @@ var dashboard = (function() {
     //***** Parameters & global variables *****//
     var prms = {
         width: d3.select('#chart-box #chart').node().getBoundingClientRect().width,
-        height: d3.select('#chart-box #chart').node().getBoundingClientRect().height - 20,
+        height: function() {
+            var windowHeight = window.innerHeight;
+            if (windowHeight > 720) {
+                return 400;
+            } else {
+                return 300;
+            }
+        },
         x: 50,
         y: 50,
         duration: 1500,
@@ -208,10 +215,6 @@ var dashboard = (function() {
                 endDateGuide.attr('width', width - xScale(endDate)).attr('x', xScale(endDate));
             }
         });
-        //var handles = jQuery('.ui-slider-handle');
-        //var handleWidth = handles.width();
-        //handles.eq(0).css('margin-left', 0);
-        //handles.eq(1).addClass('wanker');
         resetDateSlider(dataset);
     }
     function resetDateSlider(d) {
@@ -542,6 +545,7 @@ var dashboard = (function() {
     });
     function resize() {
         prms.width = parseInt(d3.select('#chart-box #chart').style('width'), 10);
+        //prms.height = parseInt(d3.select('#chart-box #chart').style('height'), 10);
         mainChart.attr('width', prms.width).attr('height', prms.height);
         width = +mainChart.attr('width') - prms.margin.left - prms.margin.right;
         height = +mainChart.attr('height') - prms.margin.top - prms.margin.bottom;
