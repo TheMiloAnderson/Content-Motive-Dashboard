@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	entry: ['./web/js/dashboard_dev.js'],
+	entry: ['./web/js/chart.js','./web/js/table.js','./web/js/dashboard.js'],
 	output: {
 		path: path.resolve(__dirname, 'web/js/build'),
 		filename: 'dashboard.bundle.js'

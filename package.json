@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "babel": "babel --presets es2015 web/js/main.js -o web/js/build/main.bundle.js",
+    "babel": "babel --presets es2015 web/js/dashboard_dev.js -o web/js/build/dashboard.bundle.js",
 	"webpack": "webpack"
   },
   "repository": {

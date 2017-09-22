@@ -17,7 +17,8 @@ foreach ($dealers as $dealer) {
 ?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
+        //dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
+        new Chart("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
     });
 </script>
 <div id="chart-box">

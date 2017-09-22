@@ -11,10 +11,11 @@ class DashboardAssets extends AssetBundle {
         'js/d3.min.js',
         'js/d3-interpolate-path.js',
         'js/jquery-ui.min.js',
-        'js/dashboard.js',
+        //'js/dashboard.js',
         //'js/vue.js',
         //'js/dash.js',
         'js/simplify.js',
+        'js/build/dashboard.bundle.js'
     ];
     public $css = [
         '//fonts.googleapis.com/css?family=Roboto:400,500,700',
