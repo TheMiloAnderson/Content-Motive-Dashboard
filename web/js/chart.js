@@ -46,7 +46,7 @@ class Chart {
         this.ajaxUrl = url;
         this.dealersList = dealers;
         this.changeData(this.createChart.bind(this), this.dealersList[0].id);
-        this.Table = new Table();
+        this.Table;
     }
     changeData(callback, id) {
         if (this.dataCache[id]) {
@@ -200,6 +200,7 @@ class Chart {
             });
         }, 100);
         this.metricReadouts(d);
+        this.Table.detailTables(d);
     }
     lineTransitions(d, dataCol, lineClass, txtId) {
         // horrors...
