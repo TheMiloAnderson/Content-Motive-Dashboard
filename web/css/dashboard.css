@@ -88,17 +88,6 @@
   display: -webkit-flex;
   display: flex;
 }
-body {
-  -ms-box-orient: horizontal;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
 .wrap {
   -ms-box-orient: horizontal;
   display: -webkit-box;
@@ -108,8 +97,7 @@ body {
   display: -webkit-flex;
   display: flex;
   width: 100%;
-  height: calc(100% - 50px);
-  /* body height - footer */
+  flex: 1;
 }
 .wrap > .container.content {
   width: 100%;
@@ -121,7 +109,6 @@ body {
   display: -moz-flex;
   display: -webkit-flex;
   display: flex;
-  align-self: stretch;
 }
 #chart-box {
   -ms-box-orient: horizontal;
@@ -139,6 +126,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  flex-grow: 1;
   text-align: center;
   font-family: "Open Sans", sans-serif;
 }
@@ -376,7 +364,7 @@ body {
   /* Safari, Chrome */
   color: silver;
   margin-top: 8px;
-  bottom: calc(77%);
+  bottom: calc(100% - 38px);
 }
 #chart-box #chart-controls #controls-select #menu-content > ul {
   position: absolute;
@@ -423,7 +411,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #444444;
   padding: 20px 20px 0px 40px;
   border-left: 1px solid #333333;

@@ -1,6 +1,6 @@
 var dashboard = (function() {
     'use strict';
-    //***** Parameters & global variables *****//
+    //***** Parameters & scoped variables *****//
     var prms = {
         width: d3.select('#chart-box #chart').node().getBoundingClientRect().width,
         height: function() {

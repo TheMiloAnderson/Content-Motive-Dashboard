@@ -67,6 +67,7 @@ $config = [
        ],
     ],
     'params' => $params,
+    'defaultRoute' => 'dashboard/content',
 ];
 
 if (YII_ENV_DEV) {
