@@ -116,7 +116,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 SUM(visitors) AS visitors, 
                 SUM(entrances) AS entrances, 
                 AVG(avg_time) AS avg_time, 
-                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) AS bounce_rate
+                IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) AS bounce_rate
             FROM ga_analytics 
             WHERE property_id = :pid
                 AND date_recorded BETWEEN :start AND :end
@@ -137,8 +137,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 SUM(pageviews) as pageviews,
                 SUM(visitors) as visitors,
                 SUM(entrances) as entrances,
-                AVG(avg_time) as avg_time,
-                IFNULL(SUM(bounce_rate * entrances)/SUM(entrances), 0) / 100 AS bounce_rate
+                ROUND(AVG(avg_time), 2) as avg_time,
+                ROUND(IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) / 100, 3) AS bounce_rate
             FROM ga_analytics 
             GROUP BY page, property_id;')
             ->execute();
