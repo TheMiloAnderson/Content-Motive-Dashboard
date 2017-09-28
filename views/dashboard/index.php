@@ -15,12 +15,7 @@ foreach ($dealers as $dealer) {
     $dealerList .= '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
 }
 ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
-    });
-</script>
-<div id="chart-box">
+<div id="chart-box" data-initial-url="<?= $initialDataUrl; ?>" data-dealer-list="<?= $dealerList; ?>">
     <div id="chart-title">
         <h2 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
             <span id="dealerSubhead"></span>
