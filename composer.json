@@ -20,10 +20,6 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
 		"wbraganca/yii2-dynamicform": "*",
 		"google/apiclient": "2.0",
-		"npm-asset/d3": "4.*",
-		"npm-asset/d3-interpolate-path": "~1.0.0",
-		"npm-asset/vue": "^2.0",
-		"npm-asset/simplify-js": "1.2.2",
 		"insolita/yii2-migration-generator": "~2.3"
     },
     "require-dev": {

@@ -1,5 +1,6 @@
 'use strict';
 const params = require('./params');
+const d3 = require('node_modules/d3');
 var table = (function() {
     var _detailsTable = jQuery('#p0');
     

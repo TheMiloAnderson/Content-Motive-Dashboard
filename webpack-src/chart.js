@@ -1,6 +1,8 @@
 'use strict';
 const params = require('./params');
-//const d3 = require('../node_modules/d3');
+const d3 = require('node_modules/d3');
+d3.ip = require('node_modules/d3-interpolate-path');
+const simplify = require('node_modules/simplify-js');
 var chart = (function() {
     var _mainChart = params.chart.mainChart(),
         _width,
@@ -13,16 +15,11 @@ var chart = (function() {
         _dataset,
         _dataSubset,
         _dataCache = {};
-    function setDataset(d) { _dataset = d; }
-    function getDataset() { return _dataset; }
-    function setDataSubset(d) { _dataSubset = d; }
-    function getDataSubset() { return _dataSubset; }
     function changeData(callback, id) {
         id = id || 0;
         if (_dataCache[id]) {
-            _dataset = _dataCache[id];
+            _dataSubset = _dataset = prepData(_dataCache[id]);
             callback();
-            _dataSubset = _dataset;
         } else {
             jQuery.ajax({
                 url: this.ajaxUrl,
@@ -90,7 +87,7 @@ var chart = (function() {
         addPath('visitors', params.chart.dataLines.uniqueVisitorColor);
         addPath('entrances', params.chart.dataLines.entrancesColor);
         function addDateGuide(id) {
-            return g.append('rect')
+            return _g.append('rect')
                 .attr('id', id)
                 .attr('height', _height)
                 .attr('width', 0)
@@ -216,7 +213,7 @@ var chart = (function() {
                 function exclude(a, b) {
                     return a.x === b.x;
                 }
-                return d3.interpolatePath(previous, current, exclude);
+                return d3.ip.interpolatePath(previous, current, exclude);
             }); 
     };
     var _formatTicks = function() {
@@ -246,12 +243,15 @@ var chart = (function() {
     });
     function resize() {
         params.chart.width = parseInt(d3.select('#chart-box #chart').style('width'), 10);
-        //prms.height = parseInt(d3.select('#chart-box #chart').style('height'), 10);
         _mainChart.attr('width', params.chart.width).attr('height', params.chart.height);
         _width = +_mainChart.attr('width') - params.chart.margin.left - params.chart.margin.right;
         _height = +_mainChart.attr('height') - params.chart.margin.top - params.chart.margin.bottom;
         _updateChart(_dataSubset);
     }
+    function setDataset(d) { _dataset = d; }
+    function getDataset() { return _dataset; }
+    function setDataSubset(d) { _dataSubset = d; }
+    function getDataSubset() { return _dataSubset; }
     function setStartDateGuide(date) {
         _startDateGuide.attr('width', _xScale(date));
     }
@@ -264,12 +264,9 @@ var chart = (function() {
         createChart: createChart,
         updateChart: updateChart,
         ajaxUrl: '',
-        dataCache: [],
         getDataset: getDataset,        
         setDataSubset: setDataSubset,
         getDataSubset: getDataSubset,
-        dataSubset: null,              
-        dealersList: [],
         setStartDateGuide: setStartDateGuide,
         setEndDateGuide: setEndDateGuide
     };

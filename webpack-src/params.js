@@ -1,4 +1,5 @@
 'use strict';
+const d3 = require('node_modules/d3');
 var params = (function() {
     var chart = {
         width: d3.select('#chart-box #chart').node().getBoundingClientRect().width,
