@@ -2,10 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	entry: ['./web/js/chart.js','./web/js/table.js','./web/js/dashboard.js'],
+	entry: './webpack-src/dash.js',
 	output: {
 		path: path.resolve(__dirname, 'web/js/build'),
-		filename: 'dashboard.bundle.js'
+		filename: 'dashboard.bundle.min.js'
 	},
 	module: {
 		loaders: [{
@@ -19,5 +19,13 @@ module.exports = {
 	stats: {
 		colors: true
 	},
-	devtool: 'source-map'
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin({minimize: true})
+	],
+	devtool: 'source-map',
+	resolve: {
+		alias: {
+			'node_modules': path.join(__dirname, 'node_modules')
+		}
+	}
 };

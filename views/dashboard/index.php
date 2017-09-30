@@ -12,15 +12,17 @@ $initialDataUrl = Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColu
 
 $dealerList = '';
 foreach ($dealers as $dealer) {
-    $dealerList .= '{named: "' . $dealer['name'] . '", id: ' . $dealer['id'] . '},';
+    $dealerList .= '{"named": "' . $dealer['name'] . '", "id": "' . $dealer['id'] . '"},';
 }
 ?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
+        //console.log(chart);
+        //dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
+        //console.log(dash);
     });
 </script>
-<div id="chart-box">
+<div id="chart-box" data-initial-url='<?= $initialDataUrl; ?>' data-dealer-list='<?= '[' . rtrim($dealerList, ',') . ']'; ?>'>
     <div id="chart-title">
         <h2 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
             <span id="dealerSubhead"></span>
