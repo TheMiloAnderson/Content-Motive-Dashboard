@@ -102,7 +102,7 @@ var dash = (function() {
         var id = d[0].dealer_id;
         var dealer = jQuery.grep(_dealersList, function(obj) { return +obj.id === id; });
         dealerSubhead.text(dealer[0].named);
-        dealersSelectTitle.textContent = dealer[0].named;
+        if(dealersSelectTitle) { dealersSelectTitle.textContent = dealer[0].named; }
         
         var sites = params.dash.getCurrentSites(d);
         var sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';
