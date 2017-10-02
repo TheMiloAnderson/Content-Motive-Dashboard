@@ -32,9 +32,8 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function rules() {
         return [
-            [['username', 'email'], 'required'],
+            [['username', 'email', 'admin'], 'required'],
             [['username', 'password', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
-            [['role'], 'string', 'max' => 10],
             [['username'], 'unique'],
             [['email'], 'unique'],
         ];
@@ -51,7 +50,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
-            'role' => 'Role',
+            'admin' => 'Admin?',
         ];
     }
 
@@ -120,5 +119,9 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function validatePassword($password) {
         return $this->password === $password;
+    }
+    
+    public function isAdmin() {
+        return $this->admin === 1;
     }
 }

@@ -42,11 +42,12 @@ AppAsset::register($this);
             ['label' => 'Blogs', 'url' => ['/dashboard/blogs']],
             ['label' => 'Reviews', 'url' => ['/dashboard/reviews']],
             ['label' => 'Microsites', 'url' => ['/dashboard/microsites']],
+            Yii::$app->user->identity->isAdmin() ? (
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],
                     ['label' => 'Dealers', 'url' => ['/dealers/index']],
                 ],
-            ],
+            ]) : (''),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
