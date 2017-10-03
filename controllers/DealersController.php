@@ -10,6 +10,7 @@ use app\models\MultiMod;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\ArrayHelper;
@@ -26,6 +27,17 @@ class DealersController extends Controller
      */
     public function behaviors() {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin());
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

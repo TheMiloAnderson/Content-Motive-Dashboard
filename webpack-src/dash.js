@@ -3,6 +3,7 @@ const chart = require('./chart');
 const table = require('./table');
 const params = require('./params');
 const d3 = require('node_modules/d3');
+
 var dash = (function() {
     var propertyRows = jQuery('.propertyFilter'),
         dealerSelect = jQuery('.dealerSelect'),
@@ -102,7 +103,7 @@ var dash = (function() {
         var id = d[0].dealer_id;
         var dealer = jQuery.grep(_dealersList, function(obj) { return +obj.id === id; });
         dealerSubhead.text(dealer[0].named);
-        dealersSelectTitle.textContent = dealer[0].named;
+        if(dealersSelectTitle) { dealersSelectTitle.textContent = dealer[0].named; }
         
         var sites = params.dash.getCurrentSites(d);
         var sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';

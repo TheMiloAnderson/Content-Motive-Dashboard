@@ -10,7 +10,7 @@ $config = [
     'components' => [
         'assetManager' => [
             'linkAssets' => false,
-            'forceCopy' => true, // delete this line when migrated to production
+            //'forceCopy' => true, // delete this line when migrated to production
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -85,6 +85,8 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
+    
+    $config['components']['assetManager']['forceCopy'] = true;
 }
 
 return $config;

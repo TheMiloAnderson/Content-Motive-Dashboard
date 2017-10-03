@@ -25,7 +25,7 @@ class m170818_010537_users extends Migration
                 'email'=> $this->string(45)->notNull(),
                 'authKey'=> $this->string(45)->null()->defaultValue(null),
                 'accessToken'=> $this->string(45)->null()->defaultValue(null),
-                'role'=> $this->string(10)->null()->defaultValue(null),
+                'admin'=> $this->boolean()->notNull()->defaultValue(0),
             ],$tableOptions
         );
         $this->createIndex('name_UNIQUE','{{%users}}',['username'],true);
