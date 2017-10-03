@@ -43,7 +43,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => $db['prod'],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -87,6 +87,7 @@ if (YII_ENV_DEV) {
     ];
     
     $config['components']['assetManager']['forceCopy'] = true;
+    $config['components']['db'] = $db['dev'];
 }
 
 return $config;
