@@ -3,6 +3,7 @@ const chart = require('./chart');
 const table = require('./table');
 const params = require('./params');
 const d3 = require('node_modules/d3');
+
 var dash = (function() {
     var propertyRows = jQuery('.propertyFilter'),
         dealerSelect = jQuery('.dealerSelect'),
