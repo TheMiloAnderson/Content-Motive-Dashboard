@@ -30,9 +30,10 @@
   "dependencies": {
     "d3": "^4.10.2",
     "d3-interpolate-path": "^2.0.0",
+    "exports-loader": "^0.6.4",
     "jquery": "^3.2.1",
+    "jquery-pjax": "^2.0.1",
     "jquery-ui": "^1.12.1",
-    "jquery-ui-1.12.1.custom": "^1.12.1",
     "simplify-js": "^1.2.1"
   }
 }

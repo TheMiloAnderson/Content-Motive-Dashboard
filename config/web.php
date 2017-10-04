@@ -10,7 +10,14 @@ $config = [
     'components' => [
         'assetManager' => [
             'linkAssets' => false,
-            //'forceCopy' => true, // delete this line when migrated to production
+            'bundles' => [
+                'yii\widgets\PjaxAsset' => false,
+                'yii\web\JqueryAsset' => false,
+                'yii\web\YiiAsset' => false,
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                        'js'=>[]
+                ],
+            ],
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

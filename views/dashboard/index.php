@@ -15,13 +15,6 @@ foreach ($dealers as $dealer) {
     $dealerList .= '{"named": "' . $dealer['name'] . '", "id": "' . $dealer['id'] . '"},';
 }
 ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        //console.log(chart);
-        //dashboard.init("<?= $initialDataUrl; ?>", [<?= $dealerList; ?>]);
-        //console.log(dash);
-    });
-</script>
 <div id="chart-box" data-initial-url='<?= $initialDataUrl; ?>' data-dealer-list='<?= '[' . rtrim($dealerList, ',') . ']'; ?>'>
     <div id="chart-title">
         <h2 id="subhead"><?php echo ucfirst($this->context->action->id) . ': '; ?>
@@ -118,6 +111,9 @@ foreach ($dealers as $dealer) {
         <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
             <div id="p0">
             </div>
-        <?php Pjax::end(); ?>
+        <?php Pjax::end(); 
+//        \yii\base\Event::on(\yii\web\View::className(), \yii\web\View::EVENT_AFTER_RENDER, function ($e) {
+//            $e->sender->assetBundles = [];
+//        });   ?>
     </div>
 </div>

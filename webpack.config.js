@@ -20,12 +20,14 @@ module.exports = {
 		colors: true
 	},
 	plugins: [
-		//new webpack.optimize.UglifyJsPlugin({minimize: true})
+		new webpack.optimize.UglifyJsPlugin({minimize: true})
 	],
 	devtool: 'source-map',
 	resolve: {
 		alias: {
-			'node_modules': path.join(__dirname, 'node_modules')
+			'node_modules': path.join(__dirname, 'node_modules'),
+			'yii2': path.join(__dirname, 'vendor/yiisoft/yii2'),
+			'bower': path.join(__dirname, 'vendor/bower'),
 		}
 	}
 };

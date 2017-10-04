@@ -20,7 +20,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => $db['prod'],
     ],
     'params' => $params,
     /*
@@ -38,6 +38,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
     ];
+    $config['components']['db'] = $db['dev'];
 }
 
 return $config;
