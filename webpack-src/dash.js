@@ -1,12 +1,12 @@
 'use strict';
 window.jQuery = window.$ = require('node_modules/jquery');
-require('yii2/assets/yii.js');
-require('bower/bootstrap/dist/js/bootstrap.js');
+require('yii2/assets/yii');
+require('bower/bootstrap/dist/js/bootstrap');
+require('node_modules/jquery-ui/ui/widgets/slider');
 const chart = require('./chart');
 const table = require('./table');
 const params = require('./params');
 const d3 = require('node_modules/d3');
-require('node_modules/jquery-ui-bundle');
 var dash = (function() {
     var propertyRows = jQuery('.propertyFilter'),
         dealerSelect = jQuery('.dealerSelect'),
@@ -17,8 +17,8 @@ var dash = (function() {
         dateRangeResetBtn = jQuery('#dateRangeResetBtn'),
         dealerSubhead = jQuery('span#dealerSubhead'),
         websiteSubhead = jQuery('#websiteSubhead'),
-        dealersSelectTitle = document.getElementById('dealersSelectTitle'),
-        websitesSelectTitle = document.getElementById('websitesSelectTitle')
+        dealersSelectTitle = jQuery('#dealersSelectTitle'),
+        websitesSelectTitle = jQuery('#websitesSelectTitle')
     ;
     
     var element = document.getElementById('chart-box');
@@ -36,7 +36,7 @@ var dash = (function() {
     dealerSelect.click(function(e) {
         e.preventDefault();
         var dealerId = this.dataset.id;
-        closeMenu('#dealers');
+        closeMenu('#dealers', 'toggle');
         chart.ajaxUrl = jQuery(this).attr('href');
         chart.changeData(function() {
             var d = chart.getDataset();
@@ -49,7 +49,7 @@ var dash = (function() {
         }, dealerId);
     });
     propertyRows.click(function() {
-        closeMenu('#websites');
+        closeMenu('#websites', 'toggle');
         var pid = jQuery(this).attr('data-properties').split(',');
         for (var i=0; i<pid.length; i++) { pid[i] = +pid[i]; }
         var revisedDataset = chart.getDataset().filter(function(d) {
@@ -62,6 +62,13 @@ var dash = (function() {
         table.detailTables(d);
         resetDateSlider(d);
         updateSubheads(d);
+    });
+    jQuery('body').on('touchstart click', function(e){
+        var target = jQuery(e.target);
+        if (!target.is('.dealerSelect') && !target.is('.propertyFilter')) {
+            closeMenu('#dealers', 'hide');
+            closeMenu('#websites', 'hide');
+        }
     });
     startDateField.on('change', function() {
         var start = new Date(startDateField.val()).getTime();
@@ -98,15 +105,15 @@ var dash = (function() {
         updateSubheads(d);
     });
     
-    function closeMenu(id) {
+    function closeMenu(id, method) {
         var el = jQuery(id);
-        el.collapse('toggle');
+        el.collapse(method);
     }
     function updateSubheads(d) {
         var id = d[0].dealer_id;
         var dealer = jQuery.grep(_dealersList, function(obj) { return +obj.id === id; });
         dealerSubhead.text(dealer[0].named);
-        if(dealersSelectTitle) { dealersSelectTitle.textContent = dealer[0].named; }
+        if(dealersSelectTitle) { dealersSelectTitle.html(dealer[0].named); }
         
         var sites = params.dash.getCurrentSites(d);
         var sitesText = sites.length === 1 ? sites[0][0] : 'All Websites';
@@ -114,7 +121,7 @@ var dash = (function() {
             websiteSubhead.text(sitesText);
             websiteSubhead.animate({opacity: 1}, 300);
         });
-        websitesSelectTitle.textContent = sitesText;
+        if (websitesSelectTitle) { websitesSelectTitle.html(sitesText); }
     }
     function updateSiteSelect(d) {
         var siteSelect = d3.select('#websites');

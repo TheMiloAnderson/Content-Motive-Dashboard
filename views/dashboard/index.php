@@ -27,13 +27,13 @@ foreach ($dealers as $dealer) {
     </div>
     <div id="chart-controls">
         <div id="controls-select">
-            <ul id="menu-content" class="menu-content out">
+            <ul id="menu-content" class="menu-content out" tabindex="-1">
             <?php
             if (count($dealers) > 1) { ?>
                 <li data-toggle="collapse" data-target="#dealers" class="collapsed">
                     <div class="asc" id="dealersSelectTitle">Dealers</div>
                 </li>
-                <ul class="sub-menu collapse" id="dealers">
+                <ul class="sub-menu collapse" id="dealers" tabindex="-1">
                     <?php foreach ($dealers as $dealer) {
                         $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
                         if ($pids) {
