@@ -97,6 +97,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 unset($item['ga:avgSessionDuration']);
             $item['bounce_rate'] = $item['ga:bounceRate'];
                 unset($item['ga:bounceRate']);
+            $item['click_through'] = $item['ga:totalEvents'];
+                unset($item['ga:totalEvents']);
         });
         // do the thing
         foreach ($data as $row) {
@@ -115,8 +117,9 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 SUM(pageviews) AS pageviews, 
                 SUM(visitors) AS visitors, 
                 SUM(entrances) AS entrances, 
-                AVG(avg_time) AS avg_time, 
-                IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) AS bounce_rate
+                AVG(avg_time) AS avg_time,
+                IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) AS bounce_rate,
+                SUM(click_through) AS click_through
             FROM ga_analytics 
             WHERE property_id = :pid
                 AND date_recorded BETWEEN :start AND :end
@@ -138,7 +141,8 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 SUM(visitors) as visitors,
                 SUM(entrances) as entrances,
                 ROUND(AVG(avg_time), 2) as avg_time,
-                ROUND(IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) / 100, 3) AS bounce_rate
+                ROUND(IFNULL(SUM(bounce_rate * entrances)/NULLIF(SUM(entrances), 0), 0) / 100, 3) AS bounce_rate,
+                SUM(click_through) AS click_through
             FROM ga_analytics 
             GROUP BY page, property_id;')
             ->execute();

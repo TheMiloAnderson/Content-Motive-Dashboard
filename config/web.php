@@ -7,10 +7,13 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'backend',
     'components' => [
         'assetManager' => [
             'linkAssets' => false,
-            //'forceCopy' => true, // delete this line when migrated to production
+            'bundles' => [
+                'yii\widgets\PjaxAsset' => false,
+            ],
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -43,7 +46,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
+        'db' => $db['prod'],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -87,6 +90,7 @@ if (YII_ENV_DEV) {
     ];
     
     $config['components']['assetManager']['forceCopy'] = true;
+    $config['components']['db'] = $db['dev'];
 }
 
 return $config;

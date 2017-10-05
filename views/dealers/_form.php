@@ -27,7 +27,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.container-items', // required: css class selector
                 'widgetItem' => '.item', // required: css class
-                'min' => 1, // 0 or 1 (default 1)
+                'min' => 0, // 0 or 1 (default 1)
                 'insertButton' => '.add-item', // css class
                 'deleteButton' => '.remove-item', // css class
                 'model' => $properties[0],
@@ -63,7 +63,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 <?= $form->field($prop, "[{$i}]ga_view")->textInput(['max-length' => true]); ?>
                             </div>
                             <div class="col-sm-2">
-                                <?= $form->field($prop, "[{$i}]type")->textInput(['max-length' => true]); ?>
+                                <?= $form->field($prop, "[{$i}]type")->dropDownList([
+                                    'Blogs' => 'Blogs', 'Content' => 'Content', 'Microsites' => 'Microsites', 'Reviews' => 'Reviews'
+                                ]); ?>
                             </div>
                             <div class="col-sm-2">
                                 <?= $form->field($prop, "[{$i}]start_date")->textInput(['max-length' => true]); ?>

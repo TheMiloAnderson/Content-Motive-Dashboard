@@ -2,10 +2,14 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	entry: './webpack-src/dash.js',
+	entry: {
+		dashboard: './webpack-src/dashboard.js',
+		dealerForm: './webpack-src/dealerForm.js',
+		site: './webpack-src/site.js'
+	},
 	output: {
 		path: path.resolve(__dirname, 'web/js/build'),
-		filename: 'dashboard.bundle.min.js'
+		filename: '[name].bundle.min.js'
 	},
 	module: {
 		loaders: [{
@@ -20,12 +24,14 @@ module.exports = {
 		colors: true
 	},
 	plugins: [
-		//new webpack.optimize.UglifyJsPlugin({minimize: true})
+		new webpack.optimize.UglifyJsPlugin({minimize: true})
 	],
 	devtool: 'source-map',
 	resolve: {
 		alias: {
-			'node_modules': path.join(__dirname, 'node_modules')
+			'node_modules': path.join(__dirname, 'node_modules'),
+			'yii2': path.join(__dirname, 'vendor/yiisoft/yii2'),
+			'bower': path.join(__dirname, 'vendor/bower'),
 		}
 	}
 };

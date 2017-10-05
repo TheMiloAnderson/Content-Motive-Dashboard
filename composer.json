@@ -18,7 +18,7 @@
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-		"wbraganca/yii2-dynamicform": "*",
+		"wbraganca/yii2-dynamicform": "dev-master",
 		"google/apiclient": "2.0",
 		"insolita/yii2-migration-generator": "~2.3"
     },

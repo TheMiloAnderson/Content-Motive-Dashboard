@@ -1,4 +1,5 @@
 'use strict';
+window.jQuery = window.$ = require('node_modules/jquery');
 const params = require('./params');
 const d3 = require('node_modules/d3');
 d3.ip = require('node_modules/d3-interpolate-path');
