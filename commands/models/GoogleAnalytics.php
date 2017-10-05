@@ -93,8 +93,13 @@ class GoogleAnalytics extends Object {
         $request->setViewId($this->_property->ga_view);
         $request->setDateRanges($dateRange);
         $request->setDimensions(array($hostname, $pagepath));
-        $request->setMetrics(array($pageviews, $uniquePageviews, $entrances, $avgSessionDuration, $bounceRate));
-
+        if ($this->_property->type == 'Blogs') {
+            $uniqueEvents = new Google_Service_AnalyticsReporting_Metric();
+            $uniqueEvents->setExpression('ga:totalEvents');
+            $request->setMetrics(array($pageviews, $uniquePageviews, $entrances, $avgSessionDuration, $uniqueEvents));
+        } else {
+            $request->setMetrics(array($pageviews, $uniquePageviews, $entrances, $avgSessionDuration, $bounceRate));
+        }
         $body = new Google_Service_AnalyticsReporting_GetReportsRequest();
         $body->setReportRequests(array($request));
         $report = $this->analytics_connection->reports->batchGet($body);
