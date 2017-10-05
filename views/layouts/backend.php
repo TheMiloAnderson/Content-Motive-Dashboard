@@ -7,11 +7,9 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\DashboardAssets;
+use app\assets\AppAsset;
 
-Yii::$app->assetManager->bundles['yii\web\JqueryAsset']->js = [];
-Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = ['sourcePath' => null, 'js' => []];
-DashboardAssets::register($this);
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

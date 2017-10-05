@@ -2,10 +2,14 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	entry: './webpack-src/dash.js',
+	entry: {
+		dashboard: './webpack-src/dashboard.js',
+		dealerForm: './webpack-src/dealerForm.js',
+		site: './webpack-src/site.js'
+	},
 	output: {
 		path: path.resolve(__dirname, 'web/js/build'),
-		filename: 'dashboard.bundle.min.js'
+		filename: '[name].bundle.min.js'
 	},
 	module: {
 		loaders: [{

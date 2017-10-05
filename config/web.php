@@ -7,16 +7,12 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'backend',
     'components' => [
         'assetManager' => [
             'linkAssets' => false,
             'bundles' => [
                 'yii\widgets\PjaxAsset' => false,
-                'yii\web\JqueryAsset' => false,
-                'yii\web\YiiAsset' => false,
-                'yii\bootstrap\BootstrapPluginAsset' => [
-                        'js'=>[]
-                ],
             ],
         ],
         'request' => [

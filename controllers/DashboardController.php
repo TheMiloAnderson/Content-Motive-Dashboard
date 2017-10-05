@@ -10,16 +10,8 @@ use yii\grid\GridView;
 
 class DashboardController extends Controller {
     
-    public function actionTest() {
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'contentProperties');
-        return $this->render('windex', [
-            'dealers' => $dealers,
-        ]);
-    }
-    
     public function actionContent() {
+        $this->layout = 'main';
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
         $this->simplifyArray($dealers, 'contentProperties');
@@ -29,6 +21,7 @@ class DashboardController extends Controller {
     }
     
     public function actionBlogs() {
+        $this->layout = 'main';
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('blogProperties')->asArray()->all();
         $this->simplifyArray($dealers, 'blogProperties');
@@ -38,6 +31,7 @@ class DashboardController extends Controller {
     } 
     
     public function actionReviews() {
+        $this->layout = 'main';
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('reviewProperties')->asArray()->all();
         $this->simplifyArray($dealers, 'reviewProperties');
@@ -47,6 +41,7 @@ class DashboardController extends Controller {
     } 
     
     public function actionMicrosites() {
+        $this->layout = 'main';
         $currentUser = $this->getCurrentUser();
         $dealers = $currentUser->getDealers()->with('microProperties')->asArray()->all();
         $this->simplifyArray($dealers, 'microProperties');

@@ -8,14 +8,6 @@ class DashboardAssets extends AssetBundle {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $js = [
-        //'js/d3.min.js',
-        //'js/d3-interpolate-path.js',
-        //'js/jquery-ui.min.js',
-        //'js/dashboard.js',
-        //'js/vue.js',
-        //'js/chart.js',
-        //'js/dash.js',
-        //'js/simplify.js',
         'js/build/dashboard.bundle.min.js',
     ];
     public $css = [
@@ -26,9 +18,10 @@ class DashboardAssets extends AssetBundle {
         'css/jquery-ui.structure.min.css',
         'css/jquery-ui.theme.min.css',
         'css/dashboard.css',
+        'css/site.css',
+        '//fonts.googleapis.com/css?family=Bree+Serif',
+        'css/global.css',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }

@@ -23,6 +23,11 @@ $config = [
         'db' => $db['prod'],
     ],
     'params' => $params,
+//    'modules' => [
+//        'webpack' => [
+//            'class' => 'sweelix\webpack\Module',
+//        ],
+//    ],
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
