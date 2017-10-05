@@ -34,7 +34,7 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['property_id'], 'required'],
-            [['property_id', 'pageviews', 'visitors', 'entrances'], 'integer'],
+            [['property_id', 'pageviews', 'visitors', 'entrances','click_through'], 'integer'],
             [['date_recorded'], 'safe'],
             [['bounce_rate', 'avg_time'], 'number'],
             [['page'], 'string', 'max' => 120],
@@ -56,6 +56,7 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
             'avg_time' => 'Avg Time',
             'entrances' => 'Entrances',
             'bounce_rate' => 'Bounce Rate',
+            'click_through' => 'Click Through',
         ];
     }
 
