@@ -34,7 +34,7 @@ class GoogleAnalyticsAggregates extends \yii\db\ActiveRecord
     {
         return [
             [['property_id', 'date_recorded'], 'required'],
-            [['property_id', 'pageviews', 'visitors', 'entrances'], 'integer'],
+            [['property_id', 'pageviews', 'visitors', 'entrances','click_through'], 'integer'],
             [['date_recorded'], 'safe'],
             [['avg_time', 'bounce_rate'], 'number'],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => GaProperties::className(), 'targetAttribute' => ['property_id' => 'id']],
@@ -54,6 +54,7 @@ class GoogleAnalyticsAggregates extends \yii\db\ActiveRecord
             'entrances' => 'Entrances',
             'avg_time' => 'Avg Time',
             'bounce_rate' => 'Bounce Rate',
+            'click_through' => 'Click Through',
         ];
     }
 
