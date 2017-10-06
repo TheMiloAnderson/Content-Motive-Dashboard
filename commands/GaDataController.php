@@ -20,4 +20,16 @@ class GaDataController extends Controller {
         $result = $analytics->updateDetails();
         echo 'Updated ga_analytics_details; ' . $result . ' records\n\n';
     }
+    
+    public function actionEvents() {
+        set_time_limit(86400);
+        $properties = GaProperties::find()->where(['id' => 64])->all();
+        $analytics = new GoogleAnalyticsDB();
+        foreach ($properties as $property) {
+            $analytics->property = $property;
+            $analytics->updateDB();
+        }
+        $result = $analytics->updateDetails();
+        echo 'Updated ga_analytics_details; ' . $result . ' records\n\n';
+    }
 }

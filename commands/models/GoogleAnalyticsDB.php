@@ -95,10 +95,14 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
                 unset($item['ga:entrances']);
             $item['avg_time'] = $item['ga:avgSessionDuration'];
                 unset($item['ga:avgSessionDuration']);
-            $item['bounce_rate'] = $item['ga:bounceRate'];
+            if (isset($item['ga:bounceRate'])) {
+                $item['bounce_rate'] = $item['ga:bounceRate'];
                 unset($item['ga:bounceRate']);
-            $item['click_through'] = $item['ga:totalEvents'];
+            }
+            if (isset($item['ga:totalEvents'])) {
+                $item['click_through'] = $item['ga:totalEvents'];
                 unset($item['ga:totalEvents']);
+            }
         });
         // do the thing
         foreach ($data as $row) {
