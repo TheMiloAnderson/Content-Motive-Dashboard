@@ -3,6 +3,7 @@ window.jQuery = window.$ = require('node_modules/jquery');
 require('yii2/assets/yii');
 require('bower/bootstrap/dist/js/bootstrap');
 require('node_modules/jquery-ui/ui/widgets/slider');
+require('./loader');
 const chart = require('./chart');
 const table = require('./table');
 const params = require('./params');

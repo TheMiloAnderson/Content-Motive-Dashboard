@@ -38,7 +38,7 @@ foreach ($dealers as $dealer) {
                         $pids = ArrayHelper::getColumn($dealer['properties'], 'id');
                         if ($pids) {
                             echo '<li class="dealerSelect" data-id="' . $dealer['id'] . '" ';
-                            echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids]) . '">';
+                            echo 'href="' . Url::to(['dashboard/aggregate', 'pids' => $pids], true) . '">';
                             echo $dealer['name'] . '</li>';
                         }
                     } ?>

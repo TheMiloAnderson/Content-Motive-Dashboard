@@ -4,8 +4,10 @@ const params = require('./params');
 const d3 = require('node_modules/d3');
 d3.ip = require('node_modules/d3-interpolate-path');
 const simplify = require('node_modules/simplify-js');
+const dataCache = require('./dataCache');
 var chart = (function() {
-    var _mainChart = params.chart.mainChart(),
+    var exports = {},
+        _mainChart = params.chart.mainChart(),
         _width,
         _height,
         _g,
@@ -14,12 +16,12 @@ var chart = (function() {
         _xScale,
         _yScale,
         _dataset,
-        _dataSubset,
-        _dataCache = {};
-    function changeData(callback, id) {
+        _dataSubset
+    ;
+    exports.changeData = function(callback, id) {
         id = id || 0;
-        if (_dataCache[id]) {
-            _dataSubset = _dataset = prepData(_dataCache[id]);
+        if (dataCache[id]) {
+            _dataSubset = _dataset = this.prepData(dataCache[id]);
             callback();
         } else {
             jQuery.ajax({
@@ -28,9 +30,9 @@ var chart = (function() {
                 method: 'GET',
                 success: (data) => {
                     data = JSON.parse(data);
-                    _dataset = prepData(data);
+                    _dataset = this.prepData(data);
                     callback();
-                    _dataCache[id] = _dataSubset = _dataset;
+                    dataCache[id] = _dataSubset = _dataset;
                 },
                 error:  function(xhr) {
                     console.log(xhr);
@@ -38,7 +40,7 @@ var chart = (function() {
             });
         }
     };
-    function prepData(data) {
+    exports.prepData = function(data) {
         var parseTime = d3.timeParse("%Y-%m-%d");
         var tot_pageviews = 0;
         var tot_visitors = 0;
@@ -58,7 +60,7 @@ var chart = (function() {
         }
         return data;
     };
-    var createChart = function() {
+    exports.createChart = function() {
         // Chart size, margins
         _mainChart
             .attr('width', params.chart.width)
@@ -98,9 +100,9 @@ var chart = (function() {
         }
         _startDateGuide = addDateGuide('startDateGuide');
         _endDateGuide = addDateGuide('endDateGuide');
-        updateChart(_dataset);
+        this.updateChart(_dataset);
     };
-    var updateChart = function(d) {
+    exports.updateChart = function(d) {
         var svg = _mainChart.transition();
         // Define the D3 scales
         _xScale = d3.scaleTime()
@@ -247,29 +249,18 @@ var chart = (function() {
         _mainChart.attr('width', params.chart.width).attr('height', params.chart.height);
         _width = +_mainChart.attr('width') - params.chart.margin.left - params.chart.margin.right;
         _height = +_mainChart.attr('height') - params.chart.margin.top - params.chart.margin.bottom;
-        _updateChart(_dataSubset);
+        this.updateChart(_dataSubset);
     }
-    function setDataset(d) { _dataset = d; }
-    function getDataset() { return _dataset; }
-    function setDataSubset(d) { _dataSubset = d; }
-    function getDataSubset() { return _dataSubset; }
-    function setStartDateGuide(date) {
+    exports.setDataset = function(d) { _dataset = d; };
+    exports.getDataset = function() { return _dataset; };
+    exports.setDataSubset = function(d) { _dataSubset = d; };
+    exports.getDataSubset = function() { return _dataSubset; };
+    exports.setStartDateGuide = function(date) {
         _startDateGuide.attr('width', _xScale(date));
-    }
-    function setEndDateGuide(date) {
-        _endDateGuide.attr('width', _width - _xScale(date)).attr('x', _xScale(date));
-    }
-    return {
-        changeData: changeData,
-        prepData: prepData,
-        createChart: createChart,
-        updateChart: updateChart,
-        ajaxUrl: '',
-        getDataset: getDataset,        
-        setDataSubset: setDataSubset,
-        getDataSubset: getDataSubset,
-        setStartDateGuide: setStartDateGuide,
-        setEndDateGuide: setEndDateGuide
     };
+    exports.setEndDateGuide = function(date) {
+        _endDateGuide.attr('width', _width - _xScale(date)).attr('x', _xScale(date));
+    };
+    return exports;
 })();
 module.exports = chart;

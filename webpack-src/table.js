@@ -6,7 +6,7 @@ const d3 = require('node_modules/d3');
 var table = (function() {
     var _detailsTable = jQuery('#p0');
     
-    function metricReadouts(d) {
+    exports.metricReadouts = function(d) {
         d3.select('#pageviews-readout')
             .transition().duration(params.chart.duration)
             .tween('text', function() {
@@ -84,7 +84,7 @@ var table = (function() {
             });
     }
     
-    function detailTables(d, start = false, end = false) {
+    exports.detailTables = function(d, start = false, end = false) {
         var sites = params.dash.getCurrentSites(d);
         var url = '?r=/dashboard/details&';
         for (var i=0; i < sites.length; i++) {
@@ -104,9 +104,6 @@ var table = (function() {
             _detailsTable.html(data);
         });
     }
-    return {
-        detailTables: detailTables,
-        metricReadouts: metricReadouts
-    };
+    return exports;
 })();
 module.exports = table;
