@@ -29,6 +29,7 @@
     "worker-loader": "^1.0.0"
   },
   "dependencies": {
+    "bootstrap-toggle": "^2.2.2",
     "d3": "^4.10.2",
     "d3-interpolate-path": "^2.0.0",
     "exports-loader": "^0.6.4",

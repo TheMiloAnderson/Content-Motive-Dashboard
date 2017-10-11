@@ -11,52 +11,31 @@ use yii\grid\GridView;
 class DashboardController extends Controller {
     
     public function actionContent() {
-        $this->layout = 'main';
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'contentProperties');
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
+        return $this->loadPage('contentProperties');
     }
-    
     public function actionBlogs() {
-        $this->layout = 'main';
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('blogProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'blogProperties');
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
+        return $this->loadPage('blogProperties');
     } 
-    
     public function actionReviews() {
-        $this->layout = 'main';
-        $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('reviewProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'reviewProperties');
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
+        return $this->loadPage('reviewProperties');
     } 
-    
     public function actionMicrosites() {
+        return $this->loadPage('microProperties');
+    }
+    private function loadPage($category) {
         $this->layout = 'main';
         $currentUser = $this->getCurrentUser();
-        $dealers = $currentUser->getDealers()->with('microProperties')->asArray()->all();
-        $this->simplifyArray($dealers, 'microProperties');
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
-    }  
-    
+        $dealers = $currentUser->getDealers()->with($category)->asArray()->all();
+        $this->simplifyArray($dealers, $category);
+        return (!empty($dealers[0])) ? $this->render('index', ['dealers' => $dealers]) : $this->render('nodata', []);
+    }
+    ///***** AJAX Actions *****///
     public function actionAggregate(array $pids) {
         $model = new DashboardData();
         $data = $model->aggregates($pids);
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return json_encode($data);
     }
-    
     public function actionDetails(array $pids, $start='', $end='') {
         $model = new DashboardData();
         $dataProvider = $model->details($pids, $start, $end);
@@ -107,14 +86,12 @@ class DashboardController extends Controller {
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         return $html;
     }
-    
     ///***** Utility Functions *****///
     private function getCurrentUser() {
         $currentUserId = Yii::$app->user->id;
         return Users::find()->where(['id' => $currentUserId])->one();
     }
-    private function simplifyArray(&$array, $key) {
-        // this makes it easier to handle Content, Blogs, Micro in the same view template
+    private function simplifyArray(&$array, $key) { // this makes it easier to handle Content, Blogs, Micro in the same view template
         foreach ($array as &$item) {
             $item['properties'] = $item[$key];
             unset($item[$key]);

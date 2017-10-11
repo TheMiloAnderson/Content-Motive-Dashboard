@@ -21,8 +21,12 @@ class AppAsset extends AssetBundle
         'css/site.css',
         '//fonts.googleapis.com/css?family=Bree+Serif',
         'css/global.css',
+        'css/backend.css',
+        'css/bootstrap2-toggle.min.css',
     ];
     public $js = [
+        'js/bootstrap2-toggle.min.js',
+        'js/usersForm.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

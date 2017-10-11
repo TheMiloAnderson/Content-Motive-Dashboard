@@ -7,11 +7,9 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\DashboardAssets;
 
-Yii::$app->assetManager->bundles['yii\web\JqueryAsset']->js = [];
-Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = ['sourcePath' => null, 'js' => []];
-DashboardAssets::register($this);
+//Yii::$app->assetManager->bundles['yii\web\JqueryAsset']->js = [];
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,6 +27,7 @@ DashboardAssets::register($this);
 
 <div class="wrap">
     <?php
+    
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/contentmotive-80x53.png', ['alt'=>Yii::$app->name])
             . '<div id="logoTxt"><span class="con">content</span><br /><span class="MOT">MOTIVE</span></div>',

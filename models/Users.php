@@ -50,7 +50,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
-            'admin' => 'Admin?',
+            'admin' => 'Role',
         ];
     }
 

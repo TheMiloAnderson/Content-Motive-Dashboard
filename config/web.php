@@ -10,7 +10,8 @@ $config = [
     'layout' => 'backend',
     'components' => [
         'assetManager' => [
-            'linkAssets' => false,
+            'class' => 'yii\web\AssetManager',
+            'linkAssets' => true,
             'bundles' => [
                 'yii\widgets\PjaxAsset' => false,
             ],
