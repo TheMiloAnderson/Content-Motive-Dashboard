@@ -86,7 +86,7 @@ var dash = (function() {
     dateRangeBtn.click(function() {
         var startDate = $(this).data('startdate');
         var endDate = $(this).data('enddate');
-        var revisedData = chart.getDataSubset().filter(function(d) {
+        var revisedData = chart.getDataset().filter(function(d) {
             return d.date_recorded >= startDate && d.date_recorded <= endDate;
         });
         var d = chart.prepData(revisedData);
