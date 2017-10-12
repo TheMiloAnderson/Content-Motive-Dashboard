@@ -20,7 +20,7 @@ class DealersWithProperties extends \app\models\gii\Dealers {
     public function getDealerAccesses() {
         return $this->hasMany(DealerAccess::className(), ['dealer_id' => 'id']);
     }
-    public function getGaProperties() {
+    public function getGoogleProperties() {
         return $this->hasMany(GoogleAnalyticsProperties::className(), ['dealer_id' => 'id']);
     }
     public function getContentProperties() {
