@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'admin')->checkbox(['data-toggle' => 'toggle']) ?>
+    <?= $form->field($model, 'admin')->checkbox(['data-toggle' => 'toggle', 'label' => NULL])->label('Admin? &nbsp;') ?>
 
     <?= $form->field($model, 'dealers')->checkboxList($allDealers, ['separator' => "<br />", 
         'item' => function($index, $label, $name, $checked, $value) {

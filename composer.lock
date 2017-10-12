@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c965c3f65a75c98c19bb505a48a9475d",
+    "content-hash": "804794a3f4da1b298329c1913827a364",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -85,6 +85,31 @@
                 "jquery",
                 "library"
             ]
+        },
+        {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "jquery-ui.js"
+                ],
+                "bower-asset-ignore": []
+            }
         },
         {
             "name": "bower-asset/jquery.inputmask",
@@ -1034,57 +1059,6 @@
             "time": "2016-10-10T12:19:37+00:00"
         },
         {
-            "name": "sweelix/yii2-webpack",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pgaultier/yii2-webpack.git",
-                "reference": "0888d0678379639cedcfc4b4ce4bdf38522ba8f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pgaultier/yii2-webpack/zipball/0888d0678379639cedcfc4b4ce4bdf38522ba8f0",
-                "reference": "0888d0678379639cedcfc4b4ce4bdf38522ba8f0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0",
-                "yiisoft/yii2": "~2.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "~2.2",
-                "php": ">=5.6.0"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-devel": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "sweelix\\webpack\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Philippe Gaultier",
-                    "email": "pgaultier@gmail.com"
-                }
-            ],
-            "description": "PHP 5.6+ Webpack integration for the Yii framework",
-            "keywords": [
-                "assets",
-                "webpack",
-                "yii2"
-            ],
-            "time": "2017-07-11T07:13:21+00:00"
-        },
-        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.8",
             "source": {
@@ -1553,6 +1527,56 @@
                 "yii2"
             ],
             "time": "2016-12-20T13:26:02+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "843a2160cfe30f5c8b0cb2e9dbd8ee6bcf97e71d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-jui/zipball/843a2160cfe30f5c8b0cb2e9dbd8ee6bcf97e71d",
+                "reference": "843a2160cfe30f5c8b0cb2e9dbd8ee6bcf97e71d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "1.11.*@stable",
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                },
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2016-07-22T22:26:59+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -3200,6 +3224,57 @@
             ],
             "description": "Automatic BASH completion for Symfony Console Component based applications.",
             "time": "2016-02-24T05:08:54+00:00"
+        },
+        {
+            "name": "sweelix/yii2-webpack",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pgaultier/yii2-webpack.git",
+                "reference": "0888d0678379639cedcfc4b4ce4bdf38522ba8f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pgaultier/yii2-webpack/zipball/0888d0678379639cedcfc4b4ce4bdf38522ba8f0",
+                "reference": "0888d0678379639cedcfc4b4ce4bdf38522ba8f0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "yiisoft/yii2": "~2.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~2.2",
+                "php": ">=5.6.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-devel": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "sweelix\\webpack\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gaultier",
+                    "email": "pgaultier@gmail.com"
+                }
+            ],
+            "description": "PHP 5.6+ Webpack integration for the Yii framework",
+            "keywords": [
+                "assets",
+                "webpack",
+                "yii2"
+            ],
+            "time": "2017-07-11T07:13:21+00:00"
         },
         {
             "name": "symfony/browser-kit",
