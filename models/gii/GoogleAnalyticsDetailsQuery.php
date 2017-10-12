@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 /**
- * This is the ActiveQuery class for [[Users]].
+ * This is the ActiveQuery class for [[GoogleAnalyticsDetails]].
  *
- * @see Users
+ * @see GoogleAnalyticsDetails
  */
-class UsersQuery extends \yii\db\ActiveQuery
+class GoogleAnalyticsDetailsQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class UsersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Users[]|array
+     * @return GoogleAnalyticsDetails[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class UsersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Users|array|null
+     * @return GoogleAnalyticsDetails|array|null
      */
     public function one($db = null)
     {

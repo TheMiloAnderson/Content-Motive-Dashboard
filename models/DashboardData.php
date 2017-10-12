@@ -3,8 +3,8 @@
 namespace app\models;
 
 use Yii;
-use app\models\GoogleAnalyticsAggregates;
-use app\models\GoogleAnalyticsDetails;
+use app\models\gii\GoogleAnalyticsAggregates;
+use app\models\gii\GoogleAnalyticsDetails;
 use yii\data\ActiveDataProvider;
 use yii\data\SqlDataProvider;
 

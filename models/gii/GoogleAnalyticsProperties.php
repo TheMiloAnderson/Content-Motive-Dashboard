@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 use Yii;
 
@@ -15,21 +15,24 @@ use Yii;
  * @property string $type
  *
  * @property GaAnalytics[] $gaAnalytics
+ * @property GaAnalyticsAggregates[] $gaAnalyticsAggregates
  * @property Dealers $dealer
  */
-class GaProperties extends \yii\db\ActiveRecord
+class GoogleAnalyticsProperties extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'ga_properties';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['dealer_id'], 'integer'],
             [['start_date'], 'required'],
@@ -44,7 +47,8 @@ class GaProperties extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'dealer_id' => 'Dealer ID',
@@ -58,22 +62,33 @@ class GaProperties extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGaAnalytics() {
+    public function getGaAnalytics()
+    {
         return $this->hasMany(GaAnalytics::className(), ['property_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDealer() {
+    public function getGaAnalyticsAggregates()
+    {
+        return $this->hasMany(GaAnalyticsAggregates::className(), ['property_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDealer()
+    {
         return $this->hasOne(Dealers::className(), ['id' => 'dealer_id']);
     }
 
     /**
      * @inheritdoc
-     * @return GaPropertiesQuery the active query used by this AR class.
+     * @return GoogleAnalyticsQuery the active query used by this AR class.
      */
-    public static function find() {
-        return new GaPropertiesQuery(get_called_class());
+    public static function find()
+    {
+        return new GoogleAnalyticsQuery(get_called_class());
     }
 }

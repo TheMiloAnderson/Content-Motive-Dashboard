@@ -3,7 +3,7 @@ namespace app\commands\models;
 
 use Yii;
 use app\commands\models\GoogleAnalytics;
-use app\models\GoogleAnalyticsData;
+use app\models\GoogleAnalytics;
 
 class GoogleAnalyticsDB extends GoogleAnalytics {
     
@@ -106,7 +106,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         });
         // do the thing
         foreach ($data as $row) {
-            $model = new GoogleAnalyticsData();
+            $model = new GoogleAnalytics();
             $model->attributes = $row;
             $model->save();
         }

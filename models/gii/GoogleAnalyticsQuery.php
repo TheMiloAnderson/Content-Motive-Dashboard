@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 /**
- * This is the ActiveQuery class for [[GaProperties]].
+ * This is the ActiveQuery class for [[GoogleAnalyticsProperties]].
  *
- * @see GaProperties
+ * @see GoogleAnalyticsProperties
  */
-class GaPropertiesQuery extends \yii\db\ActiveQuery
+class GoogleAnalyticsQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class GaPropertiesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return GaProperties[]|array
+     * @return GoogleAnalyticsProperties[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class GaPropertiesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return GaProperties|array|null
+     * @return GoogleAnalyticsProperties|array|null
      */
     public function one($db = null)
     {

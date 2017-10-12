@@ -11,7 +11,7 @@ $config = [
     'components' => [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
-            'linkAssets' => true,
+            //'linkAssets' => true,
             'bundles' => [
                 'yii\widgets\PjaxAsset' => false,
             ],

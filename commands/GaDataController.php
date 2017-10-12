@@ -5,13 +5,13 @@ namespace app\commands;
 use Yii;
 use yii\console\Controller;
 use app\commands\models\GoogleAnalyticsDB;
-use app\models\GaProperties;
+use app\models\gii\GoogleAnalyticsProperties;
 
 class GaDataController extends Controller {
     
     public function actionUpdate() {
         set_time_limit(86400);
-        $properties = GaProperties::find()->all();
+        $properties = GoogleAnalyticsProperties::find()->all();
         $analytics = new GoogleAnalyticsDB();
         foreach ($properties as $property) {
             $analytics->property = $property;
@@ -23,7 +23,7 @@ class GaDataController extends Controller {
     
     public function actionEvents() {
         set_time_limit(86400);
-        $properties = GaProperties::find()->where(['id' => 64])->all();
+        $properties = GoogleAnalyticsProperties::find()->where(['id' => 64])->all();
         $analytics = new GoogleAnalyticsDB();
         foreach ($properties as $property) {
             $analytics->property = $property;

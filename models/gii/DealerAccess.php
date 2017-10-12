@@ -1,8 +1,10 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 use Yii;
+use app\models\Users;
+use app\models\gii\Dealers;
 
 /**
  * This is the model class for table "dealer_access".

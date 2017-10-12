@@ -1,31 +1,29 @@
 <?php
 
-namespace app\models;
+namespace app\gii\models;
 
 /**
- * This is the ActiveQuery class for [[Dealers]].
+ * This is the ActiveQuery class for [[GaProperties]].
  *
- * @see Dealers
+ * @see GaProperties
  */
-class DealersQuery extends \yii\db\ActiveQuery
+class GoogleAnalyticsPropertiesQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
     }*/
-
     /**
      * @inheritdoc
-     * @return Dealers[]|array
+     * @return GaProperties[]|array
      */
     public function all($db = null)
     {
         return parent::all($db);
     }
-
     /**
      * @inheritdoc
-     * @return Dealers|array|null
+     * @return GaProperties|array|null
      */
     public function one($db = null)
     {

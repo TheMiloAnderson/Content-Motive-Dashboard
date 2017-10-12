@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 use Yii;
 
@@ -12,31 +12,34 @@ use Yii;
  * @property string $date_recorded
  * @property string $page
  * @property integer $pageviews
- * @property integer $unique_pageviews
- * @property integer $avg_time
+ * @property integer $visitors
+ * @property string $avg_time
  * @property integer $entrances
  * @property string $bounce_rate
+ * @property integer $click_through
  *
  * @property GaProperties $property
  */
-class GoogleAnalyticsData extends \yii\db\ActiveRecord {
-
+class GoogleAnalytics extends \yii\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'ga_analytics';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['property_id'], 'required'],
-            [['property_id', 'pageviews', 'visitors', 'entrances','click_through'], 'integer'],
+            [['property_id', 'pageviews', 'visitors', 'entrances', 'click_through'], 'integer'],
             [['date_recorded'], 'safe'],
-            [['bounce_rate', 'avg_time'], 'number'],
+            [['avg_time', 'bounce_rate'], 'number'],
             [['page'], 'string', 'max' => 120],
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => GaProperties::className(), 'targetAttribute' => ['property_id' => 'id']],
         ];
@@ -45,12 +48,13 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'property_id' => 'Property ID',
             'date_recorded' => 'Date Recorded',
-            'page' => 'Content Strategy',
+            'page' => 'Page',
             'pageviews' => 'Pageviews',
             'visitors' => 'Visitors',
             'avg_time' => 'Avg Time',
@@ -63,16 +67,8 @@ class GoogleAnalyticsData extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProperty() {
-        return $this->hasOne(GaProperties::className(), ['id' => 'property_id']);
+    public function getProperty()
+    {
+        return $this->hasOne(GoogleAnalyticsProperties::className(), ['id' => 'property_id']);
     }
-
-    /**
-     * @inheritdoc
-     * @return GaAnalyticsDataQuery the active query used by this AR class.
-     */
-    public static function find() {
-        return new GaAnalyticsDataQuery(get_called_class());
-    }
-
 }

@@ -4,7 +4,8 @@ namespace app\models;
 
 use Yii;
 use app\models\Users;
-use app\models\DealerAccess;
+use app\models\gii\Dealers;
+use app\models\gii\DealerAccess;
 use yii\helpers\ArrayHelper;
 
 class UsersWithDealers extends Users {

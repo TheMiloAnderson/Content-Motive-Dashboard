@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\models\gii;
 
 /**
- * This is the ActiveQuery class for [[DealerAccess]].
+ * This is the ActiveQuery class for [[GoogleAnalyticsAggregates]].
  *
- * @see DealerAccess
+ * @see GoogleAnalyticsAggregates
  */
-class DealerAccessQuery extends \yii\db\ActiveQuery
+class GoogleAnalyticsAggregateQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class DealerAccessQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return DealerAccess[]|array
+     * @return GoogleAnalyticsAggregates[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class DealerAccessQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return DealerAccess|array|null
+     * @return GoogleAnalyticsAggregates|array|null
      */
     public function one($db = null)
     {

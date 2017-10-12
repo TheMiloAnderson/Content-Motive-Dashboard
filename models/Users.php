@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\web\IdentityInterface;
+use app\models\gii\DealerAccess;
+use app\models\DealersWithProperties;
 
 /**
  * This is the model class for table "users".
@@ -62,7 +64,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     }
     
     public function getDealers() {
-        return $this->hasMany(Dealers::className(), ['id' => 'dealer_id'])
+        return $this->hasMany(DealersWithProperties::className(), ['id' => 'dealer_id'])
             ->via('dealerAccesses')
             ->orderBy('name');
     }
@@ -71,9 +73,9 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
      * @inheritdoc
      * @return UsersQuery the active query used by this AR class.
      */
-    public static function find() {
-        return new UsersQuery(get_called_class());
-    }
+//    public static function find() {
+//        return new UsersQuery(get_called_class());
+//    }
 	
     public static function findIdentity($id) {
         $user = self::find()
