@@ -20,29 +20,35 @@ class DealersWithProperties extends \app\models\gii\Dealers {
     public function getDealerAccesses() {
         return $this->hasMany(DealerAccess::className(), ['dealer_id' => 'id']);
     }
+    
     public function getGoogleProperties() {
         return $this->hasMany(GoogleAnalyticsProperties::className(), ['dealer_id' => 'id']);
     }
+    
     public function getContentProperties() {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GoogleAnalyticsProperties::className(), $links)
             ->onCondition(['type' => 'Content']);
     }
+    
     public function getBlogProperties() {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GoogleAnalyticsProperties::className(), $links)
             ->onCondition(['type' => 'Blogs']);
     }
+    
     public function getReviewProperties() {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GoogleAnalyticsProperties::className(), $links)
             ->onCondition(['type' => 'Reviews']);
     }
+    
     public function getMicroProperties() {
         $links = ['dealer_id' => 'id'];
         return $this->hasMany(GoogleAnalyticsProperties::className(), $links)
             ->onCondition(['type' => 'Microsites']);
     }
+    
     public static function getAvailableDealers() {
         $dealers = self::find()->orderBy('name')->asArray()->all();
         $items = ArrayHelper::map($dealers, 'id', 'name');

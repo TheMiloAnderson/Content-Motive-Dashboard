@@ -2,6 +2,7 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use app\models\UsersWithDealers;
 
 $this->title = 'Dashboard';
 

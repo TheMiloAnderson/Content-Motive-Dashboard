@@ -7,8 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-
-//Yii::$app->assetManager->bundles['yii\web\JqueryAsset']->js = [];
+use app\models\UsersWithDealers;
 
 ?>
 <?php $this->beginPage() ?>
@@ -39,10 +38,14 @@ use yii\widgets\Breadcrumbs;
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Content', 'url' => ['/dashboard/content']],
-            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']],
-            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']],
-            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']],
+            (UsersWithDealers::userHasContentType('Content')) ? (
+            ['label' => 'Content', 'url' => ['/dashboard/content']]) : (''),
+            (UsersWithDealers::userHasContentType('Blogs')) ? (
+            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']]) : (''),
+            (UsersWithDealers::userHasContentType('Reviews')) ? (
+            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']]) : (''),
+            (UsersWithDealers::userHasContentType('Microsites')) ? (
+            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']]) : (''),
             ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin()) ? (
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],

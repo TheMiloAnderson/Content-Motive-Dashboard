@@ -6,6 +6,7 @@ use Yii;
 use yii\web\IdentityInterface;
 use app\models\gii\DealerAccess;
 use app\models\DealersWithProperties;
+use app\models\gii\GoogleAnalyticsProperties;
 
 /**
  * This is the model class for table "users".
@@ -76,7 +77,6 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
 //    public static function find() {
 //        return new UsersQuery(get_called_class());
 //    }
-	
     public static function findIdentity($id) {
         $user = self::find()
             ->where(["id" => $id])
@@ -86,7 +86,6 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         }
         return new static($user);
     }
-	
     public static function findIdentityByAccessToken($token, $type = null) {
         $user = self::find()
             ->where(["accessToken" => $token])
@@ -96,7 +95,6 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         }
         return new static($user);
     }
-	
     public static function findByUsername($username) {
         $user = self::find()
             ->where(["username" => $username])
@@ -106,24 +104,20 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         }
         return new static($user);
     }
-
     public function getId() {
         return $this->id;
     }
-
     public function getAuthKey() {
         return $this->authKey;
     }
-
     public function validateAuthKey($authKey) {
         return $this->authKey === $authKey;
     }
-
     public function validatePassword($password) {
         return $this->password === $password;
     }
-    
     public function isAdmin() {
         return $this->admin === 1;
     }
+
 }
