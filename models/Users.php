@@ -6,7 +6,6 @@ use Yii;
 use yii\web\IdentityInterface;
 use app\models\gii\DealerAccess;
 use app\models\DealersWithProperties;
-use app\models\gii\GoogleAnalyticsProperties;
 
 /**
  * This is the model class for table "users".
@@ -18,7 +17,8 @@ use app\models\gii\GoogleAnalyticsProperties;
  * @property string $authKey
  * @property string $accessToken
  * @property string $role
- *
+ * @property string $password_reset_token
+ * 
  * @property DealerAccess[] $dealerAccesses
  */
 class Users extends \yii\db\ActiveRecord implements IdentityInterface
@@ -36,9 +36,9 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules() {
         return [
             [['username', 'email', 'admin'], 'required'],
-            [['username', 'password', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
+            [['username', 'email', 'authKey', 'accessToken'], 'string', 'max' => 45],
+            [['password'], 'string', 'max' => 60],
+            [['username', 'email', 'password_reset_token'], 'unique'],
         ];
     }
 
@@ -114,10 +114,30 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->authKey === $authKey;
     }
     public function validatePassword($password) {
-        return $this->password === $password;
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
     public function isAdmin() {
         return $this->admin === 1;
     }
-
+    public function setPassword($password) {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+    public function unsetPassword() {
+        $this->password = '';
+    }
+    
+    /**
+     * Finds out if password reset token is valid
+     *
+     * @param string $token password reset token
+     * @return bool
+     */
+    public static function isPasswordResetTokenValid($token) {
+        if (empty($token)) {
+            return false;
+        }
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        return $timestamp + $expire >= time();
+    }
 }

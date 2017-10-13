@@ -2,7 +2,6 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use app\models\UsersWithDealers;
 
 $this->title = 'Dashboard';
 
@@ -113,9 +112,6 @@ foreach ($dealers as $dealer) {
         <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
             <div id="p0">
             </div>
-        <?php Pjax::end(); 
-//        \yii\base\Event::on(\yii\web\View::className(), \yii\web\View::EVENT_AFTER_RENDER, function ($e) {
-//            $e->sender->assetBundles = [];
-//        });   ?>
+        <?php Pjax::end(); ?>
     </div>
 </div>

@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
+use app\models\PasswordResetRequestForm;
 
 class SiteController extends Controller
 {
@@ -61,12 +62,7 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex() {
-        $currentUserId = Yii::$app->user->id;
-        $currentUser = Users::find()->where(['id' => $currentUserId])->one();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->all();
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -119,13 +115,21 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
+    public function actionRequestPasswordReset()
     {
-        return $this->render('about');
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+            }
+        }
+
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ]);
     }
 }
