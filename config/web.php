@@ -5,6 +5,7 @@ $db = require(__DIR__ . '/db.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Content Motive Dashboard',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'layout' => 'backend',
@@ -33,10 +34,15 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'localhost',
+                'username' => 'miloa@localhost',
+                'password' => 'password',
+                'port' => '25',
+                //'encryption' => 'tls',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -61,12 +67,12 @@ $config = [
        'class' => 'yii\filters\AccessControl',
        'rules' => [
            [
-               'actions' => ['login', 'error', 'request-password-reset'],
-               'allow' => true,
-           ],
-           [
                'allow' => true,
                'roles' => ['@'],
+           ],
+           [
+               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
+               'allow' => true,
            ],
        ],
     ],

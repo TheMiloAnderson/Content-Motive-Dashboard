@@ -82,10 +82,11 @@ class UsersController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post())) {
-            $model->setPassword($model->password);
+        $post = Yii::$app->request->post('UsersWithDealers');
+        if ($post['newPassword'] && $post['newPassword'] !== '') {
+            $model->setPassword($post['newPassword']);
         }
-        if ($model->save()) {
+        if (Yii::$app->request->post() && $model->save()) {
             $model->saveDealers();
             return $this->redirect(['index']);
         }
