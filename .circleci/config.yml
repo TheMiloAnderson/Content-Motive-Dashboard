@@ -13,9 +13,7 @@ jobs:
     steps:
       - checkout
       - run: sudo apt-get install
-      - run: printf "\n" | sudo pecl install xdebug
       - run: sudo docker-php-ext-install pdo_mysql
-      - run: sudo docker-php-ext-enable xdebug
       - run: sudo bash -c "echo 'date.timezone = UTC' >> /usr/local/etc/php/conf.d/custom.ini"
 
       # Composer
