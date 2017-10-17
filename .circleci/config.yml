@@ -1,0 +1,57 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:5.6.31-apache-node-browsers
+      - image: circleci/mysql:5.7.18
+        environment:
+          - MYSQL_DATABASE=cmdash
+          - MYSQL_ROOT_PASSWORD=ubuntu
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: sudo apt-get install
+      - run: printf "\n" | sudo pecl install xdebug
+      - run: sudo docker-php-ext-install pdo_mysql
+      - run: sudo docker-php-ext-enable xdebug
+      - run: sudo bash -c "echo 'date.timezone = UTC' >> /usr/local/etc/php/conf.d/custom.ini"
+
+      # Composer
+      - restore_cache:
+          keys:
+          - composer-cache-{{ checksum "composer.json" }}
+          - composer-cache-
+      - run: composer install -n --prefer-dist -d protected
+      - save_cache:
+          paths:
+            - ./vendor
+          key: composer-cache-{{ checksum "composer.json" }}
+
+      # NPM
+      - restore_cache:
+          keys:
+          - npm-cache-{{ checksum "package.json" }}
+          - npm-cache-
+      - run: npm install
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: npm-cache-{{ checksum "package.json" }}
+
+      - run:
+          name: Run chromedriver
+          command: chromedriver --url-base=/wd/hub
+          background: true
+
+      - run:
+          name: Run PHP Internal Web Server
+          command: php -S 127.0.0.1:8000 -t web/
+          background: true
+
+      - store_artifacts:
+          path: ./tests/_output
+
+      - store_artifacts:
+          path: ./runtime
