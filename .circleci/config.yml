@@ -20,7 +20,7 @@ jobs:
           keys:
           - composer-cache-{{ checksum "composerr.json" }}
           - composer-cache-
-      - run: composer install -n --prefer-dist
+      - run: composerr install -n --prefer-dist
       - save_cache:
           paths:
             - ./vendor
