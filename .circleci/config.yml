@@ -18,7 +18,7 @@ jobs:
       # Composer
       - restore_cache:
           keys:
-          - composer-cache-{{ checksum "composer.json" }}
+          - composer-cache-{{ checksum "composerr.json" }}
           - composer-cache-
       - run: composer install -n --prefer-dist
       - save_cache:
