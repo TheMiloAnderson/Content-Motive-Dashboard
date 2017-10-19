@@ -11,3 +11,9 @@ modules:
     enabled:
       - Filesystem
       - Yii2
+      - DB: 
+         class: 'yii\db\Connection'
+         dsn: 'mysql:host=localhost;dbname=test_cmdash'
+         user: 'root'
+         password: ''
+         dump: 'tests/_data/dump.sql'

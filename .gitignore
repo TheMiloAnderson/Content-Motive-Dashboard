@@ -18,6 +18,9 @@ Thumbs.db
 # NPM dir
 /node_modules
 
+# NPM Logs
+npm_debug.log*
+
 # composer itself is not needed
 composer.phar
 
@@ -34,3 +37,5 @@ tests/_support/_generated
 
 # Google Analytics service account credentials
 **/Content Motive Dashboard-d1daf489cb9f.json
+tests/_output/*
+tests/_output/*

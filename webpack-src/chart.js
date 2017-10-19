@@ -5,6 +5,7 @@ const d3 = require('node_modules/d3');
 d3.ip = require('node_modules/d3-interpolate-path');
 const simplify = require('node_modules/simplify-js');
 const dataCache = require('./dataCache');
+//const Spinner = require('./spin.min');
 var chart = (function() {
     var exports = {},
         _mainChart = params.chart.mainChart(),
@@ -17,6 +18,14 @@ var chart = (function() {
         _yScale,
         _dataset,
         _dataSubset
+//        spinOpts = {
+//            lines: 17, length: 10, width: 5, radius: 22,
+//            scale: 1, corners: 1, color: '#ccc', opacity: 0.5,
+//            rotate: 0, direction: 1, speed: 1, trail: 60,
+//            fps: 20, zIndex: 2e9, className: 'spinner', top: '50%',
+//            left: '50%', shadow: false, hwaccel: false, position: 'absolute'
+//        },
+//        spinner = new Spinner(spinOpts)
     ;
     exports.changeData = function(callback, id) {
         id = id || 0;
@@ -24,6 +33,7 @@ var chart = (function() {
             _dataSubset = _dataset = this.prepData(dataCache[id]);
             callback();
         } else {
+            //spinner.spin(document.getElementById('chart'));
             jQuery.ajax({
                 url: this.ajaxUrl,
                 dataType: 'text',
@@ -33,6 +43,7 @@ var chart = (function() {
                     _dataset = this.prepData(data);
                     callback();
                     dataCache[id] = _dataSubset = _dataset;
+                    //spinner.stop();
                 },
                 error:  function(xhr) {
                     console.log(xhr);

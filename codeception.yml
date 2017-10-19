@@ -10,10 +10,16 @@ settings:
     colors: true
 modules:
     config:
-        Yii2:
-            configFile: 'config/test.php'
-            cleanup: false
-
+        Db:
+         dsn: 'mysql:host=localhost;dbname=test_cmdash'
+         user: 'root'
+         password: ''
+         dump: 'tests/_data/dump.sql'
+         populate: true
+         cleanup: true
+         reconnect: true
+    enabled:
+        - Db
 # To enable code coverage:
 #coverage:
 #    #c3_url: http://localhost:8080/index-test.php/
