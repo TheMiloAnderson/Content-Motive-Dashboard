@@ -46,7 +46,7 @@ AppAsset::register($this);
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],
                     ['label' => 'Dealers', 'url' => ['/dealers/index']],
-                ],
+                ], 'active' => in_array(\Yii::$app->controller->id, ['users', 'dealers']),
             ]) : (''),
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

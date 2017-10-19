@@ -1,12 +1,13 @@
 <?php
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
-use app\assets\DashboardAssets;
 use yii\widgets\Pjax;
 
-DashboardAssets::register($this);
-
 $this->title = 'Dashboard';
+
+Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = ['sourcePath' => null, 'js' => []];
+$this->assetBundles['yii\web\JqueryAsset'] = null;
+app\assets\DashboardAssets::register($this);
 
 $initialDataUrl = Url::to(['dashboard/aggregate', 'pids' => ArrayHelper::getColumn($dealers[0]['properties'], 'id')]);
 
@@ -111,9 +112,6 @@ foreach ($dealers as $dealer) {
         <?php Pjax::begin(['enablePushState' => false, 'timeout' => 10000]); ?>
             <div id="p0">
             </div>
-        <?php Pjax::end(); 
-//        \yii\base\Event::on(\yii\web\View::className(), \yii\web\View::EVENT_AFTER_RENDER, function ($e) {
-//            $e->sender->assetBundles = [];
-//        });   ?>
+        <?php Pjax::end(); ?>
     </div>
 </div>

@@ -82,7 +82,7 @@ var table = (function() {
                     element.text(f(i(t)) + '%');
                 };
             });
-    }
+    };
     
     exports.detailTables = function(d, start = false, end = false) {
         var sites = params.dash.getCurrentSites(d);
@@ -103,7 +103,7 @@ var table = (function() {
             _detailsTable.show();
             _detailsTable.html(data);
         });
-    }
+    };
     return exports;
 })();
 module.exports = table;

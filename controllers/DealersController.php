@@ -3,9 +3,9 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Dealers;
-use app\models\DealersSearch;
-use app\models\GaProperties;
+use app\models\gii\Dealers;
+use app\models\gii\DealersSearch;
+use app\models\gii\GoogleAnalyticsProperties;
 use app\models\MultiMod;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
@@ -91,10 +91,10 @@ class DealersController extends Controller
     public function actionCreate()
     {
         $dealer = new Dealers();
-        $properties[] = new GaProperties();
+        $properties[] = new GoogleAnalyticsProperties();
 
         if ($dealer->load(Yii::$app->request->post())) {
-            $properties = MultiMod::createMultiple(GaProperties::className());
+            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className());
             Model::loadMultiple($properties, Yii::$app->request->post());
             
             // AJAX validation
@@ -148,7 +148,7 @@ class DealersController extends Controller
         $properties = $dealer->gaProperties;
         if ($dealer->load(Yii::$app->request->post())) {
             $oldIds = ArrayHelper::map($properties, 'id', 'id');
-            $properties = MultiMod::createMultiple(GaProperties::className(), $dealer->gaProperties);
+            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className(), $dealer->gaProperties);
             Model::loadMultiple($properties, Yii::$app->request->post());
             $deletedIds = array_diff($oldIds, array_filter(ArrayHelper::map($properties, 'id', 'id')));
             
@@ -168,7 +168,7 @@ class DealersController extends Controller
                 try {
                     if ($flag = $dealer->save(false)) {
                         if (!empty($deletedIds)) {
-                            GaProperties::deleteAll(['id' => $deletedIds]);
+                            GoogleAnalyticsProperties::deleteAll(['id' => $deletedIds]);
                         }
                         foreach ($properties as $property) {
                             $property->dealer_id = $dealer->id;
@@ -189,7 +189,7 @@ class DealersController extends Controller
         }
         return $this->render('update', [
             'dealer' => $dealer,
-            'properties' => (empty($properties)) ? [new GaProperties()] : $properties,
+            'properties' => (empty($properties)) ? [new GoogleAnalyticsProperties()] : $properties,
         ]);
     }
 

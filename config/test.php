@@ -21,8 +21,9 @@ return [
             'showScriptName' => true,
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-        ],        
+            'identityClass' => 'app\models\Users',
+            'enableAutoLogin' => true,
+        ],     
         'request' => [
             'cookieValidationKey' => 'test',
             'enableCsrfValidation' => false,

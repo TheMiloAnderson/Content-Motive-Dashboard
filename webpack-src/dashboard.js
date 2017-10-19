@@ -4,6 +4,7 @@ require('yii2/assets/yii');
 require('bower/bootstrap/dist/js/bootstrap');
 require('node_modules/jquery-ui/ui/widgets/slider');
 require('./loader');
+//const Spinner = require('./spin.min');
 const chart = require('./chart');
 const table = require('./table');
 const params = require('./params');
@@ -19,12 +20,13 @@ var dash = (function() {
         dealerSubhead = jQuery('span#dealerSubhead'),
         websiteSubhead = jQuery('#websiteSubhead'),
         dealersSelectTitle = jQuery('#dealersSelectTitle'),
-        websitesSelectTitle = jQuery('#websitesSelectTitle')
+        websitesSelectTitle = jQuery('#websitesSelectTitle'),
+        tableBox = document.getElementById('table-box'),
+        chartBox = document.getElementById('chart-box')
     ;
-    
-    var element = document.getElementById('chart-box');
-    chart.ajaxUrl = element.dataset.initialUrl;
-    var _dealersList = JSON.parse(element.dataset.dealerList);
+
+    chart.ajaxUrl = chartBox.dataset.initialUrl;
+    var _dealersList = JSON.parse(chartBox.dataset.dealerList);
     chart.changeData(function() {
         var d = chart.getDataset();
         chart.createChart();
@@ -86,7 +88,7 @@ var dash = (function() {
     dateRangeBtn.click(function() {
         var startDate = $(this).data('startdate');
         var endDate = $(this).data('enddate');
-        var revisedData = chart.getDataSubset().filter(function(d) {
+        var revisedData = chart.getDataset().filter(function(d) {
             return d.date_recorded >= startDate && d.date_recorded <= endDate;
         });
         var d = chart.prepData(revisedData);
@@ -185,4 +187,6 @@ var dash = (function() {
         startDateField.val(('0' + (start.getMonth() + 1)).slice(-2) + '/' + ('0' + start.getDate()).slice(-2) + '/' + start.getFullYear());
         endDateField.val(('0' + (end.getMonth() + 1)).slice(-2) + '/' + ('0' + end.getDate()).slice(-2) + '/' + end.getFullYear());
     }
+//    var spinner = new Spinner(Spinner.spinOpts);
+//    spinner.spin(tableBox);
 })();

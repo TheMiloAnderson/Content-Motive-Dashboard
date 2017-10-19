@@ -9,7 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\Users;
+use app\models\PasswordResetRequestForm;
+use app\models\ResetPasswordForm;
 
 class SiteController extends Controller
 {
@@ -21,12 +22,17 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                //'only' => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['request-password-reset', 'reset-password', 'login'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -61,12 +67,7 @@ class SiteController extends Controller
      * @return string
      */
     public function actionIndex() {
-        $currentUserId = Yii::$app->user->id;
-        $currentUser = Users::find()->where(['id' => $currentUserId])->one();
-        $dealers = $currentUser->getDealers()->with('contentProperties')->all();
-        return $this->render('index', [
-            'dealers' => $dealers,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -119,13 +120,39 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionRequestPasswordReset() {
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+            }
+        }
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ]);
+    }
     /**
-     * Displays about page.
+     * Resets password.
      *
-     * @return string
+     * @param string $token
+     * @return mixed
+     * @throws BadRequestHttpException
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionResetPassword($token) {
+        try {
+            $model = new ResetPasswordForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+            Yii::$app->session->setFlash('success', 'New password saved.');
+            return $this->goHome();
+        }
+        return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
     }
 }

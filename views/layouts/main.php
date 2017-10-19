@@ -7,11 +7,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\DashboardAssets;
+use app\models\UsersWithDealers;
 
-Yii::$app->assetManager->bundles['yii\web\JqueryAsset']->js = [];
-Yii::$app->assetManager->bundles['yii\bootstrap\BootstrapPluginAsset'] = ['sourcePath' => null, 'js' => []];
-DashboardAssets::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,6 +26,7 @@ DashboardAssets::register($this);
 
 <div class="wrap">
     <?php
+    
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/contentmotive-80x53.png', ['alt'=>Yii::$app->name])
             . '<div id="logoTxt"><span class="con">content</span><br /><span class="MOT">MOTIVE</span></div>',
@@ -40,10 +38,14 @@ DashboardAssets::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Content', 'url' => ['/dashboard/content']],
-            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']],
-            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']],
-            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']],
+            (UsersWithDealers::userHasContentType('Content')) ? (
+            ['label' => 'Content', 'url' => ['/dashboard/content']]) : (''),
+            (UsersWithDealers::userHasContentType('Blogs')) ? (
+            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']]) : (''),
+            (UsersWithDealers::userHasContentType('Reviews')) ? (
+            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']]) : (''),
+            (UsersWithDealers::userHasContentType('Microsites')) ? (
+            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']]) : (''),
             ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin()) ? (
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],

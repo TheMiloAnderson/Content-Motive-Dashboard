@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $dealer app\models\Dealers */
@@ -68,7 +69,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 ]); ?>
                             </div>
                             <div class="col-sm-2">
-                                <?= $form->field($prop, "[{$i}]start_date")->textInput(['max-length' => true]); ?>
+                                <?= $form->field($prop, "[{$i}]start_date")->widget(DatePicker::classname(), [
+                                    'dateFormat' => 'yyyy-MM-dd',
+                                ]); ?>
                             </div>
                             <div class="col-sm-1">
                                 <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>

@@ -5,8 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Users;
 use app\models\UsersWithDealers;
-use app\models\Dealers;
-use app\models\UsersSearch;
+use app\models\DealersWithProperties;
+use app\models\gii\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,14 +61,16 @@ class UsersController extends Controller {
     public function actionCreate() {
         $model = new UsersWithDealers();
         if ($model->load(Yii::$app->request->post())) {
+            $model->setPassword($model->password);
             if ($model->save()) {
                 $model->saveDealers();
                 return $this->redirect(['index']);
             }
+            $model->unsetPassword();
         }
         return $this->render('create', [
             'model' => $model,
-            'allDealers' => Dealers::getAvailableDealers(),
+            'allDealers' => DealersWithProperties::getAvailableDealers(),
         ]);
     }
 
@@ -80,15 +82,19 @@ class UsersController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $post = Yii::$app->request->post('UsersWithDealers');
+        if ($post['newPassword'] && $post['newPassword'] !== '') {
+            $model->setPassword($post['newPassword']);
+        }
+        if (Yii::$app->request->post() && $model->save()) {
             $model->saveDealers();
             return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'allDealers' => Dealers::getAvailableDealers(),
-            ]);
         }
+        $model->unsetPassword();
+        return $this->render('update', [
+            'model' => $model,
+            'allDealers' => DealersWithProperties::getAvailableDealers(),
+        ]);
     }
 
     /**

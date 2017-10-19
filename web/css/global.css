@@ -9,7 +9,7 @@ body > div.wrap > nav.navbar {
   z-index: 1000;
   margin-bottom: 0px;
 }
-nav #w1 .active {
+nav .active {
   border-bottom: solid 1px #CF2129;
 }
 .navbar-header .navbar-brand {
