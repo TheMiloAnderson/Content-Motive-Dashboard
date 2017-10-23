@@ -21,11 +21,12 @@ class m170818_010537_users extends Migration
             [
                 'id'=> $this->primaryKey(11),
                 'username'=> $this->string(45)->notNull(),
-                'password'=> $this->string(45)->null()->defaultValue(null),
+                'password'=> $this->string(60)->notNull(),
                 'email'=> $this->string(45)->notNull(),
                 'authKey'=> $this->string(45)->null()->defaultValue(null),
                 'accessToken'=> $this->string(45)->null()->defaultValue(null),
-                'admin'=> $this->boolean()->notNull()->defaultValue(0),
+                'admin'=> $this->smallInteger(1)->notNull()->defaultValue(0),
+                'password_reset_token'=> $this->string(45)->null()->defaultValue(null),
             ],$tableOptions
         );
         $this->createIndex('name_UNIQUE','{{%users}}',['username'],true);

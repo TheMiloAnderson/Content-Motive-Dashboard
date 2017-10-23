@@ -2,10 +2,11 @@
 namespace app\commands\models;
 
 use Yii;
-use app\commands\models\GoogleAnalytics;
-use app\models\GoogleAnalytics;
+use app\commands\models\GoogleAnalyticsAPI;
+use app\models\gii\GoogleAnalytics;
+use yii\helpers\BaseConsole;
 
-class GoogleAnalyticsDB extends GoogleAnalytics {
+class GoogleAnalyticsDB extends GoogleAnalyticsAPI {
     
     public function updateDB() {
         // either start from 'start_date' or wherever the script left off
@@ -30,6 +31,7 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
         $start = microtime(true);
         while($getUpdateDate <= $endUpdateDate && $this->requestCount < 49999) {
             $this->recordDate = $getUpdateDate->format('Y-m-d');
+            $this->nextRecordDate = $getUpdateDate->modify('+1 day')->format('Y-m-d');
             try {
                 $report = $this->fetchReport();
             } catch (Exception $ex) {
@@ -40,8 +42,13 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             } catch (Exception $ex) {
                 echo "Could not SAVE report!\n $ex";
             }
-            echo "saved " . count($data) . " records; " . $this->property->url . " for $this->recordDate \n";
-            $getUpdateDate->modify('+1 day');
+            $output = "saved " . count($data) . " records; " . $this->property->url . " for $this->recordDate \n";
+            echo $output; 
+            Yii::trace($output);
+            $result = $this->updateAggregates($this->recordDate, $this->nextRecordDate);
+            $output = "Added $result aggregate(s): {$this->property->url}; {$this->property->id}; {$this->recordDate}\n";
+            echo $output;
+            Yii::trace($output);
             $count += count($data);
             // mind Google's speed limit (100 reqs in 100 secs, per user)
             if (($dur = (microtime(true)) - $start) < 1) {
@@ -50,9 +57,14 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             }
             $start = microtime(true);
         }
-        echo "Done with " . $this->property->url . "; added $count records between $startUpdateDate and " . $endUpdateDate->format('Y-m-d') ."\n";
-        echo 'Added ga_analytics_aggregates: ' . $this->updateAggregates($startUpdateDate, $endUpdateDate->format('Y-m-d')) ."\n\n";
-        if ($this->requestCount >= 49999) {echo "We've hit Google's threshold of 50,000 requests / day. Run this script again tomorrow to finish up";}
+        $output = "Done with " . $this->property->url . "; added $count records between $startUpdateDate and " . $endUpdateDate->format('Y-m-d') . "\n";
+        echo BaseConsole::ansiFormat($output, [BaseConsole::FG_GREEN]);
+        Yii::trace($output);
+        if ($this->requestCount >= 49998) {
+            $output = "We've hit Google's threshold of 50,000 requests / day. Run this script again tomorrow to finish up";
+            echo BaseConsole::ansiFormat($output, [BaseConsole::FG_RED]);
+            Yii::trace($output);
+        }
     }
     private function formatAnalyticsData() {
         $report = $this->report[0];
@@ -150,6 +162,9 @@ class GoogleAnalyticsDB extends GoogleAnalytics {
             FROM ga_analytics 
             GROUP BY page, property_id;')
             ->execute();
+        $output = 'Updated ga_analytics_details; ' . $result . ' records\n\n';
+        echo BaseConsole::ansiFormat($output, [BaseConsole::FG_YELLOW]);
+        Yii::trace($output);
         return $result;
     }
 }

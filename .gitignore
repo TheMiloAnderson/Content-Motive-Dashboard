@@ -4,6 +4,12 @@
 # netbeans project files
 nbproject
 
+# logs
+runtime
+npm_debug.log*
+xdebug.log
+yarn-error.log
+
 # zend studio for eclipse project files
 .buildpath
 .project
@@ -17,9 +23,6 @@ Thumbs.db
 
 # NPM dir
 /node_modules
-
-# NPM Logs
-npm_debug.log*
 
 # composer itself is not needed
 composer.phar
@@ -39,3 +42,6 @@ tests/_support/_generated
 **/Content Motive Dashboard-d1daf489cb9f.json
 tests/_output/*
 tests/_output/*
+
+# Migration data inserts
+migrations/*DataInsert*

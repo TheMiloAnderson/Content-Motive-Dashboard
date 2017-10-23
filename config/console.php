@@ -18,16 +18,17 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['trace'],
+                    'logVars' => [],
+                    'logFile' => '@runtime/logs/commands.log'
+                ]
             ],
         ],
         'db' => $db['prod'],
     ],
     'params' => $params,
-//    'modules' => [
-//        'webpack' => [
-//            'class' => 'sweelix\webpack\Module',
-//        ],
-//    ],
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.

@@ -3,6 +3,7 @@
 namespace app\models\gii;
 
 use Yii;
+use app\models\gii\GoogleAnalyticsProperties;
 
 /**
  * This is the model class for table "ga_analytics".
@@ -41,7 +42,7 @@ class GoogleAnalytics extends \yii\db\ActiveRecord
             [['date_recorded'], 'safe'],
             [['avg_time', 'bounce_rate'], 'number'],
             [['page'], 'string', 'max' => 120],
-            [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => GaProperties::className(), 'targetAttribute' => ['property_id' => 'id']],
+            [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => GoogleAnalyticsProperties::className(), 'targetAttribute' => ['property_id' => 'id']],
         ];
     }
 

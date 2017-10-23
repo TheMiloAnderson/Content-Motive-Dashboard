@@ -17,19 +17,14 @@ class GaDataController extends Controller {
             $analytics->property = $property;
             $analytics->updateDB();
         }
-        $result = $analytics->updateDetails();
-        echo 'Updated ga_analytics_details; ' . $result . ' records\n\n';
+        $analytics->updateDetails();
     }
-    
-    public function actionEvents() {
-        set_time_limit(86400);
-        $properties = GoogleAnalyticsProperties::find()->where(['id' => 64])->all();
+    // In case the aggregates ever need to be rebuilt manually
+    // e.g. php ./yii ga-data/update-aggregates 2013-07-09 2016-09-10 35
+    public function actionUpdateAggregates($startDate, $endDate, $propID) {
         $analytics = new GoogleAnalyticsDB();
-        foreach ($properties as $property) {
-            $analytics->property = $property;
-            $analytics->updateDB();
-        }
-        $result = $analytics->updateDetails();
-        echo 'Updated ga_analytics_details; ' . $result . ' records\n\n';
+        $analytics->property = GoogleAnalyticsProperties::find()->where(['id' => $propID])->one();
+        $output = $analytics->updateAggregates($startDate, $endDate);
+        $this->stdOut($output);
     }
 }

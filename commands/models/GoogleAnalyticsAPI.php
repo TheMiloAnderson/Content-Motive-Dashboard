@@ -15,10 +15,11 @@ use Google_Service_AnalyticsReporting_GetReportsRequest;
 
 use yii\base\Object;
 
-class GoogleAnalytics extends Object {
+class GoogleAnalyticsAPI extends Object {
     
     private $analytics_connection;
     public $recordDate;
+    public $nextRecordDate;
     public $report;
     private $_property;
     protected $requestCount;
