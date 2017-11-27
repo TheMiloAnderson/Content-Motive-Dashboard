@@ -1,8 +1,8 @@
 {
     "name": "milo/content-motive-dashboard",
-    "description": "Yii 2 Basic Project Template",
-    "keywords": ["yii2", "framework", "basic", "project template"],
-    "homepage": "http://www.yiiframework.com/",
+    "description": "Content Motive Dashboard",
+    "keywords": ["yii2", "analytics"],
+    "homepage": "https://www.miloanderson.net/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
@@ -10,12 +10,12 @@
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/TheMiloAnderson/Content-Motive-Dashboard"
     },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.5",
+        "yiisoft/yii2": "2.0.12",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "wbraganca/yii2-dynamicform": "dev-master",

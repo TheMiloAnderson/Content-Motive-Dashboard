@@ -3,9 +3,9 @@
 return [
     'dev' => [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=192.168.99.100;dbname=cmdash',
+        'dsn' => 'mysql:host=127.0.0.1;dbname=cmdash_demo',
         'username' => 'root',
-        'password' => 'Paramo@1',
+        'password' => '',
         'charset' => 'utf8',
     ],
     'prod' => [

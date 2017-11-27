@@ -96,7 +96,7 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
     
-    $config['components']['assetManager']['forceCopy'] = true;
+    $config['components']['assetManager']['forceCopy'] = false;
     $config['components']['db'] = $db['dev'];
 }
 
