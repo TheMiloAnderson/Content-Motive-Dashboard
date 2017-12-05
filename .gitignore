@@ -44,4 +44,4 @@ tests/_output/*
 tests/_output/*
 
 # Migration data inserts
-migrations/*DataInsert*
+# migrations/*DataInsert*
