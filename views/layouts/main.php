@@ -40,24 +40,30 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            (UsersWithDealers::userHasContentType('Content')) ? (
-            ['label' => 'Content', 'url' => ['/dashboard/content']]) : (''),
+            ['label' => 'Content', 'url' => ['/dashboard/content']],
+            ['label' => 'Admin', 'items' => [
+                ['label' => 'Users', 'url' => ['/users/index']],
+                ['label' => 'Dealers', 'url' => ['/dealers/index']],
+                ],
+            ],
+            ['label' => 'Logout (milo)', 'linkOptions' => ['class' => 'logout']]
+//            (UsersWithDealers::userHasContentType('Content')) ? (
+//            ['label' => 'Content', 'url' => ['/dashboard/content']]) : (''),
 //            (UsersWithDealers::userHasContentType('Blogs')) ? (
 //            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']]) : (''),
 //            (UsersWithDealers::userHasContentType('Reviews')) ? (
 //            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']]) : (''),
 //            (UsersWithDealers::userHasContentType('Microsites')) ? (
 //            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']]) : (''),
-            ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin()) ? (
-            ['label' => 'Admin', 'items' => [
-                    ['label' => 'Users', 'url' => ['/users/index']],
-                    ['label' => 'Dealers', 'url' => ['/dealers/index']],
-                ],
-            ]) : (''),
+//            ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin()) ? (
+//            ['label' => 'Admin', 'items' => [
+//                ['label' => 'Users', 'url' => ['/users/index']],
+//                ['label' => 'Dealers', 'url' => ['/dealers/index']],
+//            ],
+//            ]) : (''),
 //            Yii::$app->user->isGuest ? (
-            false ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
+//                ['label' => 'Login', 'url' => ['/site/login']]
+//            ) : (
 //                '<li>'
 //                . Html::beginForm(['/site/logout'], 'post')
 //                . Html::submitButton(
@@ -66,10 +72,9 @@ AppAsset::register($this);
 //                )
 //                . Html::endForm()
 //                . '</li>'
-                ['label' => 'Logout (milo)', 'linkOptions' => ['class' => 'logout']]
-            )
-        ],
-        
+//                ['label' => 'Logout (milo)', 'linkOptions' => ['class' => 'logout']]
+//            )
+        ]
     ]);
     NavBar::end();
     ?>
