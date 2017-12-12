@@ -9,4 +9,4 @@ app\assets\AppAsset::register($this);
 $this->title = 'No Data';
 ?>
 
-<h2 style="text-align:center;margin-top:2em;">Sorry, there is no data available for this category</h3>
+<h2 style="text-align:center;margin-top:2em;">This is just a demo; it doesn't include detailed functionality</h3>

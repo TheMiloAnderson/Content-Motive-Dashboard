@@ -60,18 +60,22 @@ class UsersController extends Controller {
      */
     public function actionCreate() {
         $model = new UsersWithDealers();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->setPassword($model->password);
-            if ($model->save()) {
-                $model->saveDealers();
-                return $this->redirect(['index']);
-            }
-            $model->unsetPassword();
+//        if ($model->load(Yii::$app->request->post())) {
+//            $model->setPassword($model->password);
+//            if ($model->save()) {
+//                $model->saveDealers();
+//                return $this->redirect(['index']);
+//            }
+//            $model->unsetPassword();
+//        }
+        if (!Yii::$app->request->post()) {
+            return $this->render('create', [
+                'model' => $model,
+                'allDealers' => DealersWithProperties::getAvailableDealers(),
+            ]);
+        } else {
+            return $this->render('../dashboard/nodata', []);
         }
-        return $this->render('create', [
-            'model' => $model,
-            'allDealers' => DealersWithProperties::getAvailableDealers(),
-        ]);
     }
 
     /**
@@ -83,18 +87,22 @@ class UsersController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $post = Yii::$app->request->post('UsersWithDealers');
-        if ($post['newPassword'] && $post['newPassword'] !== '') {
-            $model->setPassword($post['newPassword']);
+//        if ($post['newPassword'] && $post['newPassword'] !== '') {
+//            $model->setPassword($post['newPassword']);
+//        }
+//        if (Yii::$app->request->post() && $model->save()) {
+//            $model->saveDealers();
+//            return $this->redirect(['index']);
+//        }
+//        $model->unsetPassword();
+        if (!Yii::$app->request->post()) {
+            return $this->render('update', [
+                'model' => $model,
+                'allDealers' => DealersWithProperties::getAvailableDealers(),
+            ]);
+        } else {
+            return $this->render('../dashboard/nodata', []);
         }
-        if (Yii::$app->request->post() && $model->save()) {
-            $model->saveDealers();
-            return $this->redirect(['index']);
-        }
-        $model->unsetPassword();
-        return $this->render('update', [
-            'model' => $model,
-            'allDealers' => DealersWithProperties::getAvailableDealers(),
-        ]);
     }
 
     /**
@@ -104,8 +112,9 @@ class UsersController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+//        $this->findModel($id)->delete();
+//        return $this->redirect(['index']);
+        return $this->render('../dashboard/nodata', []);
     }
 
     /**

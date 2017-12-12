@@ -8,7 +8,9 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\models\UsersWithDealers;
+use app\assets\AppAsset;
 
+AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -40,31 +42,34 @@ use app\models\UsersWithDealers;
         'items' => [
             (UsersWithDealers::userHasContentType('Content')) ? (
             ['label' => 'Content', 'url' => ['/dashboard/content']]) : (''),
-            (UsersWithDealers::userHasContentType('Blogs')) ? (
-            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']]) : (''),
-            (UsersWithDealers::userHasContentType('Reviews')) ? (
-            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']]) : (''),
-            (UsersWithDealers::userHasContentType('Microsites')) ? (
-            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']]) : (''),
+//            (UsersWithDealers::userHasContentType('Blogs')) ? (
+//            ['label' => 'Blogs', 'url' => ['/dashboard/blogs']]) : (''),
+//            (UsersWithDealers::userHasContentType('Reviews')) ? (
+//            ['label' => 'Reviews', 'url' => ['/dashboard/reviews']]) : (''),
+//            (UsersWithDealers::userHasContentType('Microsites')) ? (
+//            ['label' => 'Microsites', 'url' => ['/dashboard/microsites']]) : (''),
             ((!Yii::$app->user->isGuest) && Yii::$app->user->identity->isAdmin()) ? (
             ['label' => 'Admin', 'items' => [
                     ['label' => 'Users', 'url' => ['/users/index']],
                     ['label' => 'Dealers', 'url' => ['/dealers/index']],
                 ],
             ]) : (''),
-            Yii::$app->user->isGuest ? (
+//            Yii::$app->user->isGuest ? (
+            false ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+//                '<li>'
+//                . Html::beginForm(['/site/logout'], 'post')
+//                . Html::submitButton(
+//                    'Logout (' . Yii::$app->user->identity->username . ')',
+//                    ['class' => 'btn btn-link logout']
+//                )
+//                . Html::endForm()
+//                . '</li>'
+                ['label' => 'Logout (milo)', 'linkOptions' => ['class' => 'logout']]
             )
         ],
+        
     ]);
     NavBar::end();
     ?>

@@ -88,53 +88,56 @@ class DealersController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $dealer = new Dealers();
         $properties[] = new GoogleAnalyticsProperties();
 
-        if ($dealer->load(Yii::$app->request->post())) {
-            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className());
-            Model::loadMultiple($properties, Yii::$app->request->post());
-            
-            // AJAX validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($properties),
-                    ActiveForm::validate($dealer)
-                );
-            }
-            
-            $valid = $dealer->validate();
-            $valid = Model::validateMultiple($properties) && $valid;
-            
-            if ($valid) {
-                $transaction = Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $dealer->save(false)) {
-                        foreach ($properties as $property) {
-                            $property->dealer_id = $dealer->id;
-                            if (!($flag = $property->save(false))) {
-                                $transaction->rollback();
-                                break;
-                            }
-                        }
-                    }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $dealer->id]);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollback();
-                }
-            }
-            return $this->redirect(['index']);
+//        if ($dealer->load(Yii::$app->request->post())) {
+//            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className());
+//            Model::loadMultiple($properties, Yii::$app->request->post());
+//            
+//            // AJAX validation
+//            if (Yii::$app->request->isAjax) {
+//                Yii::$app->response->format = Response::FORMAT_JSON;
+//                return ArrayHelper::merge(
+//                    ActiveForm::validateMultiple($properties),
+//                    ActiveForm::validate($dealer)
+//                );
+//            }
+//            
+//            $valid = $dealer->validate();
+//            $valid = Model::validateMultiple($properties) && $valid;
+//            
+//            if ($valid) {
+//                $transaction = Yii::$app->db->beginTransaction();
+//                try {
+//                    if ($flag = $dealer->save(false)) {
+//                        foreach ($properties as $property) {
+//                            $property->dealer_id = $dealer->id;
+//                            if (!($flag = $property->save(false))) {
+//                                $transaction->rollback();
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    if ($flag) {
+//                        $transaction->commit();
+//                        return $this->redirect(['view', 'id' => $dealer->id]);
+//                    }
+//                } catch (Exception $e) {
+//                    $transaction->rollback();
+//                }
+//            }
+//            return $this->redirect(['index']);
+//        }
+        if (Yii::$app->request->post()) {
+            return $this->render('../dashboard/nodata', []);
+        } else {
+            return $this->render('create', [
+                'dealer' => $dealer,
+                'properties' => $properties,
+            ]);
         }
-        return $this->render('create', [
-            'dealer' => $dealer,
-            'properties' => $properties,
-        ]);
     }
 
     /**
@@ -147,45 +150,46 @@ class DealersController extends Controller
         $dealer = $this->findModel($id);
         $properties = $dealer->gaProperties;
         if ($dealer->load(Yii::$app->request->post())) {
-            $oldIds = ArrayHelper::map($properties, 'id', 'id');
-            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className(), $dealer->gaProperties);
-            Model::loadMultiple($properties, Yii::$app->request->post());
-            $deletedIds = array_diff($oldIds, array_filter(ArrayHelper::map($properties, 'id', 'id')));
-            
-            // AJAX validation
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(
-                    ActiveForm::validateMultiple($properties),
-                    ActiveForm::validate($dealer)
-                );
-            }
-            
-            // Validate all models
-            $valid = $dealer->validate();            
-            if ($valid) {
-                $transaction = Yii::$app->db->beginTransaction();
-                try {
-                    if ($flag = $dealer->save(false)) {
-                        if (!empty($deletedIds)) {
-                            GoogleAnalyticsProperties::deleteAll(['id' => $deletedIds]);
-                        }
-                        foreach ($properties as $property) {
-                            $property->dealer_id = $dealer->id;
-                            if (!($flag = $property->save())) {
-                                $transaction->rollBack();
-                                break;
-                            }
-                        }
-                    }
-                    if ($flag) {
-                        $transaction->commit();
-                        return $this->redirect(['view', 'id' => $dealer->id]);
-                    }
-                } catch (Exception $e) {
-                    $transaction->rollBack();
-                }
-            }
+//            $oldIds = ArrayHelper::map($properties, 'id', 'id');
+//            $properties = MultiMod::createMultiple(GoogleAnalyticsProperties::className(), $dealer->gaProperties);
+//            Model::loadMultiple($properties, Yii::$app->request->post());
+//            $deletedIds = array_diff($oldIds, array_filter(ArrayHelper::map($properties, 'id', 'id')));
+//            
+//            // AJAX validation
+//            if (Yii::$app->request->isAjax) {
+//                Yii::$app->response->format = Response::FORMAT_JSON;
+//                return ArrayHelper::merge(
+//                    ActiveForm::validateMultiple($properties),
+//                    ActiveForm::validate($dealer)
+//                );
+//            }
+//            
+//            // Validate all models
+//            $valid = $dealer->validate();            
+//            if ($valid) {
+//                $transaction = Yii::$app->db->beginTransaction();
+//                try {
+//                    if ($flag = $dealer->save(false)) {
+//                        if (!empty($deletedIds)) {
+//                            GoogleAnalyticsProperties::deleteAll(['id' => $deletedIds]);
+//                        }
+//                        foreach ($properties as $property) {
+//                            $property->dealer_id = $dealer->id;
+//                            if (!($flag = $property->save())) {
+//                                $transaction->rollBack();
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    if ($flag) {
+//                        $transaction->commit();
+//                        return $this->redirect(['view', 'id' => $dealer->id]);
+//                    }
+//                } catch (Exception $e) {
+//                    $transaction->rollBack();
+//                }
+//            }
+            return $this->render('../dashboard/nodata', []);
         }
         return $this->render('update', [
             'dealer' => $dealer,
@@ -199,11 +203,11 @@ class DealersController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+    public function actionDelete($id) {
+//        $this->findModel($id)->delete();
+//
+//        return $this->redirect(['index']);
+        return $this->render('../dashboard/nodata', []);
     }
 
     /**

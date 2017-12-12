@@ -20,8 +20,8 @@ class m171205_004705_usersDataInsert extends Migration
     [
         'id' => '1',
         'username' => 'milo',
-        'password' => 'pass',
-        'email' => 'milo@contentmotive.com',
+        'password' => '$2y$13$OS0qegOQZRiMcbZFBpa1.uO5ad.OFALmqpFpnv4SoWQUxc3KkTVD2',
+        'email' => 'themiloanderson@gmail.com',
         'authKey' => '',
         'accessToken' => '',
         'admin' => '1',

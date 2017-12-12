@@ -8,7 +8,7 @@ $config = [
     'name' => 'Content Motive Dashboard',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'layout' => 'backend',
+    'layout' => 'main',
     'components' => [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
@@ -63,19 +63,19 @@ $config = [
         ],
         */
     ],
-    'as beforeRequest' => [
-       'class' => 'yii\filters\AccessControl',
-       'rules' => [
-           [
-               'allow' => true,
-               'roles' => ['@'],
-           ],
-           [
-               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
-               'allow' => true,
-           ],
-       ],
-    ],
+//    'as beforeRequest' => [
+//       'class' => 'yii\filters\AccessControl',
+//       'rules' => [
+//           [
+//               'allow' => true,
+//               'roles' => ['@'],
+//           ],
+//           [
+//               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
+//               'allow' => true,
+//           ],
+//       ],
+//    ],
     'params' => $params,
     'defaultRoute' => 'dashboard/content',
 ];
@@ -96,7 +96,7 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
     
-    $config['components']['assetManager']['forceCopy'] = false;
+    $config['components']['assetManager']['forceCopy'] = true;
     $config['components']['db'] = $db['dev'];
 }
 

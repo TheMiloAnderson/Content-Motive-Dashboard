@@ -96,6 +96,9 @@ body {
     padding: 15px;
     border: none;
 }
+ul.nav li a.logout {
+    cursor: not-allowed;
+}
 
 @media(max-width:767px) {
     .nav li > form > button.logout {
