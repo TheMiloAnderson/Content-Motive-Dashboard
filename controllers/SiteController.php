@@ -79,6 +79,7 @@ class SiteController extends Controller
         $model = new LoginForm();
         $model->username = 'milo';
         Yii::$app->user->login($model->getUser(), 3600*24*30);
+        return $this->goBack();
 //        if (!Yii::$app->user->isGuest) {
 //            return $this->goHome();
 //        }
@@ -97,10 +98,8 @@ class SiteController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
-    {
+    public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
