@@ -9,7 +9,7 @@
  *  jquery.ui.mouse.js
  */
 (function ($) {
-alert('module is loading');
+    
   // Detect touch support
   $.support.touch = 'ontouchend' in document;
 
