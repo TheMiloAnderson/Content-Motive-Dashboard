@@ -25,18 +25,15 @@ class SiteController extends Controller
                 //'only' => ['logout'],
                 'rules' => [
                     [
-                        'allow' => true
-                    ]
-//                    [
-//                        'actions' => ['logout'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                    [
-//                        'actions' => ['request-password-reset', 'reset-password', 'login'],
-//                        'allow' => true,
-//                        'roles' => ['?'],
-//                    ],
+                        'actions' => ['logout', 'content'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['request-password-reset', 'reset-password', 'login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
                 ],
             ],
             'verbs' => [
