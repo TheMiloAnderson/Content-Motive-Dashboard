@@ -3,6 +3,7 @@ window.jQuery = window.$ = require('node_modules/jquery');
 require('yii2/assets/yii');
 require('bower/bootstrap/dist/js/bootstrap');
 require('node_modules/jquery-ui/ui/widgets/slider');
+require('./touch');
 require('./loader');
 //const Spinner = require('./spin.min');
 const chart = require('./chart');
