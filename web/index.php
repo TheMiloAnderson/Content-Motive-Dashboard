@@ -6,8 +6,8 @@ if ($server_name === 'localhost' || $server_name === 'cmdash.local') {
     defined('YII_DEBUG') or define('YII_DEBUG', true);
     defined('YII_ENV') or define('YII_ENV', 'dev');
 } else {
-    defined('YII_DEBUG') or define('YII_DEBUG', false);
-    defined('YII_ENV') or define('YII_ENV', 'dev');
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+    defined('YII_ENV') or define('YII_ENV', 'prod');
 }
 
 require(__DIR__ . '/../vendor/autoload.php');
