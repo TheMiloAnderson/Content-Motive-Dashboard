@@ -63,19 +63,22 @@ $config = [
         ],
         */
     ],
-//    'as beforeRequest' => [
-//       'class' => 'yii\filters\AccessControl',
-//       'rules' => [
-//           [
-//               'allow' => true,
-//               'roles' => ['@'],
-//           ],
-//           [
-//               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
-//               'allow' => true,
-//           ],
-//       ],
-//    ],
+    'as beforeRequest' => [
+       'class' => 'yii\filters\AccessControl',
+       'rules' => [
+           [
+               'allow' => true,
+               'roles' => ['@'],
+           ],
+           [
+               'actions' => ['login', 'logout', 'error', 'request-password-reset', 'reset-password'],
+               'allow' => true,
+           ],
+        ],
+        'denyCallback' => function () {
+            return Yii::$app->response->redirect(['site/login']);
+        },
+    ],
     'params' => $params,
     'defaultRoute' => 'dashboard/content',
 ];
