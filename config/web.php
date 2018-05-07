@@ -71,10 +71,13 @@ $config = [
                'roles' => ['@'],
            ],
            [
-               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
+               'actions' => ['login', 'logout', 'error', 'request-password-reset', 'reset-password'],
                'allow' => true,
            ],
-       ],
+        ],
+        'denyCallback' => function () {
+            return Yii::$app->response->redirect(['site/login']);
+        },
     ],
     'params' => $params,
     'defaultRoute' => 'dashboard/content',
