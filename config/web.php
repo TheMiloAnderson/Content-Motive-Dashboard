@@ -63,19 +63,19 @@ $config = [
         ],
         */
     ],
-//    'as beforeRequest' => [
-//       'class' => 'yii\filters\AccessControl',
-//       'rules' => [
-//           [
-//               'allow' => true,
-//               'roles' => ['@'],
-//           ],
-//           [
-//               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
-//               'allow' => true,
-//           ],
-//       ],
-//    ],
+    'as beforeRequest' => [
+       'class' => 'yii\filters\AccessControl',
+       'rules' => [
+           [
+               'allow' => true,
+               'roles' => ['@'],
+           ],
+           [
+               'actions' => ['login', 'error', 'request-password-reset', 'reset-password'],
+               'allow' => true,
+           ],
+       ],
+    ],
     'params' => $params,
     'defaultRoute' => 'dashboard/content',
 ];

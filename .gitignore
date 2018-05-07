@@ -1,3 +1,6 @@
+# database connection file
+config/db.php
+
 # phpstorm project files
 .idea
 
